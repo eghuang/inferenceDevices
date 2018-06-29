@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}          
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}\onehalfspacing
+\usepackage[loose,nice]{units} %replace "nice" by "ugly" for units in upright fractions
+\usepackage{graphicx}
+\graphicspath{ {/Users/eghuang/math104/images/} }
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=R,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{
+  Inference Devices \\
+  \large Santa Fe Institute}
+\author{Edward G. Huang}
+\date{Summer 2018} 
+ 
+ \newcommand{\R}{\mathbb{R}}
+ \newcommand{\Q}{\mathbb{Q}}
+ \newcommand{\Z}{\mathbb{Z}}
+ \newcommand{\N}{\mathbb{N}}
+ \newcommand{\Prob}{\mathbb{P}}
+ \newcommand{\E}{\mathbb{E}}
+ \newcommand{\code}[1]{\texttt{#1}}
+ \let\oldemptyset\emptyset
+ \let\emptyset\varnothing
+ 
+\begin{document}
+ % \maketitle 
+
+\textbf{27 June 2018} \\
+\\
+\textbf{Notation and Definitions} \\
+\\
+% $ S \quad $ Function of values of a physical variable over time $ t_i $. \\
+% $ t_i \quad $ An instance in time. \\
+% $ L \quad $ A value. \\
+% $ q \quad $ An $ L $-indexed question of the form $ S(t_i) = L $? \\
+$ U \quad $ Set of possible histories of the universe. \\
+$ u \quad $ A history of the universe in $ U $. \\ 
+$ X \quad $ Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
+$ x \quad $ A binary question and a member of image $ X(U) $. \\ 
+$ Y \quad $ Conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
+$ y \quad $ A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
+$ \Gamma \quad $ A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
+$ \gamma \quad $ Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
+$ \delta \quad $ Probe of any variable $V$ parameterized by $v \in V$ such that : 
+	  \[ \delta_v (v') =
+	  \begin{cases} 
+       1 & \text{ if } v = v' \\
+       -1 & \text{ otherwise } \\
+      \end{cases}\] \\
+$ \wp \quad $ Set of probes over $\Gamma(U)$. \\
+$ \mathcal{D} = (X, Y) \quad $ An inference device, consisting of functions $ X $ and $ Y $. \\
+$ \bar{F} \quad $ Inverse. Given a function $ F $ over $ U $, $F ^ {-1} = \bar{F} \equiv \{\{u : F(u) = f \} : f \in F(U) \} $. \\
+$ > \quad $ Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
+
+$ \quad X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
+$ >> \quad $ Strong inference: a device $ (X_1, Y_1) $ strongly infers a device $ (X_2, Y_2) $ \textit{ iff } $\forall \delta \in \wp(Y_2) $ 
+
+\quad and all $ x_2 $, $ \exists x_1 $ \textit{ such that } $ X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $. \\
+
+\bigbreak
+
+\textbf{28 June 2018} \\ 
+\\
+\textbf{Turing Machines} \\ 
+% The quadruple you list isn't a set of rules - it's a quadruple. In fact, a TM is defined by (in your notation) by Q, p, A, S and a special halt state in Q, along with a rule taking Q x A -> Q x S, where we have to say what each element a of S would do to a semi-infinite string with current element s in A.
+
+We construct an Inference Device (ID) such that it weakly infers a Turing Machine (TM). A TM behaves according to a set of rules $(p, s, a, q)$ corresponding to a starting state, scanned input, action, and end state such that $p, q \in Q$, $s \in S = \{0, 1, B\}$, and $a \in A = \{0, 1, B, L, R\} $. Hence, a TM can be represented by a mapping between $ Q \times S \rightarrow S \times Q $. Note that $ Q $ is a finite set of internal states. Any two distinctive $(p, s, a, q)$ quadruples must differ in the first two elements, such that the Turing machine is deterministic. \\
+\\
+
+\textbf{Example 1} Consider a Turing machine $ T $ with a single internal state $ q $. We construct a set of rules for $ T $: 
+
+% The goal is to show how, for countably infinite U, for an *arbitrary* given TM (not some particular one with a single internal state), design an ID that strongly infers *the entire map* taking the starting instantaneous description (ID) of the TM to the halting ID, or to a special "never halt" symbol, as determined by that starting ID.
+
+% Our goal is to infer the entire function implemented by the TM, not just a single iteration of the TM.
+
+\begin{center}
+\begin{tabular}{ c||c } 
+
+ $ (p, s) $ & $ (a, q) $ \\ 
+ \hline
+ \hline
+ $ (q, 0) $ & $ (0, q) $ \\ 
+ \hline
+ $ (q, 1) $ & $ (1, q) $ \\ 
+ \hline
+ $ (q, B) $ & $ (B, q) $ \\ 
+ 
+\end{tabular}
+\end{center}
+
+
+Now consider an inference device $ \mathcal{D} $ that can weakly infer $ T $.
+
+\begin{center}
+\begin{tabular}{ c||c|c|c } 
+
+% Cannot have two separate values of X(u) for the same u. Similarly for Y(u).
+
+% I'm not sure how you chose this Gamma.  Is it the rule for a single iteration of the TM?
+
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma(u) $ \\ 
+ \hline
+ \hline
+ $ (q, 0) $ & $ (0, q) $ & 1 & $ (0, q) $ \\ 
+ \hline
+ $ (q, 0) $ & $ (1, q) $ & -1 & $ (0, q) $ \\ 
+ \hline
+ $ (q, 1) $ & $ (1, q) $ & 1 & $ (1, q) $ \\ 
+ \hline
+ $ (q, 1) $ & $ (0, q) $ & -1 & $ (1, q) $ \\ 
+ \hline
+ $ (q, B) $ & $ (B, q) $ & 1 & $ (B, q) $ \\ 
+ \hline
+ $ (q, B) $ & $ (1, q) $ & -1 & $ (B, q) $ \\ 
+ 
+\end{tabular}
+\end{center}
+
+We show that weak inference holds. Recall that the definition of weak inference is:
+$$ \mathcal{D} > \Gamma \textit{ iff } \forall \gamma \in \Gamma(U), \exists x \in X(U) \text{ such that } \forall u \in U, X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $$  
+Then, 
+$$ \Gamma(U) = S \times Q = \{(0, q), (1, q), (B, q)\} $$
+$$ \Gamma((q, 0)) = (0, q), x = (0, q) \in X(U) \implies Y(u) = 1 = \delta_{(0, q)}((0, q)) $$
+$$ \Gamma((q, 0)) = (0, q), x = (1, q) \in X(U) \implies Y(u) = -1 = \delta_{(0, q)}((1, q)) $$ 
+$$ \Gamma((1, q)) = (1, q), x = (1, q) \in X(U) \implies Y(u) = 1 = \delta_{(1, q)}((1, q)) $$ 
+$$ \Gamma((1, q)) = (1, q), x = (0, q) \in X(U) \implies Y(u) = -1 = \delta_{(1, q)}((0, q)) $$ 
+$$ \Gamma((q, B)) = (B, q), x = (B, q) \in X(U) \implies Y(u) = 1 = \delta_{(B, q)}((B, q)) $$ 
+$$ \Gamma((q, B)) = (1, q), x = (1, q) \in X(U) \implies Y(u) = -1 = \delta_{(B, q)}((1, q)) $$ 
+
+\bigbreak
+
+\textbf{29 June 2018} \\ 
+\\
+
+\textbf{Strong Inference of a Turing Machine} \\
+
+
+
+\end{document}
