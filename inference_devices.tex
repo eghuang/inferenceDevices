@@ -32,7 +32,7 @@
 }
 
 \title{
-  Inference Devices \\
+  Notes on Inference Devices \\
   \large Santa Fe Institute}
 \author{Edward G. Huang}
 \date{Summer 2018} 
@@ -41,17 +41,19 @@
  \newcommand{\Q}{\mathbb{Q}}
  \newcommand{\Z}{\mathbb{Z}}
  \newcommand{\N}{\mathbb{N}}
+ \newcommand{\B}{\mathbb{B}}
  \newcommand{\Prob}{\mathbb{P}}
  \newcommand{\E}{\mathbb{E}}
  \newcommand{\code}[1]{\texttt{#1}}
  \let\oldemptyset\emptyset
  \let\emptyset\varnothing
  
+ \setlength{\parindent}{0pt} % no indent
+ 
 \begin{document}
- % \maketitle 
+\maketitle 
 
-\textbf{27 June 2018} \\
-\\
+
 \textbf{Notation and Definitions} \\
 \\
 % $ S \quad $ Function of values of a physical variable over time $ t_i $. \\
@@ -82,82 +84,70 @@ $ >> \quad $ Strong inference: a device $ (X_1, Y_1) $ strongly infers a device 
 
 \quad and all $ x_2 $, $ \exists x_1 $ \textit{ such that } $ X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $. \\
 
-\bigbreak
-
-\textbf{28 June 2018} \\ 
-\\
-\textbf{Turing Machines} \\ 
+\newpage
+\textbf{Turing Machines} \\
 % The quadruple you list isn't a set of rules - it's a quadruple. In fact, a TM is defined by (in your notation) by Q, p, A, S and a special halt state in Q, along with a rule taking Q x A -> Q x S, where we have to say what each element a of S would do to a semi-infinite string with current element s in A.
 
-We construct an Inference Device (ID) such that it weakly infers a Turing Machine (TM). A TM behaves according to a set of rules $(p, s, a, q)$ corresponding to a starting state, scanned input, action, and end state such that $p, q \in Q$, $s \in S = \{0, 1, B\}$, and $a \in A = \{0, 1, B, L, R\} $. Hence, a TM can be represented by a mapping between $ Q \times S \rightarrow S \times Q $. Note that $ Q $ is a finite set of internal states. Any two distinctive $(p, s, a, q)$ quadruples must differ in the first two elements, such that the Turing machine is deterministic. \\
-\\
+%Li and Vitanyi informally specify a Turing Machine (TM) according to a set of rules $(p, s, a, q)$ corresponding to a starting state, scanned input, action, and end state such that $p, q \in Q$, $s \in S = \{0, 1, B\}$, and $a \in A = \{0, 1, B, L, R\} $. Hence, a TM can be represented by a mapping between $ Q \times S \rightarrow S \times Q $. Note that $ Q $ is a finite set of internal states. Any two distinctive $(p, s, a, q)$ quadruples must differ in the first two elements, such that the Turing machine is deterministic. This definition may be useful for gaining intuition about Turing Machines but we use a more formal definition for our purposes: \\
 
-\textbf{Example 1} Consider a Turing machine $ T $ with a single internal state $ q $. We construct a set of rules for $ T $: 
+ Arora and Barak denote a Turing Machine $ T $ as $ T = (\Gamma, Q, \delta) $ containing:
+\begin{enumerate}
+\item An \textit{alphabet} $ \Gamma $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Gamma $ contains a special blank symbol $ B $, start symbol $ S $, and the numbers 0 and 1. 
+\item A finite set $ Q $ of possible states that $ T $'s register can be in. We assume that $ Q $ contains a special start state $ q_{s} $ and a special halt state $ q_{h} $. 
+\item A transition function function $ \delta : Q \times \Gamma^{k} \rightarrow Q \times \Gamma^{k - 1} \times \{L, S, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L ,S, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
+\end{enumerate}
+
+Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, S, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. \\
+
+\textit{Remark}: $\Gamma$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power.
 
 % The goal is to show how, for countably infinite U, for an *arbitrary* given TM (not some particular one with a single internal state), design an ID that strongly infers *the entire map* taking the starting instantaneous description (ID) of the TM to the halting ID, or to a special "never halt" symbol, as determined by that starting ID.
 
 % Our goal is to infer the entire function implemented by the TM, not just a single iteration of the TM.
 
-\begin{center}
-\begin{tabular}{ c||c } 
+% \begin{center}
+% \begin{tabular}{ c||c } 
 
- $ (p, s) $ & $ (a, q) $ \\ 
- \hline
- \hline
- $ (q, 0) $ & $ (0, q) $ \\ 
- \hline
- $ (q, 1) $ & $ (1, q) $ \\ 
- \hline
- $ (q, B) $ & $ (B, q) $ \\ 
+% $ (p, s) $ & $ (a, q) $ \\ 
+% \hline
+% \hline
+% $ (q, 0) $ & $ (0, q) $ \\ 
+% \hline
+% $ (q, 1) $ & $ (1, q) $ \\ 
+% \hline
+% $ (q, B) $ & $ (B, q) $ \\ 
  
-\end{tabular}
-\end{center}
-
-
-Now consider an inference device $ \mathcal{D} $ that can weakly infer $ T $.
-
-\begin{center}
-\begin{tabular}{ c||c|c|c } 
+% \end{tabular}
+% \end{center}
 
 % Cannot have two separate values of X(u) for the same u. Similarly for Y(u).
 
 % I'm not sure how you chose this Gamma.  Is it the rule for a single iteration of the TM?
 
- $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma(u) $ \\ 
- \hline
- \hline
- $ (q, 0) $ & $ (0, q) $ & 1 & $ (0, q) $ \\ 
- \hline
- $ (q, 0) $ & $ (1, q) $ & -1 & $ (0, q) $ \\ 
- \hline
- $ (q, 1) $ & $ (1, q) $ & 1 & $ (1, q) $ \\ 
- \hline
- $ (q, 1) $ & $ (0, q) $ & -1 & $ (1, q) $ \\ 
- \hline
- $ (q, B) $ & $ (B, q) $ & 1 & $ (B, q) $ \\ 
- \hline
- $ (q, B) $ & $ (1, q) $ & -1 & $ (B, q) $ \\ 
- 
-\end{tabular}
-\end{center}
+\pagebreak
 
-We show that weak inference holds. Recall that the definition of weak inference is:
-$$ \mathcal{D} > \Gamma \textit{ iff } \forall \gamma \in \Gamma(U), \exists x \in X(U) \text{ such that } \forall u \in U, X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $$  
-Then, 
-$$ \Gamma(U) = S \times Q = \{(0, q), (1, q), (B, q)\} $$
-$$ \Gamma((q, 0)) = (0, q), x = (0, q) \in X(U) \implies Y(u) = 1 = \delta_{(0, q)}((0, q)) $$
-$$ \Gamma((q, 0)) = (0, q), x = (1, q) \in X(U) \implies Y(u) = -1 = \delta_{(0, q)}((1, q)) $$ 
-$$ \Gamma((1, q)) = (1, q), x = (1, q) \in X(U) \implies Y(u) = 1 = \delta_{(1, q)}((1, q)) $$ 
-$$ \Gamma((1, q)) = (1, q), x = (0, q) \in X(U) \implies Y(u) = -1 = \delta_{(1, q)}((0, q)) $$ 
-$$ \Gamma((q, B)) = (B, q), x = (B, q) \in X(U) \implies Y(u) = 1 = \delta_{(B, q)}((B, q)) $$ 
-$$ \Gamma((q, B)) = (1, q), x = (1, q) \in X(U) \implies Y(u) = -1 = \delta_{(B, q)}((1, q)) $$ 
 
-\bigbreak
-
-\textbf{29 June 2018} \\ 
+\textbf{Inference of Turing Machines} \\
 \\
+\textbf{Theorem} \quad \textit{Every Turing Machine can be weakly inferred by an inference device.}\\
+\textbf{Proof} \quad Recall the definition of weak inference: $$ \mathcal{D} > \Gamma \textit{ iff } \forall \gamma \in \Gamma(U), \exists x \in X(U) \text{ such that } \forall u \in U, X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $$ \\
+\\
+\textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
+\textbf{Proof} \quad Recall the definition of strong inference:
+$$ (X_1, Y_1) >> (X_2, Y_2) \textit{ iff } \forall \delta \in \wp(Y_2)\text{ and all } x_2,  \exists x_1 \textit{ such that } X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $$
 
-\textbf{Strong Inference of a Turing Machine} \\
+
+% Write theorem for any Turing Machine encode it as gamma such that there is an inference device that can weakly infer that function
+
+% Encode not the update rule but the entire map 
+
+% Use countable spaces
+% Gamma has to encode input string, output string or nonhalting
+
+
+
+
+
 
 
 
