@@ -53,7 +53,7 @@
 \begin{document}
 \maketitle 
 
-
+% SECTION 1: NOTATION
 \section{Notation and Definitions} 
 
 Standard notation is taken from set theory and vector algebra. We clarify some notation specific to computation and inference devices. \\
@@ -61,10 +61,12 @@ Standard notation is taken from set theory and vector algebra. We clarify some n
 
 \textbf{Computation and Turing Machines} \\
 $ \B^{*} \quad $ The space of all finite bit strings. \\
-$ \Gamma \quad $ Symbol alphabet for a Turing Machine. \\
-$ Q \quad $ Set of finite states for a given Turing Machine. \\
-$ \delta \quad $ Transition function for a given Turing Machine. \\
-$ k \quad $ Number of tapes for a Turing Machine. \\
+$ \Lambda \quad $ Symbol alphabet of a Turing Machine. \\
+$ \sigma \quad $ A symbol on a Turing Machine tape. \\
+$ Q \quad $ Set of finite states of a Turing Machine. \\
+$ \Delta \quad $ Transition function of a Turing Machine. \\
+$ k \quad $ Number of tapes of a Machine. \\
+$ \eta \quad $ Non-halting state of a Turing Machine. \\
 
 
 % $ S \quad $ Function of values of a physical variable over time $ t_i $. \\
@@ -96,21 +98,21 @@ $ >> \quad $ Strong inference: a device $ (X_1, Y_1) $ strongly infers a device 
 
 \quad and all $ x_2 $, $ \exists x_1 $ \textit{ such that } $ X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $. \\
 
-\newpage
+% SECTION 2: TURING MACHINES
 \section{Turing Machines} 
 
 %Li and Vitanyi informally specify a Turing Machine (TM) according to a set of rules $(p, s, a, q)$ corresponding to a starting state, scanned input, action, and end state such that $p, q \in Q$, $s \in S = \{0, 1, B\}$, and $a \in A = \{0, 1, B, L, R\} $. Hence, a TM can be represented by a mapping between $ Q \times S \rightarrow S \times Q $. Note that $ Q $ is a finite set of internal states. Any two distinctive $(p, s, a, q)$ quadruples must differ in the first two elements, such that the Turing machine is deterministic. This definition may be useful for gaining intuition about Turing Machines but we use a more formal definition for our purposes: \\
 
- Arora and Barak denote a Turing Machine (TM) as $ T = (\Gamma, Q, \delta) $ containing:
+ Arora and Barak denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
 \begin{enumerate}
-\item An \textit{alphabet} $ \Gamma $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Gamma $ contains a special blank symbol $ B $, start symbol $ S $, and the numbers 0 and 1. 
+\item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the numbers 0 and 1. 
 \item A finite set $ Q $ of possible states that $ T $'s register can be in. We assume that $ Q $ contains a special start state $ q_{s} $ and a special halt state $ q_{h} $. 
-\item A transition function function $ \delta : Q \times \Gamma^{k} \rightarrow Q \times \Gamma^{k - 1} \times \{L, S, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L ,S, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
+\item A transition function function $ \Delta : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{L, S, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L ,S, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
 \end{enumerate}
 
-Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, S, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in Figure 1. \\
+Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, S, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in Figure 1. \\
 
-\textbf{Figure 1. The transition function $ \delta $ for a $ k $-tape Turing Machine}
+\textbf{Figure 1. The transition function $ \Delta $ for a $ k $-tape Turing Machine}
 
  \begin{center}
  \begin{tabular}{ c|c|c|c||c|c|c|c|c} 
@@ -142,7 +144,7 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \bigbreak
 
-\textit{Remark}: $\Gamma$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup NH $, where $ NH $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup NH | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. 
+\textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. 
 
 % The goal is to show how, for countably infinite U, for an *arbitrary* given TM (not some particular one with a single internal state), design an ID that strongly infers *the entire map* taking the starting instantaneous description (ID) of the TM to the halting ID, or to a special "never halt" symbol, as determined by that starting ID.
 
@@ -165,23 +167,33 @@ Preliminaries: \\
 We want to define a countably infinite $ U $, $ X(U) $, so that an inference device can weakly infer a countably infinite $ \Gamma = \{b \in \B^{*}, T_{1}(b) \} $. 
 $x \in X(U) $ can be informally phrased as: "For this input string $ b $, what is $ T_{1}(p) $? Then the inference device must be able to answer correctly, for either of the probes for $ \gamma_{i} $. \\
 
-Working definition of weak inference: $\forall \gamma_{i}, \forall \delta_{\gamma_{i}}, \exists x : \forall u \in  X^{-1}(x) Y(u) = \delta_{y_{i}}(u) $ \\
+Working definition of weak inference: $\forall \gamma_{i}, \forall \delta_{\gamma_{i}}, \exists x : \forall u \in  X^{-1}(x), Y(u) = \delta_{y_{i}}(u) $ \\
 
-Take $ U $ to be the integers. The hard part is mapping $ U $ to $ p, T_{1}(p) $. The mapping must be injective, i.e. there must be some $ u $ for each $(p, T_{1}(p))$ tuple. \\
+
+Take $ U $ to be the integers. The hard part is mapping $ U $ to $ (p, T_{1}(p)) $. The mapping must be injective, i.e. there must be some $ u $ for each $(p, T_{1}(p))$ tuple. \\
 
 
 
 \noindent\rule{16cm}{0.4pt} \\
-Let $ U := \N $. Let $ X: U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bit strings. 
-
-We illustrate weak inference with a toy example. 
-
-w
+Let $ U := \N $. Let $ X: U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bit strings. \\
 
 
-%\textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
-%\textbf{Proof} \quad Recall the definition of strong inference:
-%$$ (X_1, Y_1) >> (X_2, Y_2) \textit{ iff } \forall \delta \in \wp(Y_2)\text{ and all } x_2,  \exists x_1 \textit{ such that } X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $$
+\textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
+\textbf{Proof} \quad Recall the definition of strong inference:
+$$ (X_1, Y_1) >> (X_2, Y_2) \textit{ iff } \forall \delta \in \wp(Y_2)\text{ and all } x_2,  \exists x_1 \textit{ such that } X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $$
+
+\noindent\rule{16cm}{0.4pt} \\
+Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. \\
+
+We want to construct an inference device $ (X, Y) $ such that $(X, Y) >> (S, T) $. We need to show that for all probes for $ T $ and for all values of $ s \in S $ there exist some $ x \in X $ such that $ x $ forces $ s $ and forces $ y $ to equal $ \delta(T) $. \\
+
+Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 is alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
+
+Now we want to construct a $ Y $ that correctly answers $ \delta(Y_2) $ for all probes and for all $ s $ when $ X = x $. 
+
+Let $ Y : U \rightarrow \{0, 1\} $ be the probe $ \delta_{T(u)}(T(u)) $. 
+% Can we actually do this? I don't know of any restrictions on the definition of Y other than its domain and image. 
+
 
 
 % Write theorem for any Turing Machine encode it as gamma such that there is an inference device that can weakly infer that function
@@ -189,11 +201,15 @@ w
 % Encode not the update rule but the entire map 
 
 % Use countable spaces
-% Gamma has to encode input string, output string or nonhalting
+% Gamma has to encode input string, output string or nonhalting 
 
-% Does strong inference solve the Halting Problem?
+% Does strong inference solve the Halting Problem? 
 
+% Go through all the counting numbers, map from counting numbers to joint space (b, T_1(b))
+% T(u) is a value in the space of strings union no halt such that T(u) is the associated output of S(u). 
 
+% Use tuple to define Gamma, probe cares about second part 
+% 
 
 
 
