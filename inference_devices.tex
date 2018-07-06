@@ -146,57 +146,105 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. 
 
-% The goal is to show how, for countably infinite U, for an *arbitrary* given TM (not some particular one with a single internal state), design an ID that strongly infers *the entire map* taking the starting instantaneous description (ID) of the TM to the halting ID, or to a special "never halt" symbol, as determined by that starting ID.
-
-% Our goal is to infer the entire function implemented by the TM, not just a single iteration of the TM.
-
-% Cannot have two separate values of X(u) for the same u. Similarly for Y(u).
-
-% I'm not sure how you chose this Gamma. Is it the rule for a single iteration of the TM?
-
 \pagebreak
 
 
 \section{Inference of Turing Machines} 
 
-\textbf{Theorem} \quad \textit{Every Turing Machine can be weakly inferred by an inference device.}\\
-\textbf{Proof} \quad Recall the definition of weak inference: $$ \mathcal{D} > \Gamma \textit{ iff } \forall \gamma \in \Gamma(U), \exists x \in X(U) \text{ such that } \forall u \in U, X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $$ 
+\textbf{Example} \quad Figure 2. Strong Inference \\
 
-Preliminaries: \\
+ In this example, $T(U) = \B^{1} \cup \eta $ so we are concerned with three probes $ \delta_{0}, \delta_{1}$, and $ \delta{\eta} $. 
 
-We want to define a countably infinite $ U $, $ X(U) $, so that an inference device can weakly infer a countably infinite $ \Gamma = \{b \in \B^{*}, T_{1}(b) \} $. 
-$x \in X(U) $ can be informally phrased as: "For this input string $ b $, what is $ T_{1}(p) $? Then the inference device must be able to answer correctly, for either of the probes for $ \gamma_{i} $. \\
+ \begin{center}
+ \begin{tabular}{ c||c|c|c|c } 
 
-Working definition of weak inference: $\forall \gamma_{i}, \forall \delta_{\gamma_{i}}, \exists x : \forall u \in  X^{-1}(x), Y(u) = \delta_{y_{i}}(u) $ \\
-
-
-Take $ U $ to be the integers. The hard part is mapping $ U $ to $ (p, T_{1}(p)) $. The mapping must be injective, i.e. there must be some $ u $ for each $(p, T_{1}(p))$ tuple. \\
-
-
-
-\noindent\rule{16cm}{0.4pt} \\
-Let $ U := \N $. Let $ X: U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bit strings. \\
-
-
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ (00, \eta) $ & $ 1 $ & $ 00 $ & $ (00, \eta) $ \\
+ \hline
+ $ 2 $ & $ (01, 0) $ & $ 1 $ & $ 01 $ & $ (01, 0) $ \\
+ \hline
+ $ 3 $ & $ (10, 1) $ & $ 1 $ & $ 10 $ & $ (10, 1) $ \\
+ \hline
+ $ 4 $ & $ (11, 0) $ & $ -1 $ & $ 11 $ & $ (11, \eta) $ \\
+ 
+ \end{tabular}
+ \end{center} 
+ 
+%  \begin{center}
+% \begin{tabular}{ c||c|c|c|c } 
+%
+% $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
+% \hline
+% \hline
+% $ 1 $ & $ \eta $     & $ -1 $ & $ 00 $ & $ 0 $ \\
+% \hline
+% $ 2 $ & $ \eta $     & $ -1 $  & $ 00 $ & $ 1 $ \\
+% \hline
+% $ 3 $ & $ \eta $     & $ 1 $ & $ 00 $ & $ \eta $ \\
+%  \hline
+% $ 4 $ & $ 0 $     & $ 1 $  & $ 01 $ & $ 0 $ \\
+% \hline
+% $ 5 $ & $ 0 $     & $ -1 $ & $ 01 $ & $ 1 $ \\
+% \hline
+% $ 6 $ & $ 0 $     & $ -1 $ & $ 01 $ & $ \eta $ \\
+%  \hline
+% $ 7 $ & $ 1 $  & $ -1 $ & $ 10 $ & $ 0 $ \\
+% \hline
+% $ 8 $ & $ 1 $  & $ -1 $ & $ 10 $ & $ 1 $ \\
+% \hline
+% $ 9 $ & $ 1 $     & $ -1 $ & $ 10 $ & $ \eta $ \\
+%  \hline
+% $ 10 $ & $ 0 $ & $ -1 $ & $ 11 $ & $ 0 $ \\
+% \hline
+% $ 11 $ & $ 0 $    & $ 1 $  & $ 11 $ & $ 1 $ \\
+% \hline
+% $ 12 $ & $ 0 $    & $ -1 $ & $ 11 $ & $ \eta $ \\
+%
+% 
+% \end{tabular}
+% \end{center} 
+ 
+ Then: \\
+ 
+ \textbf{Case 1:} $ X(u) = 0 $ \\
+ $ X^{-1}(0) = \{2, 4\} \implies S(u) = \{01, 11\} $. Then if $ u = 2 $, $ S(2) = 01 \implies Y(2) = 1 = \delta_0(T(2) = 0) $. If $ u = 4 $, $ S(4) = 11 \implies Y(4) = -1 = \delta_{0}(T(4) = \eta) $ \\
+ 
+ \textbf{Case 2:} $ X(u) = 1 $ \\ 
+ $X^{-1}(1) = 3 $. Then $ S(3) = 10 \implies Y(3) = 1 = \delta_{1}(T(3) = 1) $ \\
+ 
+ \textbf{Case 3:} $ X(u) = \eta $ \\
+ $X^{-1}(\eta) = 1 $ Then $ S(1) = 00 \implies Y(1) = 1 = \delta_{\eta}(T(1) = \eta) $ \\ 
+ 
+ 
+\bigbreak
 \textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
-\textbf{Proof} \quad Recall the definition of strong inference:
-$$ (X_1, Y_1) >> (X_2, Y_2) \textit{ iff } \forall \delta \in \wp(Y_2)\text{ and all } x_2,  \exists x_1 \textit{ such that } X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $$
+\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 comes alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
 
-\noindent\rule{16cm}{0.4pt} \\
-Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. \\
-
-We want to construct an inference device $ (X, Y) $ such that $(X, Y) >> (S, T) $. We need to show that for all probes for $ T $ and for all values of $ s \in S $ there exist some $ x \in X $ such that $ x $ forces $ s $ and forces $ y $ to equal $ \delta(T) $. \\
-
-Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 is alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
-
-Now we want to construct a $ Y $ that correctly answers $ \delta(Y_2) $ for all probes and for all $ s $ when $ X = x $. 
-
-Let $ Y : U \rightarrow \{0, 1\} $ be the probe $ \delta_{T(u)}(T(u)) $. 
-% Can we actually do this? I don't know of any restrictions on the definition of Y other than its domain and image. 
+% Take $ Y : U \rightarrow \{0, 1\} $ to be the probe $ \delta_{T(u)}(T(u)) $. 
 
 
+Hence:
+
+$$ \forall \delta \in \wp(T)\text{ and all } s,  \exists x \textit{ such that } X = x \implies S = s, Y = \delta(T) $$ 
+
+Since the choices of $S$ and $T$ were arbitrary, any Turing machine can be strongly inferred by an inference device. \\
+
+
+\textbf{Theorem} \quad \textit{Every Turing Machine can be weakly inferred by an inference device.}\\
+\textbf{Proof} \quad This follows from Proposition 4 and the preceding result.
+
+%Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 is alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. Take $ Y : U \rightarrow \{0, 1\} $ to be the probe $ \delta_{T(u)}(T(u)) $. 
+
+
+% choice of x influences choice of probe
+% y is fixed
+% probe is really just a mathematical relation that allows for us to ask yes/no question.
 
 % Write theorem for any Turing Machine encode it as gamma such that there is an inference device that can weakly infer that function
+
+% fix x and loop s, t
 
 % Encode not the update rule but the entire map 
 
@@ -211,6 +259,13 @@ Let $ Y : U \rightarrow \{0, 1\} $ be the probe $ \delta_{T(u)}(T(u)) $.
 % Use tuple to define Gamma, probe cares about second part 
 % 
 
+\section{Inference Complexity}
+
+\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. The \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
+
+$$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
+
+\textit{Remark:} This is only a working definition and may be revised depending on its behavior.
 
 
 
