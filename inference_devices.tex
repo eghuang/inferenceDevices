@@ -90,13 +90,13 @@ $ \delta \quad $ Probe of any variable $V$ parameterized by $v \in V$ such that 
       \end{cases}\] \\
 $ \wp \quad $ Set of probes over $\Gamma(U)$. \\
 $ \mathcal{D} = (X, Y) \quad $ An inference device, consisting of functions $ X $ and $ Y $. \\
-$ \bar{F} \quad $ Inverse. Given a function $ F $ over $ U $, $F ^ {-1} = \bar{F} \equiv \{\{u : F(u) = f \} : f \in F(U) \} $. \\
+$ \quad \bar{F} \quad $ Inverse. Given a function $ F $ over $ U $, $F ^ {-1} = \bar{F} \equiv \{\{u : F(u) = f \} : f \in F(U) \} $. \\
 $ > \quad $ Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
 
-$ \quad X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
-$ >> \quad $ Strong inference: a device $ (X_1, Y_1) $ strongly infers a device $ (X_2, Y_2) $ \textit{ iff } $\forall \delta \in \wp(Y_2) $ 
+$ \quad \quad X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
+$ >> \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ 
 
-\quad and all $ x_2 $, $ \exists x_1 $ \textit{ such that } $ X_1 = x_1 \implies X_2 = x_2, Y_1 = \delta(Y_2) $. \\
+\quad \quad and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
 
 % SECTION 2: TURING MACHINES
 \section{Turing Machines} 
@@ -151,26 +151,104 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \section{Inference of Turing Machines} 
 
-\textbf{Example} \quad Figure 2. Strong Inference \\
-
- In this example, $T(U) = \B^{1} \cup \eta $ so we are concerned with three probes $ \delta_{0}, \delta_{1}$, and $ \delta{\eta} $. 
-
+%\textbf{Example} \quad Figure 2. Strong Inference \\
+%
+% In this example, $T(U) = \B^{1} \cup \eta $ so we are concerned with three probes $ \delta_{0}, \delta_{1}$, and $ \delta{\eta} $. 
+%
+% \begin{center}
+% \begin{tabular}{ c||c|c|c|c } 
+%
+% $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\
+% \hline
+% \hline
+% $ 1 $ & $ (00, \eta) $ & $ 1 $ & $ 00 $ & $ \eta $ \\
+% \hline
+% $ 2 $ & $ (01, 0) $ & $ 1 $ & $ 01 $ & $ 0 $ \\
+% \hline
+% $ 3 $ & $ (10, 1) $ & $ 1 $ & $ 10 $ & $ 1 $ \\
+% \hline
+% $ 4 $ & $ (11, 0) $ & $ -1 $ & $ 11 $ & $ \eta $ \\
+% 
+% \end{tabular}
+% \end{center}
+ 
+ Trivial Strong Inference Example 1 \\
+ 
  \begin{center}
  \begin{tabular}{ c||c|c|c|c } 
 
  $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
  \hline
  \hline
- $ 1 $ & $ (00, \eta) $ & $ 1 $ & $ 00 $ & $ (00, \eta) $ \\
+ $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
  \hline
- $ 2 $ & $ (01, 0) $ & $ 1 $ & $ 01 $ & $ (01, 0) $ \\
+ $ 2 $ & $ 2 $ & $ 1 $ & $ 1 $ & $ 2 $ \\
  \hline
- $ 3 $ & $ (10, 1) $ & $ 1 $ & $ 10 $ & $ (10, 1) $ \\
+ $ 3 $ & $ 3 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
  \hline
- $ 4 $ & $ (11, 0) $ & $ -1 $ & $ 11 $ & $ (11, \eta) $ \\
+ $ 4 $ & $ 4 $ & $ 1 $ & $ 2 $ & $ 2 $ \\
  
  \end{tabular}
  \end{center} 
+ 
+ Trivial Strong Inference Example 2 \\
+ 
+ \begin{center}
+ \begin{tabular}{ c||c|c|c|c } 
+
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+ \hline
+ $ 2 $ & $ 2 $ & $ 1 $ & $ 1 $ & $ 2 $ \\
+ \hline
+ $ 3 $ & $ 3 $ & $ 1 $ & $ 1 $ & $ 3 $ \\
+ \hline
+ $ 4 $ & $ 4 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
+ \hline
+ $ 5 $ & $ 5 $ & $ 1 $ & $ 2 $ & $ 2 $ \\
+ \hline
+ $ 6 $ & $ 6 $ & $ 1 $ & $ 2 $ & $ 3 $ \\
+ \hline
+ $ 7 $ & $ 7 $ & $ 1 $ & $ 3 $ & $ 1 $ \\
+ \hline
+ $ 8 $ & $ 8 $ & $ 1 $ & $ 3 $ & $ 2 $ \\
+  \hline
+ $ 9 $ & $ 9 $ & $ 1 $ & $ 3 $ & $ 3 $ \\
+ 
+ \end{tabular}
+ \end{center} 
+ 
+ Slightly Less Trivial Strong Inference Example 1
+ 
+ \begin{center}
+ \begin{tabular}{ c||c|c|c|c } 
+
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ 1 $ & $ b_1 $ & $ 0 $ \\
+ \hline
+ $ 2 $ & $ 2 $ & $ 1 $ & $ b_2 $ & $ 1 $ \\
+ \hline
+ $ 3 $ & $ 3 $ & $ 1 $ & $ b_3 $ & $ \eta $ \\
+ \hline
+ $ 4 $ & $ 4 $ & $ 1 $ & $ b_4 $ & $ 0 $ \\
+ \hline
+ $ 5 $ & $ 5 $ & $ 1 $ & $ b_5 $ & $ 1 $ \\
+ \hline
+ $ 6 $ & $ 6 $ & $ 1 $ & $ b_6 $ & $ \eta $ \\
+ \hline
+ $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
+ 
+ \end{tabular}
+ \end{center} 
+ 
+ 
+% \hline
+% $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
+
  
 %  \begin{center}
 % \begin{tabular}{ c||c|c|c|c } 
@@ -201,26 +279,17 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 % $ 11 $ & $ 0 $    & $ 1 $  & $ 11 $ & $ 1 $ \\
 % \hline
 % $ 12 $ & $ 0 $    & $ -1 $ & $ 11 $ & $ \eta $ \\
-%
+% 
 % 
 % \end{tabular}
 % \end{center} 
  
- Then: \\
- 
- \textbf{Case 1:} $ X(u) = 0 $ \\
- $ X^{-1}(0) = \{2, 4\} \implies S(u) = \{01, 11\} $. Then if $ u = 2 $, $ S(2) = 01 \implies Y(2) = 1 = \delta_0(T(2) = 0) $. If $ u = 4 $, $ S(4) = 11 \implies Y(4) = -1 = \delta_{0}(T(4) = \eta) $ \\
- 
- \textbf{Case 2:} $ X(u) = 1 $ \\ 
- $X^{-1}(1) = 3 $. Then $ S(3) = 10 \implies Y(3) = 1 = \delta_{1}(T(3) = 1) $ \\
- 
- \textbf{Case 3:} $ X(u) = \eta $ \\
- $X^{-1}(\eta) = 1 $ Then $ S(1) = 00 \implies Y(1) = 1 = \delta_{\eta}(T(1) = \eta) $ \\ 
- 
+
  
 \bigbreak
 \textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
-\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 comes alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
+\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. 
+%Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 comes alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
 
 % Take $ Y : U \rightarrow \{0, 1\} $ to be the probe $ \delta_{T(u)}(T(u)) $. 
 
@@ -261,12 +330,13 @@ Since the choices of $S$ and $T$ were arbitrary, any Turing machine can be stron
 
 \section{Inference Complexity}
 
-\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. The \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
+\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
 \textit{Remark:} This is only a working definition and may be revised depending on its behavior.
 
-
+% Make strong inference example for arxiv paper
+% use a tuple for x <- (b, probe type)
 
 \end{document}
