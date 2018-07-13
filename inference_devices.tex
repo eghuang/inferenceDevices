@@ -112,7 +112,7 @@ $ >> \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions $
 
 Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, S, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in Figure 1. \\
 
-\textbf{Figure 1. The transition function $ \Delta $ for a $ k $-tape Turing Machine}
+\textbf{Figure 2.1. The transition function $ \Delta $ for a $ k $-tape Turing Machine}
 
  \begin{center}
  \begin{tabular}{ c|c|c|c||c|c|c|c|c} 
@@ -148,13 +148,14 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \pagebreak
 
-
+% SECTION #: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines} 
  
- \textbf{Trivial Strong Inference Example 1} \\
+ In the next two examples we examine strong inference of simple single-valued functions. \\
  
- Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $.  
- \begin{center}
+ 
+ \textbf{Example 3.1} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+ \begin {center}
  \begin{tabular}{ c||c|c|c|c } 
 
  $ u $ & $ X(u) $ & $ Y(u) $ & $ S(u) $ & $ T(u) $ \\ 
@@ -171,13 +172,8 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
  $ 5 $ & $ 5 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
  \hline 
  $ 6 $ & $ 6 $ & $ -1 $ & $ 2 $ & $ 1 $ \\
- \hline 
- 
- \end{tabular}
- \end{center} 
- 
-  Table of $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied:
- \begin{center}
+ \end{tabular} 
+ \quad 
  \begin{tabular}{ c||c|c } 
 
  $ (s, \delta) $ & $ \delta_0 $ & $ \delta_1 $ \\ 
@@ -188,14 +184,15 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
  $ 1 $ & $ 3 $ & $ 4 $ \\
  \hline
  $ 2 $ & $ 6 $ & $ 5 $ \\
-
  
  \end{tabular}
- \end{center} 
+ \end{center}
  
- \textbf{Strong Inference Example 2} \\
- 
- Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $.
+  
+ \bigbreak
+ \bigbreak 
+ \textbf{Example 3.2} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+
  \begin{center}
  \begin{tabular}{ c||c|c|c|c } 
 
@@ -214,19 +211,15 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
  \hline
  $ 6 $ & $ 6 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
  \hline
- $  $ & $ 7 $ & $ -1 $ & $ 1 $ & $ 1 $ \\
+ $ 7 $ & $ 7 $ & $ -1 $ & $ 1 $ & $ 1 $ \\
  \hline
  $ 8 $ & $ 8 $ & $ 1 $ & $ 3 $ & $ 2 $ \\
  \hline
  $ 9 $ & $ 9 $ & $ 1 $ & $ 4 $ & $ 2 $ \\
  \hline
- $ 10 $ & $ 10 $ & $ 1 $ & $ 5 $ & $ 3 $ \\
- 
- \end{tabular}
- \end{center} 
- 
- Table of $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied:
- \begin{center}
+ $ 10 $ & $ 10 $ & $ 1 $ & $ 5 $ & $ 3 $ \\ 
+ \end{tabular} 
+ \quad
  \begin{tabular}{ c||c|c|c|c|c } 
 
  $ (s, \delta) $ & $ \delta_1 $ & $ \delta_1 $ & $ \delta_1 $ & $ \delta_1 $ & $ \delta_1 $ \\ 
@@ -245,25 +238,33 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
  \end{tabular}
  \end{center} 
  
- 
-%\bigbreak
-%\textbf{Theorem} \quad \textit{Every Turing Machine can be strongly inferred by an inference device.} \\
-%\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be the lexicographic mapping of integers to binary bit strings and $ T: U \rightarrow \B^{*} \times \B^{*} \cup \eta$ as a function that maps $u$ to the Cartesian product of the space of bits strings with all possible outputs from any Turing machine. 
-%%Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 comes alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. 
-%
-%% Take $ Y : U \rightarrow \{0, 1\} $ to be the probe $ \delta_{T(u)}(T(u)) $. 
-%
-%
+
+\pagebreak
+\textbf{Theorem} \quad \textit{Any deterministic Turing Machine can be strongly inferred by a device iff} 
+$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ 
+\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be a function that maps integers to binary bit strings and $ T: U \rightarrow \B^{*} \cup \eta$ as a function that maps $u$ to the space of bits strings union with the non-halting output $ \eta $. Define $ V = \{u : S^{-1}(s) \} $ for some value of $ s $. \\
+
+Assume the function $ f: S \rightarrow T $ given by $ f(s) = T(S^{-1}(s)) $ is single-valued. Set $ Y(v_{1}) = 1 $ and $ Y(v_{2}) = -1 $. Then for each pair $ (s, \delta_{t \in T(U)} ) $ choose $ X(v_{1}) = x_1 $ if $ t = T(v_1) $ or otherwise choose $ X(v_2) = x_2 $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+
+%Then $ (S, T) $ can be strongly inferred by an inference device iff $\forall s \in S(U) $, $ |S^{-1}(s)| \geq 2 $. \\
+
+% X(u) \implies S(u) = s and $ \{y: Y(q \in Q)\} = \{-1, 1\} $. \\
+
+Now suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| \geq 1 $. $ \hfill \qed $
+
+
+
+
 %Hence:
 %
-%$$ \forall \delta \in \wp(T)\text{ and all } s,  \exists x \textit{ such that } X = x \implies S = s, Y = \delta(T) $$ 
+%$$ \forall \delta \in \wp(T)\text{ and all } s \in S(U),  \exists x \textit{ such that } X(u) = x \implies \{S(u) = s, Y(u) = \delta(T(u))\} $$ 
 %
 %Since the choices of $S$ and $T$ were arbitrary, any Turing machine can be strongly inferred by an inference device. \\
-%
-%
+
+
 %\textbf{Theorem} \quad \textit{Every Turing Machine can be weakly inferred by an inference device.}\\
 %\textbf{Proof} \quad This follows from Proposition 4 and the preceding result.
-
+%
 %Let $ X : U \rightarrow \B^{*} $ be the lexicographic mapping of integers to binary bits strings such that 1 is alphabetically before 0. Then $ X(u) = x $ \textit{ iff } $S(u) = s $. Take $ Y : U \rightarrow \{0, 1\} $ to be the probe $ \delta_{T(u)}(T(u)) $. 
 
 
@@ -287,7 +288,7 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 % Use tuple to define Gamma, probe cares about second part 
 % 
-
+\pagebreak
 \section{Inference Complexity}
 
 \textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
