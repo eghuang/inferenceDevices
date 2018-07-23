@@ -3,6 +3,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{csquotes}
 \usepackage{setspace}\onehalfspacing
 \usepackage[loose,nice]{units} %replace "nice" by "ugly" for units in upright fractions
 \usepackage{graphicx}
@@ -59,13 +60,14 @@
 Standard notation is taken from set theory and vector algebra. We clarify some notation specific to computation and inference devices. \\
 
 
-\textbf{Computation and Turing Machines} \\
+\subsection{Turing Machines} 
+
 $ \B^{*} \quad $ The space of all finite bit strings. \\
 $ \Lambda \quad $ Symbol alphabet of a Turing Machine. \\
 $ \sigma \quad $ A symbol on a Turing Machine tape. \\
 $ Q \quad $ Set of finite states of a Turing Machine. \\
 $ \Delta \quad $ Transition function of a Turing Machine. \\
-$ k \quad $ Number of tapes of a Machine. \\
+$ k \quad $ Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
 $ \eta \quad $ Non-halting state of a Turing Machine. \\
 
 
@@ -73,12 +75,12 @@ $ \eta \quad $ Non-halting state of a Turing Machine. \\
 % $ t_i \quad $ An instance in time. \\
 % $ L \quad $ A value. \\
 % $ q \quad $ An $ L $-indexed question of the form $ S(t_i) = L $? \\
-\textbf{Deterministic Inference Devices} \\
+\subsection{Inference Devices} 
 $ U \quad $ Set of possible histories of the universe. \\
 $ u \quad $ A history of the universe in $ U $. \\ 
 $ X \quad $ Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
 $ x \quad $ A binary question and a member of image $ X(U) $. \\ 
-$ Y \quad $ Conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
+$ Y \quad $ Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
 $ y \quad $ A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
 $ \Gamma \quad $ A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
 $ \gamma \quad $ Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
@@ -94,18 +96,19 @@ $ \quad \bar{F} \quad $ Inverse. Given a function $ F $ over $ U $, $F ^ {-1} = 
 $ > \quad $ Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
 
 $ \quad \quad X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
-$ >> \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ 
+$ \gg \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ 
 
 \quad \quad and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
 
 % SECTION 2: TURING MACHINES
 \section{Turing Machines} 
 
+\subsection{Deterministic Turing Machines} 
 %Li and Vitanyi informally specify a Turing Machine (TM) according to a set of rules $(p, s, a, q)$ corresponding to a starting state, scanned input, action, and end state such that $p, q \in Q$, $s \in S = \{0, 1, B\}$, and $a \in A = \{0, 1, B, L, R\} $. Hence, a TM can be represented by a mapping between $ Q \times S \rightarrow S \times Q $. Note that $ Q $ is a finite set of internal states. Any two distinctive $(p, s, a, q)$ quadruples must differ in the first two elements, such that the Turing machine is deterministic. This definition may be useful for gaining intuition about Turing Machines but we use a more formal definition for our purposes: \\
 
  Arora and Barak denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
 \begin{enumerate}
-\item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the numbers 0 and 1. 
+\item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the symbols 0 and 1. 
 \item A finite set $ Q $ of possible states that $ T $'s register can be in. We assume that $ Q $ contains a special start state $ q_{s} $ and a special halt state $ q_{h} $. 
 \item A transition function function $ \Delta : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{L, S, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L ,S, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
 \end{enumerate}
@@ -146,9 +149,16 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. 
 
-\pagebreak
+\subsection{Non-deterministic Turing Machines} 
 
-% SECTION #: INFERENCE OF TURING MACHINES
+Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak:
+
+\begin{displayquote}
+When a NDTM $M$ computes a function, we envision that at each computational step $ M $ makes an arbitrary choice as to which of its two transition functions to apply. For every input $ x $, we say that $ M(x) = 1 $ if there exists some sequence of these choices (which we call nondeterministic choices of $ M $) that would make $ M $ reach $ q_{accept} $ on input $ x $. Otherwise - if every sequence of choices makes $ M $ halt without reaching $ q_{accept} $ - then we say that $ M(x) = 0 $.
+\end{displayquote}
+
+
+% SECTION 3: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines} 
  
  In the next two examples we examine strong inference of simple single-valued functions. \\
@@ -237,25 +247,51 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
  
  \end{tabular}
  \end{center} 
- 
 
-\pagebreak
-\textbf{Theorem} \quad \textit{Any deterministic Turing Machine can be strongly inferred by a device iff} 
+\bigskip 
+\bigskip
+\textbf{Theorem} \quad \textit{A deterministic Turing Machine can be strongly inferred by a device iff} 
 $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ 
-\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be a function that maps integers to binary bit strings and $ T: U \rightarrow \B^{*} \cup \eta$ as a function that maps $u$ to the space of bits strings union with the non-halting output $ \eta $. Define $ V = \{u : S^{-1}(s) \} $ for some value of $ s $. \\
+\textbf{Proof} \quad We show that the condition holds for both the partial recursive function description and the instantaneous description of Turing machines. Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be a function that maps integers to binary bit strings and $ T: U \rightarrow \B^{*} \cup \eta$ as a function that maps $ U $ to the space of bits strings union with the non-halting output $ \eta $. \\
 
-Assume the function $ f: S \rightarrow T $ given by $ f(s) = T(S^{-1}(s)) $ is single-valued. Set $ Y(v_{1}) = 1 $ and $ Y(v_{2}) = -1 $. Then for each pair $ (s, \delta_{t \in T(U)} ) $ choose $ X(v_{1}) = x_1 $ if $ t = T(v_1) $ or otherwise choose $ X(v_2) = x_2 $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+
+\textbf{Lemma} \: \textit{There exists a single-valued function} $ f: N \rightarrow M $ \textit{for all nonempty countable sets} $N$, $M$. \\
+\textbf {Proof} \: Choose an element $ m \in  M $. Construct $ f $ such that $ f(n) = m, n \in N $. \textit{Remark to Wolpert: I'm not even sure if I should state this as a lemma, it seems rather clear.} \\
+
+
+Since $ \N $, $ \B^{*} $, and $ \B^{*} \cup \eta $ are countable sets, by the lemma there exists a single-valued $ f $ for each single-valued $ S $ and $ T $. We only consider the restriction of $ f $ to single-valued functions because deterministic Turing Machines can be entirely described by single-valued partial functions. \\
+
+Let $ V = \{u : S^{-1}(s) = u \} $ for a value of $ s \in S(U) $. Since $ V $ has at least two elements, let the first element of $ V $ be $ v_1 $ and the second element be $ v_2 $. Set $ Y(v_{1}) = 1 $ and $ Y(v_{2}) = -1 $. Then for each pair $ (s, \delta_{t \in T(U)} ) $ choose $ X(v_{1}) = x_1 $ if $ T(v_1) = t $ or otherwise choose $ X(v_2) = x_2 $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
 
 %Then $ (S, T) $ can be strongly inferred by an inference device iff $\forall s \in S(U) $, $ |S^{-1}(s)| \geq 2 $. \\
 
 % X(u) \implies S(u) = s and $ \{y: Y(q \in Q)\} = \{-1, 1\} $. \\
 
-Now suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| \geq 1 $. $ \hfill \qed $
+Now examine the instantaneous description of Turing Machines. The instantaneous description can be described by a function $ \Delta $ mapping $ Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} $, $ k \geq 2 $. Consider the functions $ S: U \rightarrow Q \times \Lambda^{k} $ and $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \}^ {k} $. Since the set of all finite subsets of $ \N $ are countable, it follows that $ | Q \times \Lambda^{k} | = | Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} | = | \N | $. \\
+
+We proceed similarly to the partial function portion of the proof. By the lemma, we restrict our focus such that $ \Delta $, $ S $, and $ T $ are single valued functions. Then let $ V = \{u : S^{-1}(s) = u \} $ for a value of $ s \in S(U) $ such that  the first element of $ V $ is $ v_1 $ and the second element is $ v_2 $. Set $ Y(v_{1}) = 1 $ and $ Y(v_{2}) = -1 $. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ X(v_{1}) = x_1 $ if $ T(v_1) = t $ or otherwise choose $ X(v_2) = x_2 $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+
+Now for either case, suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| > 1 $. $ \hfill \qed $ \\
 
 
 
+%\textbf {Theorem} \quad \textit{Any non-deterministic Turing Machine can be strongly inferred by a device iff} 
+%$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$
+%\textbf{Proof} \quad Let $ U := \N $. Define $ S: U \rightarrow \B^{*} $ to be a function that maps integers to binary bit strings and $ T: U \rightarrow \B^{*} \cup \eta$ as a function that maps $u$ to the space of bits strings union with the non-halting output $ \eta $. Define $ V = \{u : S^{-1}(s) \} $ for some value of $ s $. \\
+% 
+%Assume the function $ f: S \rightarrow T $ given by $ f(s) = T(S^{-1}(s)) $ may be multi-valued. Without loss of generality, fix $ s $. If $ T(S^{-1}(s) $ is \textit{single-valued,} choose $ x_1 $, $ x_2 $ as described in Proof 1. If $ T(S^{-1}(s) $ is \textit{multi-valued}, set $ Y(v_{1}) = -1 $ and $ Y(v_{2}) = -1 $. Then for each pair $ (s, \delta_{t \in T(U)} ) $ choose $ X(v_{1}) = x_1 $ if $ t \neq T(v_1) $ or otherwise choose $ X(v_2) = x_2 $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+%
+%Now suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| \geq 1 $. $ \hfill \qed $ \\
+%
+%
+%\textbf {Theorem} \quad \textit{Any update function of a deterministic Turing Machine can be strongly inferred by a device.} \\
+%\textbf{Proof} \quad 
+%
+%\textbf {Theorem} \quad \textit{Any update function of a non-deterministic Turing Machine can be strongly inferred by a device.} \\
+%\textbf{Proof} \quad 
 
-%Hence:
+
+% Hence:
 %
 %$$ \forall \delta \in \wp(T)\text{ and all } s \in S(U),  \exists x \textit{ such that } X(u) = x \implies \{S(u) = s, Y(u) = \delta(T(u))\} $$ 
 %
@@ -288,7 +324,7 @@ Now suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exist
 
 % Use tuple to define Gamma, probe cares about second part 
 % 
-\pagebreak
+
 \section{Inference Complexity}
 
 \textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
