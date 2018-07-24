@@ -297,18 +297,18 @@ $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the r
 
 % delta and f must be in definitions of s and t.
 
-Let $ V_s = \{u : S^{-1}(s) = u \} $ for a value of $ s \in S(U) $. Define $ n(s) = |V_s| $. Enumerate the elements of $ V_s $ as $v_{{s}_1}, v_{{s}_2}, \dots , v_{s_{n(s)}}$. Then define $ X $ and $ Y $ as follows:
+Let $ V_s = \{u : S^{-1}(s) = u \} $ for a value of $ s \in S(U) $. Define $ n(s) = |V_s| $. Enumerate the elements of $ V_s $ as $v_{s}^1, v_{s}^2, \dots , v_{s}^{n(s)}$. We also enumerate the elements of $ S(U) $ as $ s_1, s_2, \dots \; $. Then define $ X $ and $ Y $ as follows:
 
 \begin{equation*}
-X(v_{s_i}) = i : i \in 1, \dots, n(s) \quad \quad 
-Y(v_{s_i}) = \begin{cases}
-       1 & \text{ if } v_{s_i} = v_{s_1} \\
+X(v_{s_{j}}^i) = i + \sum_{1}^{j - 1}{n({s_{j}})} : i \in 1, \dots, n(s) \quad \quad 
+Y(v_{s_{j}}^i) = \begin{cases}
+       1 & \text{ if } v_{s}^i = v_{s}^1 \\
        -1 & \text{ otherwise } \\
        \end{cases} 
 \end{equation*}
 
 \bigskip
-The condition $ |S^{-1}(s)| \geq 2 $ is required to guarantee $ Y(v) = -1 $ for some $ v_{s_i} $. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x_1 $ if $ t = T(v_1) $ or otherwise choose $ x_2 $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+The condition $ |S^{-1}(s)| \geq 2 $ is required to guarantee $ Y(v) = -1 $ for some $ v_{s}^i $. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x_1 $ if $ t = T(v_1) $ or otherwise choose $ x_2 $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
 
 Now consider the update function that describes the given Turing Machine. The update function is written as $ \Delta $ mapping $ Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} $, $ k \geq 2 $. Consider a convenient single-valued function $ S: U \rightarrow Q \times \Lambda^{k} $ representing the possible inputs for a Turing Machine and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \}^ {k} $ given by $ T(u) = \Delta(S(u)) $. Then $ \Delta $ can be written as the single-valued function $ \Delta(s) = T(S^{-1}(s)). $ \\
 
