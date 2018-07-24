@@ -70,7 +70,6 @@ $ \Delta \quad $ Transition function of a Turing Machine. \\
 $ k \quad $ Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
 $ \eta \quad $ Non-halting state of a Turing Machine. \\
 
-
 \subsection{Inference Devices} 
 $ U \quad $ Set of possible histories of the universe. \\
 $ u \quad $ A history of the universe in $ U $. \\ 
@@ -148,14 +147,15 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak:
 
 \begin{displayquote}
-When a NDTM $M$ computes a function, we envision that at each computational step $ M $ makes an arbitrary choice as to which of its two transition functions to apply. For every input $ x $, we say that $ M(x) = 1 $ if there exists some sequence of these choices (which we call nondeterministic choices of $ M $) that would make $ M $ reach $ q_{accept} $ on input $ x $. Otherwise - if every sequence of choices makes $ M $ halt without reaching $ q_{accept} $ - then we say that $ M(x) = 0 $.
+When a NDTM $M$ computes a function, we envision that at each computational step $ M $ makes an arbitrary choice as to which of its two transition functions to apply. For every input $ x $, we say that $ M(x) = 1 $ if there exists some sequence of these choices (which we call nondeterministic choices of $ M $) that would make $ M $ reach $ q_{accept} $ on input $ x $. Otherwise - if every sequence of choices makes $ M $ halt without reaching $ q_{accept} $ - then we say that $ M(x) = 0 $. 
 \end{displayquote}
 
+If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
 
-% SECTION 3: INFERENCE OF TURING MACHINES
-\section{Inference of Turing Machines} 
+% SECTION 3: STRONG INFERENCE
+\section{Strong Inference} 
  
- In the next three examples we examine strong inference of integer-valued functions. \\
+In the next three examples we examine strong inference of integer-valued functions. \\
  
  
  \textbf{Example 3.1} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
@@ -287,57 +287,73 @@ When a NDTM $M$ computes a function, we envision that at each computational step
  \end{tabular}
  \end{center} 
 
-
 \bigskip 
 \bigskip
+% SECTION 4: INFERENCE OF TURING MACHINES
+\section{Inference of Turing Machines}
 \textbf{Theorem} \quad \textit{A deterministic Turing Machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device if} 
 $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing Machine as a partial recursive function and the representation as an update function.} \\
 
-\textbf{Proof} \quad We first examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing Machine tuple. Let $ U := \N $. Choose any convenient single valued function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ given by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ given by $ f(s) = T(S^{-1}(s)) $. \\
+\textbf{Proof} \quad We first examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing Machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
 
 % delta and f must be in definitions of s and t.
 
-Let $ V_s = \{u : S^{-1}(s) = u \} $ for a value of $ s \in S(U) $. Define $ n(s) = |V_s| $. Enumerate the elements of $ V_s $ as $v_{s}^1, v_{s}^2, \dots , v_{s}^{n(s)}$. We also enumerate the elements of $ S(U) $ as $ s_1, s_2, \dots \; $. Then define $ X $ and $ Y $ as follows:
+Enumerate the elements of $ S(U) $ as $ 1, 2, \dots, s, \dots \; $. Let $ V^s = \{u : S^{-1}(s) = u \} $ for $ s \in S(U) $. Define $ n(s) = |V^s| $. Similarly enumerate the elements of $ V^s $ as $ s_1, s_2, \dots , s_{n(s)}$. Then define $ X $ and $ Y $ as follows:
 
 \begin{equation*}
-X(v_{s_{j}}^i) = i + \sum_{1}^{j - 1}{n({s_{j}})} : i \in 1, \dots, n(s) \quad \quad 
-Y(v_{s_{j}}^i) = \begin{cases}
-       1 & \text{ if } v_{s}^i = v_{s}^1 \\
+X(s_i) = \begin{cases}
+       s_a & \text{ if } i = 1 \\
+       s_b & \text{ otherwise } \\
+       \end{cases} \quad \quad 
+Y(s_i) = \begin{cases}
+       1 & \text{ if } i = 1 \\
        -1 & \text{ otherwise } \\
        \end{cases} 
 \end{equation*}
 
 \bigskip
-The condition $ |S^{-1}(s)| \geq 2 $ is required to guarantee $ Y(v) = -1 $ for some $ v_{s}^i $. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x_1 $ if $ t = T(v_1) $ or otherwise choose $ x_2 $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
+Note that the condition $ |S^{-1}(s)| \geq 2 $ is required to guarantee $ Y(V^s) = \{1, -1\} $. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x = s_a $ if $ t = T(v_1) $ or otherwise choose $ x = s_b $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
 
-Now consider the update function that describes the given Turing Machine. The update function is written as $ \Delta $ mapping $ Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} $, $ k \geq 2 $. Consider a convenient single-valued function $ S: U \rightarrow Q \times \Lambda^{k} $ representing the possible inputs for a Turing Machine and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \}^ {k} $ given by $ T(u) = \Delta(S(u)) $. Then $ \Delta $ can be written as the single-valued function $ \Delta(s) = T(S^{-1}(s)). $ \\
+Now consider the update function that describes the given Turing Machine. The update function is written as $ \Delta $ mapping $ Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} $, $ k \geq 2 $. Consider a convenient single-valued function $ S: U \rightarrow Q \times \Lambda^{k} $ representing the possible inputs for a Turing Machine and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \}^ {k} $ as $ T(u) = \Delta(S(u)) $. Then $ \Delta $ can be written as the single-valued function $ \Delta(s) = T(S^{-1}(s)). $ \\
 
-We proceed analogously to the partial function portion of the proof. Define $ V $, $ X $, and $ Y $ as described in the preceding paragraphs. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x_1 $ if $ t = T(v_1) $ or otherwise choose $ x_2 $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. $ \hfill \qed $ \\
+We proceed analogously to the partial function portion of the proof. Define $ V^s $, $ X $, and $ Y $ as described in the preceding paragraphs. For each pair $ (s, \delta_{t \in T(U)} ) $ choose $ x = s_a $ if $ t = T(v_1) $ or otherwise choose $ x = s_b $ to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $. Since the choice of $ s $ was arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
 
 % NECESSARY <- PROOF, DOES NOT CONSIDER CASE WHERE TURING MACHINE NEVER HALTS
 %Now for either case, suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| > 1 $. $ \hfill \qed $ \\
+
+
+%\bigskip
+%\bigskip
+%\textbf{Corollary} \quad \textit{}
+
+
 
 %\bigskip
 %\bigskip
 %\textbf {Theorem} \quad \textit{Any non-deterministic Turing Machine can be strongly inferred by a device if} 
 %$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$
 %\textit{This condition holds for both the partial function representation and the instantaneous description of the Turing Machines.} \\
-%
-%\textbf{Proof} \quad The proof is symmetric to the proof for deterministic Turing Machines. Define all sets and functions as in Proof 1, with the exception of $ Y $. Define $ Y $ as follows:
-%
-%	  \[ Y(v) =
-%	  \begin{cases} 
-%       1 & \text{ if } v = v_1 \text{ and } |\{ t: Y(v) = t \}| = 1 \\
-%       -1 & \text{ otherwise } \\
-%      \end{cases}\] \\
-%
-%Then if $ T(v) $ is single valued, we can choose $ x_1 $
 
-% choice of x influences choice of probe
-% y is fixed
-% probe is really just a mathematical relation that allows for us to ask yes/no question.
+% # NOTES #
+% Don't need to consider partial function case
+% Need to construct two update functions 
+%Consider the two update functions $ \Delta_0 $, $ \Delta_1 : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \} ^{k} $, $ k \geq 2 $ of a nondeterministic Turing machine. Let $ U := \N $. Choose any convenient single-valued surjective function $ S: U \rightarrow Q \times \Lambda^{k} $ and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, S, R \}^ {k} $ as:
+%
+%\begin{equation*}
+% T(u) = \begin{cases}
+%        \Delta_0(S(u)) \\
+%        \Delta_1(S(u)) \\
+%        \end{cases} \text{arbitrarily}
+%\end{equation*} 
+%       
+%Then we write $ \Delta_{0}(s), \Delta_{1}(s) = T(S^{-1}(s)) $
 
-% Write theorem for any Turing Machine encode it as gamma such that there is an inference device that can weakly infer that function
+
+% Does this mean that there can be different t for each u? 
+
+% #########
+
+
 
 % fix x and loop s, t
 
