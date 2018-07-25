@@ -356,29 +356,34 @@ We proceed analogously to the partial function portion of the proof. Define $ V^
 % #########
 
 
-
-% fix x and loop s, t
-
-% Encode not the update rule but the entire map 
-
-% Use countable spaces
-% Gamma has to encode input string, output string or nonhalting 
-
-% Does strong inference solve the Halting Problem? 
-
-% Go through all the counting numbers, map from counting numbers to joint space (b, T_1(b))
-% T(u) is a value in the space of strings union no halt such that T(u) is the associated output of S(u). 
-
-% Use tuple to define Gamma, probe cares about second part 
-
-
 \section{Inference Complexity}
 
-\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
+\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
-\textit{Remark:} This is only a working definition and may be revised depending on its behavior.
+\textit{Remark:} This is only a working definition and may be revised depending on its behavior. \\
+
+\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 26^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
+
+\textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
+
+$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
+
+Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
+
+\bigskip
+\bigskip
+\textbf{Theorem} \quad \textit{Let c be a positive integer. Every finite set A of cardinality m has at least} $ m(1 - 26^{-c}) + 1 $ \textit{elements x such that} $ \mathcal{C}_\mathcal{D}( x ) \geq \log m - c $. \\
+
+
+\textbf{Proof} \quad Let $ U := \B^{*} $ and take $ d\mu(u) = l(u) $ where $ l(b) $ is the length of a bit string $ b $. Since $ A $ is finite, we can map its elements to a set of finite bit strings. The number of $ u $ with inference complexity of less than $ \log m - c $ is
+
+$$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$ 
+
+Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
+
+%$ \hfill \qed $ \\
 
 % Make strong inference example for arxiv paper
 % use a tuple for x <- (b, probe type)
