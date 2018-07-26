@@ -110,7 +110,7 @@ $ \gg \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions 
 \begin{enumerate}
 \item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the symbols 0 and 1. 
 \item A finite set $ Q $ of possible states that $ T $'s register can be in. We assume that $ Q $ contains a special start state $ q_{s} $ and a special halt state $ q_{h} $. 
-\item A transition function function $ \Delta : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{L, \mathcal{S}, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L, \mathcal{S}, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
+\item A transition function $ \Delta : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{L, \mathcal{S}, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L, \mathcal{S}, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
 \end{enumerate}
 
 Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, \mathcal{S}, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in Figure 2.1. \\
@@ -296,10 +296,10 @@ In the next three examples we examine strong inference of integer-valued functio
 \bigskip
 % SECTION 4: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines}
-\textbf{Theorem} \quad \textit{A deterministic Turing Machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device if} 
+\textbf{Theorem} \quad \textit{A deterministic Turing machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device iff} 
 $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing Machine as a partial recursive function and the representation as an update function.} \\
 
-\textbf{Proof} \quad We first examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing Machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
+\textbf{Proof} \quad First examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
 
 % delta and f must be in definitions of s and t.
 
@@ -319,14 +319,12 @@ Y(s_i) = \begin{cases}
 \bigskip
 Note that the condition $ |S^{-1}(s)| \geq 2 $ is required to guarantee $ Y(V^s) = \{1, -1\} $. For each pair $ (s, \delta_{t \in T(U)} ) $, to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $, choose $ x = a_s $ if $ t = T(s_1) $ or otherwise choose $ x = b_s $. Since the choices of $ s $ and $ t $ were arbitrary, this holds for all $ (s, \delta_t) $ pairs. \\
 
-Now consider the update function that describes the given Turing Machine. Recall that the update function is written as $ \Delta: Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, \mathcal{S}, R \} ^{k} $, $ k \geq 2 $. Consider a convenient single-valued surjective function $ S: U \rightarrow Q \times \Lambda^{k} $ representing the possible inputs for a Turing Machine and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, \mathcal{S}, R \}^ {k} $ as $ T(u) = \Delta(S(u)) $. Then $ \Delta $ can be written as the single-valued function $ \Delta(s) = T(S^{-1}(s)). $ \\
+Now consider the update function that describes the given Turing machine. Recall that the update function is written as $ \Delta: Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{ L, \mathcal{S}, R \} ^{k} $, $ k \geq 2 $. Consider a convenient single-valued surjective function $ S: U \rightarrow Q \times \Lambda^{k} $ representing the possible inputs for a Turing Machine and a corresponding single-valued $ T: U \rightarrow Q \times \Lambda^{k - 1} \times \{ L, \mathcal{S}, R \}^ {k} $ as $ T(u) = \Delta(S(u)) $. Observe that $ \Delta $ can be written as the single-valued function $ \Delta(s) = T(S^{-1}(s)) $. Then define $ V^s $, $ X $, $ Y $, and choose $ x $ for each $ (s, \delta_t ) $ as described in the preceding portion of the proof. Hence, the claim holds for the update function of a Turing machine.\\
 
-We proceed analogously to the partial function portion of the proof. Define $ V^s $, $ X $, and $ Y $ as described in the preceding paragraphs. For each pair $ (s, \delta_{t \in T(U)} ) $, to force $ S(u) = s $ and $ Y(u) = \delta_{t}(T(u)) $, choose $ x = a_s $ if $ t = T(s_1) $ or otherwise choose $ x = b_s $. Since the choices of $ s $ and $ t $ were arbitrary, this holds for all $ (s, \delta_t) $ pairs. $ \hfill \qed $ \\
+To show that the condition is necessary for either representation, suppose that $|V^s| < 2$ for some $ s $. If $ V^s = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(s_i) = y \in \{-1, 1\} $. However, whichever value is assigned, there exists a $ t $ such that $ \delta_{t}(T(s_i)) \neq Y(s_i) $ since $ |T(U)| \geq 2 $. $ \hfill \qed $ \\
 
-\textit{Remark:} As a point of convention, all functions over $ U $ must have a range of at least two elements. This implies that Turing machines that never halt cannot be strongly inferred.
 
-% NECESSARY <- PROOF, DOES NOT CONSIDER CASE WHERE TURING MACHINE NEVER HALTS
-%Now for either case, suppose that $|V| < 2$ for some $ s $. If $ V = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(v) = y \in \{-1, 1\} $. However, whatever value we assign, we cannot guarantee that $ \delta_{t}(T(v)) = Y(v) $ for all $ t $ since $ |T(U)| > 1 $. $ \hfill \qed $ \\
+\textit{Remark:} Conventionally all functions over $ U $ must have a range of at least two elements. This implies that Turing machines that never halt cannot be strongly inferred.
 
 
 %\bigskip
@@ -367,6 +365,7 @@ We proceed analogously to the partial function portion of the proof. Define $ V^
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
+% INCOMPRESSIBILITY THEOREM
 \textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
 
 \textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
@@ -375,14 +374,16 @@ $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 
 Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \bigskip
 \bigskip
+
+
 \textbf{Theorem} \quad \textit{Let c be a positive integer. Every finite set A(U) of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_\mathcal{D}( a ) \geq \log m - c $. \\
 
 
-\textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y
-
-
+\textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y $
 
 
 \bigskip
@@ -400,6 +401,63 @@ $$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$
 Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
 
 %$ \hfill \qed $ \\
+
+\begin{center}
+ \begin{tabular}{ |c||c|c|c|c| } 
+
+ \hline
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma_1(u) $ & $ \Gamma_2(u) $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 2 $ \\
+ \hline
+ $ 2 $ & $ 2 $ & $ -1 $ & $ 2 $ & $ 1 $ \\
+ \hline
+ $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
+ \hline
+ \end{tabular} 
+ \quad
+ \begin{tabular}{ |c||c|c| } 
+ \hline
+ $ \gamma $ \textbackslash $ \Gamma $ & $ \Gamma_1 $ & $ \Gamma_2 $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ null $  \\
+  \hline
+ $ 2 $ & $ null $ & $ 1 $  \\
+ \hline
+ 
+ \end{tabular}
+ \end{center} 
+
+\begin{center}
+ \begin{tabular}{ |c||c|c|c|c| } 
+
+ \hline
+ $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma_1(u) $ & $ \Gamma_2(u) $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 2 $ \\
+ \hline
+ $ 2 $ & $ 2 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
+ \hline
+ $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
+ \hline
+ \end{tabular} 
+ \quad
+ \begin{tabular}{ |c||c|c| } 
+ \hline
+ $ \gamma $ \textbackslash $ \Gamma $ & $ \Gamma_1 $ & $ \Gamma_2 $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ null $ & $ 2 $  \\
+  \hline
+ $ 2 $ & $ 2 $ & $ null $  \\
+ \hline
+ 
+ \end{tabular}
+ \end{center} 
+
 
 
 %\section{Future Work}
