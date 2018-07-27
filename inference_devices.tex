@@ -270,7 +270,7 @@ In the next three examples we examine strong inference of integer-valued functio
  \hline
  $ 2 $ & $ 2 $ & $ -1 $ & $ 1 $ & $ 2 $ \\
  \hline
- $ 3 $ & $ 3 $ & $ -1 $ & $ 1 $ & $ 3 $ \\
+ $ 3 $ & $ 3 $ & $ 1 $ & $ 1 $ & $ 3 $ \\
  \hline
  $ 4 $ & $ 4 $ & $ -1 $ & $ 2 $ & $ 1 $ \\
  \hline
@@ -379,15 +379,60 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 \bigskip
 \bigskip
 
+\textbf{Lemma 5.1} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
+\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
+\begin{equation*}
+X(i_j) = \begin{cases}
+       a_i & \text{ if } j = 2 \\
+       b_i & \text{ otherwise } \\
+       \end{cases} \quad \quad 
+Y(i_j) = \begin{cases}
+       -1 & \text{ if } j = 2 \\
+       1 & \text{ otherwise. } \\
+       \end{cases} 
+\end{equation*}
 
-\textbf{Theorem} \quad \textit{Let c be a positive integer. Every finite set A(U) of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_\mathcal{D}( a ) \geq \log m - c $. \\
+Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(b_i)) = i). \hfill \qed $ \\
+
+\bigskip
+\textbf{Proposition} \quad \textit{No inference device that can weakly infer all sets of finite-ranged functions.} \\
+\textbf{Proof} \quad Take any conclusion function $ Y $. Let $\Gamma(u) = Y(u) $. Then for $ \gamma = -1 $, $ X(u) = x \implies Y(u) = -1 \neq \delta_{-1}(\Gamma(u) = -1) \hfill \qed $  \\
+
+
+\bigskip
+
+% You can define a device to infer a given set of countably infinite functions.
+
+% Perhaps the best approach is to find a way to define a device give any finite set of functions and prove any of these devices behave the same under inference complexity
+
+\textbf{Corollary} \quad \textit{A set of countable functions A can be weakly inferred by a device} $ \mathcal{D} $ \textit {if for all} $ F \in A $,  $\exists f \in F : |F^{-1}(f)| \geq 2 $. \\
+
+\textbf{Proof} \quad We proceed by induction. Let the base case be $ |A| = 1 $. The base case holds by Theorem 5.1. Assume that the claim holds for some $ n $ such that $ |A| = n $. We show that it holds for the case of $ n + 1 $. Let $ U := \N $ and denote the device inferring $ A $ as $ (X, Y) $. Add a new function $ a $ to $ A $ such that $\exists g \in a(U) : |a^{-1}(g)| \geq 2 $ and $ a $ is not already a member of $ A $. Enumerate $ g \in a $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: a^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $.
+
+Then define the inference device $ ( X', Y' ) $ as 
+
+\begin{equation*}
+X'(i_j) = \begin{cases}
+       b_i & \text{ if } j = 2 \\
+       X(i_j) & \text{ otherwise } \\
+       \end{cases} \quad \quad 
+Y'(i_j) = \begin{cases}
+       -1 & \text{ if } j = 2 \\
+       Y(i_j) & \text{ otherwise } \\
+       \end{cases} \\ 
+\end{equation*}
+
+Then for each $ i \in \Gamma(U) $ choose $ x = a_i $ to force $ Y(X^{-1}(a_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(a_i)) = i) $. Because the choice of $ n $ was arbitrary, the claim holds for all $ n \in \N. \hfill \qed $ \\
+
+\bigskip
+\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be the set of all functions with finite ranges. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. \\
 
 
 \textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y $
 
 
 \bigskip
-Let $ U := \B^{*} $ and take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Choose any finite set $ A(U) $ with cardinality $ m $. Since $ A(U) $ is finite, its elements are bit strings. Define $ X: U \rightarrow \B^{*} $ as $ X(u) = A(u) $. Define $ Y: U \rightarrow \{-1, 1\} $ as $ Y(u) = 1 $. Then for any element $ a $ we can choose $ x = X(A^{-1}(a)) $ to force $ Y = 1 = \delta_a(a) $. Thus, the device $ \mathcal{D} = (X, Y) $ weakly infers $ A $. \\
+Let $ U := \B^{*} $ and take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Choose any finite set $ A(U) $ with cardinality $ m $. Since $ A(U) $ is finite, its elements are bit strings. 
 
 $$ \mathcal{C}_{\mu}(A ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(A)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
@@ -401,62 +446,6 @@ $$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$
 Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
 
 %$ \hfill \qed $ \\
-
-\begin{center}
- \begin{tabular}{ |c||c|c|c|c| } 
-
- \hline
- $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma_1(u) $ & $ \Gamma_2(u) $ \\ 
- \hline
- \hline
- $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 2 $ \\
- \hline
- $ 2 $ & $ 2 $ & $ -1 $ & $ 2 $ & $ 1 $ \\
- \hline
- $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
- \hline
- \end{tabular} 
- \quad
- \begin{tabular}{ |c||c|c| } 
- \hline
- $ \gamma $ \textbackslash $ \Gamma $ & $ \Gamma_1 $ & $ \Gamma_2 $ \\ 
- \hline
- \hline
- $ 1 $ & $ 1 $ & $ null $  \\
-  \hline
- $ 2 $ & $ null $ & $ 1 $  \\
- \hline
- 
- \end{tabular}
- \end{center} 
-
-\begin{center}
- \begin{tabular}{ |c||c|c|c|c| } 
-
- \hline
- $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma_1(u) $ & $ \Gamma_2(u) $ \\ 
- \hline
- \hline
- $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 2 $ \\
- \hline
- $ 2 $ & $ 2 $ & $ 1 $ & $ 2 $ & $ 1 $ \\
- \hline
- $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ \\
- \hline
- \end{tabular} 
- \quad
- \begin{tabular}{ |c||c|c| } 
- \hline
- $ \gamma $ \textbackslash $ \Gamma $ & $ \Gamma_1 $ & $ \Gamma_2 $ \\ 
- \hline
- \hline
- $ 1 $ & $ null $ & $ 2 $  \\
-  \hline
- $ 2 $ & $ 2 $ & $ null $  \\
- \hline
- 
- \end{tabular}
- \end{center} 
 
 
 
