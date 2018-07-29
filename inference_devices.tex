@@ -157,6 +157,44 @@ When a NDTM $M$ computes a function, we envision that at each computational step
 
 If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
 
+% SECTION: WEAK INFERENCE
+\section{Weak Inference}
+\bigskip   
+\textbf{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
+\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
+
+\begin{equation*}
+X(i_j) = \begin{cases}
+       a_i & \text{ if } j = 2 \\
+       b_i & \text{ otherwise } \\
+       \end{cases} \quad \quad 
+Y(i_j) = \begin{cases}
+       -1 & \text{ if } j = 2 \\
+       1 & \text{ otherwise. } \\
+       \end{cases} 
+\end{equation*}
+
+Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(b_i)) = i). \hfill \qed $ \\
+
+\bigskip   
+\textbf{Corollary} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma(U)| \geq 3 $.  \\
+\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
+
+\begin{equation*}
+X(i_j) = \begin{cases}
+       a & \text{ if } i = 1 \text{ and } j = 1 \\
+       b & \text{ if } i = 2 \text{ and } j = 1 \\
+       c & \text{ if } i = 3 \text{ and } j = 1 \\
+       d & \text{ otherwise. } \\
+       \end{cases} \quad \quad 
+Y(i_j) = \begin{cases}
+       1 & \text{ if } i = 1 \text{ and } j = 1 \\
+       -1 & \text{ otherwise. } \\
+       \end{cases} 
+\end{equation*}
+
+Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^{-1}(x)) = i) $ choose $ x = a $ if $ i = 1 $, $ x = c $ if $ i = 2 $, or else choose $ x = b $. $ \hfill \qed $ \\
+
 % SECTION 3: STRONG INFERENCE
 \section{Strong Inference} 
  
@@ -294,10 +332,11 @@ In the next three examples we examine strong inference of integer-valued functio
 
 \bigskip 
 \bigskip
+\newpage
 % SECTION 4: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines}
 \textbf{Theorem} \quad \textit{A deterministic Turing machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device iff} 
-$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing Machine as a partial recursive function and the representation as an update function.} \\
+$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing machine as a partial recursive function and the representation as an update function.} \\
 
 \textbf{Proof} \quad First examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
 
@@ -365,9 +404,9 @@ To show that the condition is necessary for either representation, suppose that 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
+\bigskip
 % INCOMPRESSIBILITY THEOREM
 \textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
-
 \textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
 
 $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
@@ -376,74 +415,49 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bigskip
-\bigskip
 
-\textbf{Lemma 5.1} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
-\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
-\begin{equation*}
-X(i_j) = \begin{cases}
-       a_i & \text{ if } j = 2 \\
-       b_i & \text{ otherwise } \\
-       \end{cases} \quad \quad 
-Y(i_j) = \begin{cases}
-       -1 & \text{ if } j = 2 \\
-       1 & \text{ otherwise. } \\
-       \end{cases} 
-\end{equation*}
-
-Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(b_i)) = i). \hfill \qed $ \\
-
-\bigskip
-\textbf{Proposition} \quad \textit{No inference device that can weakly infer all sets of finite-ranged functions.} \\
-\textbf{Proof} \quad Take any conclusion function $ Y $. Let $\Gamma(u) = Y(u) $. Then for $ \gamma = -1 $, $ X(u) = x \implies Y(u) = -1 \neq \delta_{-1}(\Gamma(u) = -1) \hfill \qed $  \\
-
-
-\bigskip
+%\bigskip
 
 % You can define a device to infer a given set of countably infinite functions.
 
 % Perhaps the best approach is to find a way to define a device give any finite set of functions and prove any of these devices behave the same under inference complexity
 
-\textbf{Corollary} \quad \textit{A set of countable functions A can be weakly inferred by a device} $ \mathcal{D} $ \textit {if for all} $ F \in A $,  $\exists f \in F : |F^{-1}(f)| \geq 2 $. \\
+\textbf{Countable Inference Lemma} \; \textit{A set of countable functions} $ A^{*} $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit {if for all} $ F \in A $,  $\exists f \in F : |F^{-1}(f)| \geq 2 $. \\
+\textbf{Proof} \; We proceed by induction. Let the base case be $ |A^{*}| = 1 $. The base case holds by Theorem 5.1. Assume that the claim holds for some $ n $ such that $ |A^{*}| = n $. We show that it holds for the case of $ n + 1 $. Let $ U := \N $ and denote the device inferring $ A^{*} $ as $ (X, Y) $. Add a new function $ A $ to $ A^{*} $ such that $\exists a \in A(U) : |A^{-1}(a)| \geq 2 $ and $ A $ is not already a member of $ A^{*} $. Enumerate $ a \in A(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: A^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Then define the inference device $ ( X', Y' ) $ as 
 
-\textbf{Proof} \quad We proceed by induction. Let the base case be $ |A| = 1 $. The base case holds by Theorem 5.1. Assume that the claim holds for some $ n $ such that $ |A| = n $. We show that it holds for the case of $ n + 1 $. Let $ U := \N $ and denote the device inferring $ A $ as $ (X, Y) $. Add a new function $ a $ to $ A $ such that $\exists g \in a(U) : |a^{-1}(g)| \geq 2 $ and $ a $ is not already a member of $ A $. Enumerate $ g \in a $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: a^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $.
-
-Then define the inference device $ ( X', Y' ) $ as 
-
-\begin{equation*}
-X'(i_j) = \begin{cases}
-       b_i & \text{ if } j = 2 \\
-       X(i_j) & \text{ otherwise } \\
-       \end{cases} \quad \quad 
-Y'(i_j) = \begin{cases}
-       -1 & \text{ if } j = 2 \\
-       Y(i_j) & \text{ otherwise } \\
-       \end{cases} \\ 
-\end{equation*}
-
-Then for each $ i \in \Gamma(U) $ choose $ x = a_i $ to force $ Y(X^{-1}(a_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(a_i)) = i) $. Because the choice of $ n $ was arbitrary, the claim holds for all $ n \in \N. \hfill \qed $ \\
+%\begin{equation*}
+%X'(i_j) = \begin{cases}
+%       b_i & \text{ if } j = 2 \\
+%       X(i_j) & \text{ otherwise } \\
+%       \end{cases} \quad \quad 
+%Y'(i_j) = \begin{cases}
+%       -1 & \text{ if } j = 2 \\
+%       Y(i_j) & \text{ otherwise } \\
+%       \end{cases} \\ 
+%\end{equation*}
+%
+%Then for each $ i \in \Gamma(U) $ choose $ x = a_i $ to force $ Y(X^{-1}(a_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(a_i)) = i) $. Because the choice of $ n $ was arbitrary, the claim holds for all $ n \in \N. \hfill \qed $ \\
 
 \bigskip
-\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be the set of all functions with finite ranges. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. \\
+\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of functions with finite ranges. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. \\
 
 
-\textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y $
-
-
-\bigskip
-Let $ U := \B^{*} $ and take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Choose any finite set $ A(U) $ with cardinality $ m $. Since $ A(U) $ is finite, its elements are bit strings. 
-
-$$ \mathcal{C}_{\mu}(A ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(A)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
-
-$$ \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
-
-
-The number of $ a $ with length of less than $ \log m - c $ is less than the sum
-
-$$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$ 
-
-Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
+%\textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y $
+%
+%
+%\bigskip
+%Let $ U := \B^{*} $ and take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Choose any finite set $ A(U) $ with cardinality $ m $. Since $ A(U) $ is finite, its elements are bit strings. 
+%
+%$$ \mathcal{C}_{\mu}(A ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(A)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
+%
+%$$ \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
+%
+%
+%The number of $ a $ with length of less than $ \log m - c $ is less than the sum
+%
+%$$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$ 
+%
+%Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
 
 %$ \hfill \qed $ \\
 
