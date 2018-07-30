@@ -453,7 +453,7 @@ To show that the condition is necessary for either representation, suppose that 
 
 \textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
 
-$$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
+$$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
 \bigskip
 % INCOMPRESSIBILITY THEOREM
@@ -466,28 +466,35 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
 \bigskip
-\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of functions with finite ranges. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. \\
+\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of finite-ranged functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that a finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. There also exists $ A^{*} $ and $ \mathcal{D} $ such that all $ a \in A $ have $ \mathcal{C}_{\mu}(a;\mathcal{D}) = 0 $. } \\
+
+\textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any countable set $ A $ from $ A^{*} $ with cardinality $ m $. Construct a device $ \mathcal{D} $ that can weakly infer $ A $. This device exists by the Countable Inference Theorem. Let $ U := \B^{*} $. Define $ X: U \rightarrow \N $ as the lexicographic mapping from bit strings to integers and let $ Y:U \rightarrow \{-1, 1\} $ be defined as specified in the Countable Inference Theorem.
+
+\bigskip
+Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Recall that the inference complexity of $ a \in A $ with respect to $ \mathcal{D} $ is
+$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } [\mathcal{M}_{\mu, X} (x)]: \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
+
+% Find two bounds: minimum complexity and maximum complexity for A \in A^{*}
+By the Countable Inference Theorem, there are a class of functions that can all be weakly inferred by $ u \in \{1, 2\} $. 
+% Need to show that you cannot infer something with just one u $.
+Then the minimum inference complexity for any function $ a \in A $ is 
+$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) }- \ln \sum_{X^{-1}(x)} {\ell(u)} $$
+
+$$ = \sum_{\delta \in \wp(a)} - \ln {1}  = - 2\ln {1} = 0. $$
+
+If all $ a \in A $ are instances of that class of functions then the inference complexity for all $ a \in A $ would be zero. Now suppose that all $ a \in A $ are in the class of functions $ A_5 $. Then the inference complexity of $ a $ is
+$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } -\ln \sum_{X^{-1}(x)} {\ell(u)} $$
+
+$$ = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } - \ln {u} = - \ln 1 - \ln(u)  = \ln(u). $$
+
+Since a unique $ u $ is used to infer every $ a $ in this set, we can apply the pigeonhole principle. The number of bit strings of length less than $ \log m - c $ is 
+$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
+
+Hence, there are at least $ m - m2^{-c} + 1 $ functions $ a $ in $ A $ which have inference complexity greater than $ \log m - c $. $ \hfill \qed $ \\
 
 
-%\textbf{Proof} \quad We first construct a fixed device $ \mathcal{D}_{\phi} $ that can weakly infer any finite set $ A $. Let $ U := \B^{*} \cup \{0\} $. Define $ X: U \rightarrow \B^{*} \cup \{0\} $ as $ X(u) = u $ and define $ :Y $
-%
-%
-%\bigskip
-%Let $ U := \B^{*} $ and take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Choose any finite set $ A(U) $ with cardinality $ m $. Since $ A(U) $ is finite, its elements are bit strings. 
-%
-%$$ \mathcal{C}_{\mu}(A ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(A)} min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
-%
-%$$ \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
-%
-%
-%The number of $ a $ with length of less than $ \log m - c $ is less than the sum
-%
-%$$ \sum_{i = 0}^{\log m - c} {2^i} = ^{\log m - c} - 1. $$ 
-%
-%Note that each $ u $ can infer at most one unique element of $ A $. Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ that cannot be inferred by a $ u $ of length less than $ \log m - c $. \\
-
-%$ \hfill \qed $ \\
 
 
 \newpage
