@@ -34,6 +34,7 @@
 
 \title{
   Notes on Inference Devices \\
+  \bigskip
   \large Santa Fe Institute}
 \author{Edward G. Huang}
 \date{Summer 2018} 
@@ -61,10 +62,10 @@
 
  
 
-% SECTION 1: NOTATION
+% SECTION 1: INTRODUCTION
 \section{Introduction} 
 
-
+% SUBSECTION: NOTATION
 \subsection{Notation and Definitions}
 This manuscript utilizes standard notation taken from set theory and vector algebra. We clarify notation specific to Turing machine theory and inference devices. \\
 
@@ -102,9 +103,10 @@ $ \gg \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions 
 
 \quad \quad and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
 
-% SECTION 2: TURING MACHINES
+% SUBSECTION: TURING MACHINES
 \subsection{Turing Machines} 
 
+% SUBSECTION: DTM
 \textbf{Deterministic Turing Machines} \\
  Arora and Barak denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
 \begin{enumerate}
@@ -148,6 +150,7 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. \\
 
+% SUBSECTION: NDTM
 \textbf{Non-deterministic Turing Machines} \\
 Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak:
 
@@ -158,8 +161,11 @@ When a NDTM $M$ computes a function, we envision that at each computational step
 If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
 
 % SECTION: WEAK INFERENCE
+\newpage
 \section{Weak Inference}
 \bigskip   
+
+% LEMMA 1
 \textbf{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
 \textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
 
@@ -176,6 +182,7 @@ Y(i_j) = \begin{cases}
 
 Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(b_i)) = i). \hfill \qed $ \\
 
+% COROLLARY 1
 \bigskip   
 \textbf{Corollary} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma(U)| \geq 3 $.  \\
 \textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
@@ -195,12 +202,55 @@ Y(i_j) = \begin{cases}
 
 Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^{-1}(x)) = i) $ choose $ x = a $ if $ i = 1 $, $ x = c $ if $ i = 2 $, or else choose $ x = b $. $ \hfill \qed $ \\
 
+% COUNTABLE INFERENCE THEOREM
+\bigskip
+\newpage
+\textbf{Countable Inference Theorem} \; \textit{A set of countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if for all} $ A_i \in A^{*} $,  $\exists a \in A_i : |A_i^{-1}(a)| \geq 2 $ or $ |A_i(U)| \geq 3 $. \\
+\textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $ such that for any $ A_i $  there exists an element $ a \in A_i(U) $ such that $ | A_i^{-1}(a) | \geq 2 $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ u \in \{1, 2, 3\} $ \\
+ \begin{center}
+ \begin{tabular}{ |c||c|c|c|c|c|c|c|c } 
+
+ \hline
+ $ u $ & $ X(u) $ & $Y(u)$ & $ A_1(u) $ & $ A_2(u) $ & $ A_3(u) $ & $ A_4(u) $ & $ A_5(u) $ & $ \dots $ \\ 
+ \hline
+ \hline
+ $ 1 $ & $ 1 $ & $ -1 $ & $ a_i $ & $ a_i $ & $ a_i $ & $ a_i $ & $ a_i $ & $ \dots $ \\
+ \hline
+ $ 2 $ & $ 2 $ & $ -1 $ & $ a_i $ & $ a_j $ & $ a_j $ & $ a_j $ & $ a_i $ & $ \dots $ \\
+ \hline
+ $ 3 $ & $ 3 $ & $ 1 $ & $ a_i $ & $ a_k $ & $ a_j $ & $ a_i $ & $ a_j $ & $ \dots $ \\
+ \hline
+ $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \vdots $ & $ \ddots $ \\
+ \end{tabular} 
+ \end{center}
+\bigskip 
+Note that setting $ X(u) = u $ and $ Y(1) = -1 $, $ Y(2) = -1 $, and $ Y(3) = -1 $ immediately satisfies weak inference for any function $ A_i $ whose distinct elements over $ u \in \{1, 2, 3\} $ are representative of the combinations in $ A_1 $, $ A_2 $, $ A_3 $ and $ A_4 $. This holds regardless of the values of $ X(u) $ , $ Y(u) $, and $ A_{ i \in \{1, 2, 3, 4\} }(u) $ that follow for $ u > 3 $. This is shown by selecting $ x $ for the following cases:
+
+\bigskip
+\textit{Case} $ A_1 $: Choose $ x = 3 $ for $ a = a_i $. Choose $ x = 2 $ otherwise. 
+
+\textit{Cases} $ A_2 $, $ A_3 $, $ A_4 $: Choose $ x = 2 $ for $ a = a_i $. Choose $ x = 1 $ otherwise. \\
+
+Now enumerate each $ A_i $ resembling $ A_5 \in A^{*} $ as $ B_4, B_5, \dots, B_i, \dots, B_n $. To satisfy weak inference for any $ B_i $, define $ X $, $ Y $ more explicitly as 
+\begin{equation*} 
+     X(u) = u, \quad \quad
+     Y(u) = \begin{cases} 
+    -1 & \text{ if } u = 1, 2 \text { or if } B_i(u) = a_j, a_k: i = X(u) \\
+     1 & \text{ if } u = 3 \text{ or if } B_i(u) = a_i: i = X(u) \\
+    -1 & \text { otherwise. } \\
+            \end{cases} \\
+\end{equation*}
+
+Then for each $ a \in B_i(U) $, to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $, choose $ x = i $ if $ a = a_i $ or otherwise choose $ x = 1 $. Because the choice of $ A^{*} $ was arbitrary, the claim holds for all $ A^{*} $. $ \hfill \qed $ \\
+
+
 % SECTION 3: STRONG INFERENCE
+\newpage
 \section{Strong Inference} 
  
 In the next three examples we examine strong inference of integer-valued functions. \\
  
- 
+% EXAMPLE 
  \textbf{Example 2.3.1} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
  \begin {center}
  \begin{tabular}{ |c||c|c|c|c| } 
@@ -239,7 +289,7 @@ In the next three examples we examine strong inference of integer-valued functio
  \end{tabular}
  \end{center}
  
-  
+% EXAMPLE  
  \bigskip
  \bigskip 
  \textbf{Example 2.3.2} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
@@ -293,6 +343,7 @@ In the next three examples we examine strong inference of integer-valued functio
  \end{tabular}
  \end{center} 
 
+% EXAMPLE
  \bigskip
  \bigskip 
  \textbf{Example 2.3.3} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2\} $. In this example, the inferred function $ f: S \rightarrow T, f(s) = T(S^{-1}(s)) $ is not single-valued. \\ 
@@ -333,14 +384,13 @@ In the next three examples we examine strong inference of integer-valued functio
 \bigskip 
 \bigskip
 \newpage
-% SECTION 4: INFERENCE OF TURING MACHINES
+% SECTION: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines}
+% TURING INFERENCE THEOREM
 \textbf{Theorem} \quad \textit{A deterministic Turing machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device iff} 
 $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing machine as a partial recursive function and the representation as an update function.} \\
 
 \textbf{Proof} \quad First examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
-
-% delta and f must be in definitions of s and t.
 
 Enumerate the elements of $ S(U) $ as $ 1, 2, \dots, s, \dots \; $. Let $ V^s = \{u : S^{-1}(s) = u \} $ for $ s \in S(U) $. Similarly enumerate the elements of $ V^s $ as $ s_1, s_2, \dots , s_{|V^{s}|}$. Then define $ X $ and $ Y $ as follows:
 
@@ -398,6 +448,7 @@ To show that the condition is necessary for either representation, suppose that 
 % #########
 
 % SECTION: INFERENCE COMPLEXITY
+\newpage
 \section{Inference Complexity}
 
 \textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
@@ -414,29 +465,6 @@ $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%\bigskip
-
-% You can define a device to infer a given set of countably infinite functions.
-
-% Perhaps the best approach is to find a way to define a device give any finite set of functions and prove any of these devices behave the same under inference complexity
-
-\textbf{Countable Inference Lemma} \; \textit{A set of countable functions} $ A^{*} $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit {if for all} $ F \in A $,  $\exists f \in F : |F^{-1}(f)| \geq 2 $. \\
-\textbf{Proof} \; We proceed by induction. Let the base case be $ |A^{*}| = 1 $. The base case holds by Theorem 5.1. Assume that the claim holds for some $ n $ such that $ |A^{*}| = n $. We show that it holds for the case of $ n + 1 $. Let $ U := \N $ and denote the device inferring $ A^{*} $ as $ (X, Y) $. Add a new function $ A $ to $ A^{*} $ such that $\exists a \in A(U) : |A^{-1}(a)| \geq 2 $ and $ A $ is not already a member of $ A^{*} $. Enumerate $ a \in A(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: A^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Then define the inference device $ ( X', Y' ) $ as 
-
-%\begin{equation*}
-%X'(i_j) = \begin{cases}
-%       b_i & \text{ if } j = 2 \\
-%       X(i_j) & \text{ otherwise } \\
-%       \end{cases} \quad \quad 
-%Y'(i_j) = \begin{cases}
-%       -1 & \text{ if } j = 2 \\
-%       Y(i_j) & \text{ otherwise } \\
-%       \end{cases} \\ 
-%\end{equation*}
-%
-%Then for each $ i \in \Gamma(U) $ choose $ x = a_i $ to force $ Y(X^{-1}(a_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(a_i)) = i) $. Because the choice of $ n $ was arbitrary, the claim holds for all $ n \in \N. \hfill \qed $ \\
 
 \bigskip
 \textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of functions with finite ranges. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements a such that} $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. \\
@@ -462,8 +490,10 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 %$ \hfill \qed $ \\
 
 
-
-%\section{Future Work}
-%\section{Acknowledgements}
+\newpage
+\section{Future Work}
+\newpage
+\section{Acknowledgements}
 
 \end{document}
+
