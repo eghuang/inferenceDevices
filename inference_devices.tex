@@ -10,6 +10,7 @@
 \graphicspath{ {/Users/eghuang/math104/images/} }
 \usepackage{listings}
 \usepackage{color}
+\usepackage{glossaries}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -69,39 +70,45 @@
 \subsection{Notation and Definitions}
 This manuscript utilizes standard notation taken from set theory and vector algebra. We clarify notation specific to Turing machine theory and inference devices. \\
 
+
+\begin{tabular}{cp{0.6\textwidth}}
 \textbf{Turing Machine Notation} \\
-$ \B^{*} \quad $ The space of all finite bit strings. \\
-$ \Lambda \quad $ Symbol alphabet of a Turing Machine. \\
-$ \sigma \quad $ A symbol on a Turing Machine tape. \\
-$ Q \quad $ Set of finite states of a Turing Machine. \\
-$ \Delta \quad $ Transition function of a Turing Machine. \\
-$ k \quad $ Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
-$ \eta \quad $ Non-halting state of a Turing Machine. \\
+
+$ \B^{*} $ & The space of all finite bit strings. \\
+$ \Lambda $ & Symbol alphabet of a Turing Machine. \\
+$ \sigma  $ & A symbol on a Turing Machine tape. \\
+$ Q $ & Set of finite states of a Turing Machine. \\
+$ \Delta $ & Transition function of a Turing Machine. \\
+$ k $ & Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
+$ \eta $ & Non-halting state of a Turing Machine. \\
 
 \textbf{Inference Device Notation} \\
-$ U \quad $ Set of possible histories of the universe. \\
-$ u \quad $ A history of the universe in $ U $. \\ 
-$ X \quad $ Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
-$ x \quad $ A binary question and a member of image $ X(U) $. \\ 
-$ Y \quad $ Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
-$ y \quad $ A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
-$ \Gamma \quad $ A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
-$ \gamma \quad $ Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
-$ \delta \quad $ Probe of any variable $V$ parameterized by $v \in V$ such that : 
+$ U $ & Set of possible histories of the universe. \\
+$ u $ & A history of the universe in $ U $. \\ 
+$ X $ & Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
+$ x $ & A binary question and a member of image $ X(U) $. \\ 
+$ Y $ & Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
+$ y $ & A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
+$ \Gamma $ & A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
+$ \gamma $ & Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
+$ \delta $ & Probe of any variable $V$ parameterized by $v \in V$ such that : 
 	  \[ \delta_v (v') =
 	  \begin{cases} 
        1 & \text{ if } v = v' \\
        -1 & \text{ otherwise } \\
       \end{cases}\] \\
-$ \wp \quad $ Set of probes over $\Gamma(U)$. \\
-$ \mathcal{D} = (X, Y) \quad $ An inference device, consisting of functions $ X $ and $ Y $. \\
-$ \quad \bar{F} \quad $ Inverse. Given a function $ F $ over $ U $, $F ^ {-1} = \bar{F} \equiv \{\{u : F(u) = f \} : f \in F(U) \} $. \\
-$ > \quad $ Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
+$ \wp $ & Set of probes over $\Gamma(U)$. \\
+$ \mathcal{D}  $ & An inference device, consisting of functions $ (X, Y) $. \\
+$ \xi $ & A function $ \Gamma(U) \rightarrow \overline{X} $.  \\
+$ \Gamma^{-1} $ & Inverse. Given a function $ \Gamma $ over $ U $, $\Gamma ^ {-1} = \bar{\Gamma} \equiv \{\{u : \Gamma(u) = \gamma \} : \gamma \in \Gamma(U) \} $. \\
+$ \overline{\Gamma} $ & Given a function $ \Gamma $ over $ U $, the partition of $ U $ given by $ \Gamma^{-1} $.  \\
+$ > $ & Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
+$ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
+$ \gg $ & Strong inference: a device $ (X, Y) $ strongly infers a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
+$ \mathcal{C}_{\mu}(\Gamma; \mathcal{D}) $ & Inference complexity. \\
+$ \mu $ & Measure defined for $ u \in U $. \\
 
-$ \quad \quad X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
-$ \gg \quad $ Strong inference: a device $ (X, Y) $ strongly infers a functions $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ 
-
-\quad \quad and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
+\end{tabular}
 
 % SUBSECTION: TURING MACHINES
 \subsection{Turing Machines} 
@@ -165,7 +172,10 @@ If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to
 \section{Weak Inference}
 \bigskip   
 
+\textbf{Definition} \quad Two functions $ \Gamma_1 $ and $ \Gamma_2 $ with the same domain $ U $ are \textbf{(functionally) equivalent} iff the inverse functions $ \Gamma^{-1}_1 $ and $ \Gamma^{-1}_2 $ induce the same partitions of $ U $, i.e., iff $ \overline{\Gamma_1} = \overline{\Gamma_2} $. \\
+
 % LEMMA 1
+
 \textbf{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
 \textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
 
@@ -180,7 +190,7 @@ Y(i_j) = \begin{cases}
        \end{cases} 
 \end{equation*}
 
-Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = 1 = \delta_{i}(\Gamma(X^{-1}(b_i)) = i). \hfill \qed $ \\
+Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) = \delta_{i}(\Gamma(X^{-1}(b_i)) = i) = 1. \hfill \qed $ \\
 
 % COROLLARY 1
 \bigskip   
@@ -205,8 +215,9 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 % COUNTABLE INFERENCE THEOREM
 \bigskip
 \newpage
-\textbf{Countable Inference Theorem} \; \textit{A set of countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if for all} $ A_i \in A^{*} $,  $\exists a \in A_i : |A_i^{-1}(a)| \geq 2 $ or $ |A_i(U)| \geq 3 $. \\
-\textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $ such that for any $ A_i $  there exists an element $ a \in A_i(U) $ such that $ | A_i^{-1}(a) | \geq 2 $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ u \in \{1, 2, 3\} $ \\
+\textbf{Countable Inference Theorem} \; \textit{A set of inequivalent countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if for all} $ A_i \in A^{*} $,  $\exists a \in A_i(U) : |A_i^{-1}(a)| \geq 2 $ or $ |A_i(U)| \geq 3 $. \\
+
+\textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c|c|c|c|c } 
 
@@ -224,24 +235,26 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
  \end{tabular} 
  \end{center}
 \bigskip 
-Note that setting $ X(u) = u $ and $ Y(1) = -1 $, $ Y(2) = -1 $, and $ Y(3) = -1 $ immediately satisfies weak inference for any function $ A_i $ whose distinct elements over $ u \in \{1, 2, 3\} $ are representative of the combinations in $ A_1 $, $ A_2 $, $ A_3 $ and $ A_4 $. This holds regardless of the values of $ X(u) $ , $ Y(u) $, and $ A_{ i \in \{1, 2, 3, 4\} }(u) $ that follow for $ u > 3 $. This is shown by selecting $ x $ for the following cases:
+Note that setting $ X(u) = u $, $ Y(1) = -1 $, $ Y(2) = -1 $, and $ Y(3) = 1 $ immediately satisfies weak inference for any function $ A_i $ that is functionally equivalent to $ A_1 $, $ A_2 $, $ A_3 $ and $ A_4 $ over $ V $. This holds regardless of the values of $ Y(u) $ and $ A_{ i \in \{1, 2, 3, 4\} }(u) $ that follow for $ u > 3 $. This is shown by selecting $ x $ for the following cases:
 
 \bigskip
-\textit{Case} $ A_1 $: Choose $ x = 3 $ for $ a = a_i $. Choose $ x = 2 $ otherwise. 
+\textit{Case 1:} $ \overline{A_i(V)} = \overline{A_1(V)} $. \\
+ Choose $ x = 3 $ for $ a = a_i $. Choose $ x = 2 $ otherwise. \\
 
-\textit{Cases} $ A_2 $, $ A_3 $, $ A_4 $: Choose $ x = 2 $ for $ a = a_i $. Choose $ x = 1 $ otherwise. \\
+\textit{Cases 2, 3, 4:} $ \overline{A_i(V)} = \overline{A_2(V)} $ or  $ \overline{A_3(V)} $ or $ \overline{A_4(V)} $. \\
+ Choose $ x = 2 $ for $ a = a_i $. Choose $ x = 1 $ otherwise. \\
 
-Now enumerate each $ A_i $ resembling $ A_5 \in A^{*} $ as $ B_4, B_5, \dots, B_i, \dots, B_n $. To satisfy weak inference for any $ B_i $, define $ X $, $ Y $ more explicitly as 
+Now we need to guarantee weak inference for $ A_i $ that are functionally equivalent to $ A_5 $ over $ V $. Enumerate each $ A_i \in A^{*}: \overline{A_i(V)} = \overline{A_5(V)} $ as $ B_4, B_5, \dots, B_i, \dots, B_n $. To satisfy weak inference for any $ A_i $ and $ B_i $, define $ X $, $ Y $ more explicitly as 
 \begin{equation*} 
      X(u) = u, \quad \quad
      Y(u) = \begin{cases} 
-    -1 & \text{ if } u = 1, 2 \text { or if } B_i(u) = a_j, a_k: i = X(u) \\
-     1 & \text{ if } u = 3 \text{ or if } B_i(u) = a_i: i = X(u) \\
+    -1 & \text{ if } u = 1, 2 \text { or if } B_i(u) = a_j, a_k: X(u) = i \\
+     1 & \text{ if } u = 3 \text{ or if } B_i(u) = a_i: X(u) = i \\
     -1 & \text { otherwise. } \\
             \end{cases} \\
 \end{equation*}
 
-Then for each $ a \in B_i(U) $, to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $, choose $ x = i $ if $ a = a_i $ or otherwise choose $ x = 1 $. Because the choice of $ A^{*} $ was arbitrary, the claim holds for all $ A^{*} $. $ \hfill \qed $ \\
+For each $ a \in B_i(U) $ to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $ choose $ x = i $ if $ a = a_i $ or otherwise choose $ x = 1 $. $ \hfill \qed $ \\
 
 
 % SECTION 3: STRONG INFERENCE
@@ -468,34 +481,35 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 
 \newpage
 \bigskip
-\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of finite-ranged functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that a finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $. There also exists $ A^{*} $ and $ \mathcal{D} $ such that all $ a \in A $ have $ \mathcal{C}_{\mu}(a;\mathcal{D}) = 0 $. } \\
+\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
 
-\textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any countable set $ A $ from $ A^{*} $ with cardinality $ m $. Construct a device $ \mathcal{D} $ that can weakly infer $ A $. This device exists by the Countable Inference Theorem. Let $ U := \B^{*} $. Define $ X: U \rightarrow \N $ as the lexicographic mapping from bit strings to integers and let $ Y:U \rightarrow \{-1, 1\} $ be defined as specified in the Countable Inference Theorem.
+\textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. Note that $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction.
 
 \bigskip
 Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Recall that the inference complexity of $ a \in A $ with respect to $ \mathcal{D} $ is
-$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } [\mathcal{M}_{\mu, X} (x)]: \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
+$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } [\mathcal{M}_{\mu, X} (x)]: \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
 
-% Find two bounds: minimum complexity and maximum complexity for A \in A^{*}
-By the Countable Inference Theorem, there are a class of functions that can all be weakly inferred by $ u \in \{1, 2\} $. 
-% Need to show that you cannot infer something with just one u $.
-Then the minimum inference complexity for any function $ a \in A $ is 
-$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) }- \ln \sum_{X^{-1}(x)} {\ell(u)} $$
+Now suppose that all $ A_i \in A $ is functionally equivalent to $ A_5 $ over $ V $. Then the maximum inference complexity of any $ A_i $ with respect to $ \mathcal{D} $ is
+$$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(a) } -\ln \sum_{X^{-1}(x)} {\ell(A_i^{-1}(a))} $$
 
-$$ = \sum_{\delta \in \wp(a)} - \ln {1}  = - 2\ln {1} = 0. $$
+$$ = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(a) } - \ln {A_i^{-1}(a)} = - \ln 1 - \ln(A_i^{-1}(a_i))  = - \ln(u). $$
 
-If all $ a \in A $ are instances of that class of functions then the inference complexity for all $ a \in A $ would be zero. Now suppose that all $ a \in A $ are in the class of functions $ A_5 $. Then the inference complexity of $ a $ is
-$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } -\ln \sum_{X^{-1}(x)} {\ell(u)} $$
+Since a unique $ u $ is used by $ \mathcal{D} $ to infer every $ A_i \in A $, we can apply the pigeonhole principle. The number of bit strings of length less than $ m - c $ is 
+$$ \sum_{i = 0}^{m - c - 1} {2^i} = 2^{m - c - 1}. $$
 
-$$ = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } - \ln {u} = - \ln 1 - \ln(u)  = \ln(u). $$
-
-Since a unique $ u $ is used to infer every $ a $ in this set, we can apply the pigeonhole principle. The number of bit strings of length less than $ \log m - c $ is 
-$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
-
-Hence, there are at least $ m - m2^{-c} + 1 $ functions $ a $ in $ A $ which have inference complexity greater than $ \log m - c $. $ \hfill \qed $ \\
+Hence, there are at least $ m - m2^{-c} + 1 $ functions $ a $ in $ A $ which have inference complexity greater than $ \ln \log m - c $. $ \hfill \qed $ \\
 
 
+\textbf{Corollary} \; \textit{ There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $ } \\
+\textbf{Proof} \quad 
+Recall the functions and spaces defined in the Countable Inference Theorem and take $ \mu(u) = \ell (u) $. Then choose $ A^{*}: \overline{A_ i(V)} \in A^{*} = \overline{A_{j \in \{2, 3, 4\}}(V)} $. Then the inference complexity for any function $ A_i \in A $ is 
+$$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - 2 \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
+$ \hfill \qed $
 
+\textbf{Definition} \quad Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that 
+
+\textit{i}) $ \forall \gamma' \in \Gamma(U), u \in \xi(\gamma') \implies \delta_{\gamma'}(\Gamma(u)) = Y(u) $ \\ 
+\textit{ii}) $ \emptyset \neq \xi(\gamma) \cap W \subseteq Y^{-1}(1). $ \\
 
 \newpage
 \section{Future Work}

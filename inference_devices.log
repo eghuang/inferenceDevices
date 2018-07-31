@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  30 JUL 2018 11:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  31 JUL 2018 13:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -235,7 +235,171 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 144.
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+Package: glossaries 2016/04/30 v4.23 (NLCT)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks29
+\XKV@tempa@toks=\toks30
+)
+\XKV@depth=\count118
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
+Package: mfirstuc 2015/12/17 v2.02 (NLCT)
+\@glsmfirst=\toks31
+\@glsmrest=\toks32
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/xfor/xfor.sty
+Package: xfor 2009/02/05 v1.05 (NLCT)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/datatool/datatool-base.sty
+Package: datatool-base 2016/01/18 v2.25 (NLCT)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/substr/substr.sty
+Package: substr 2009/10/20 v1.2 Handle substrings
+\c@su@anzahl=\count119
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/datatool/datatool-fp.sty
+Package: datatool-fp 2016/01/18 v2.25 (NLCT)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp.sty
+Package: fp 1995/04/02
+
+`Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/defpattern.sty
+Package: defpattern 1994/10/12
+\actioncount=\count120
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-basic.sty
+Package: fp-basic 1996/05/13
+\FP@xs=\count121
+\FP@xia=\count122
+\FP@xib=\count123
+\FP@xfa=\count124
+\FP@xfb=\count125
+\FP@rega=\count126
+\FP@regb=\count127
+\FP@regs=\count128
+\FP@times=\count129
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-addons.sty
+Package: fp-addons 1995/03/15
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-snap.sty
+Package: fp-snap 1995/04/05
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-exp.sty
+Package: fp-exp 1995/04/03
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-trigo.sty
+Package: fp-trigo 1995/04/14
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-pas.sty
+Package: fp-pas 1994/08/29
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-random.sty
+Package: fp-random 1995/02/23
+\FPseed=\count130
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-eqn.sty
+Package: fp-eqn 1995/04/03
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-upn.sty
+Package: fp-upn 1996/10/21
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fp/fp-eval.sty
+Package: fp-eval 1995/04/03
+)))
+\@dtl@toks=\toks33
+\@dtl@tmpcount=\count131
+\dtl@tmplength=\skip52
+\dtl@sortresult=\count132
+\@dtl@numgrpsepcount=\count133
+\@dtl@datatype=\count134
+\dtl@codeA=\count135
+\dtl@codeB=\count136
+\@dtl@foreach@level=\count137
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/base/glossaries-compat
+ible-307.sty
+Package: glossaries-compatible-307 2016/04/30 v4.23 (NLCT)
+)
+\gls@level=\count138
+\@gls@tmpb=\toks34
+\gls@tmplen=\skip53
+\glskeylisttok=\toks35
+\glslabeltok=\toks36
+\glsshorttok=\toks37
+\glslongtok=\toks38
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
+av.sty
+Package: glossary-hypernav 2016/04/30 v4.23 (NLCT)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
+ty
+Package: glossary-list 2016/04/30 v4.23 (NLCT)
+\glslistdottedwidth=\skip54
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
+ty
+Package: glossary-long 2016/04/30 v4.23 (NLCT)
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
+\LTchunksize=\count139
+\LTcapwidth=\dimen126
+\LT@head=\box30
+\LT@firsthead=\box31
+\LT@foot=\box32
+\LT@lastfoot=\box33
+\LT@cols=\count140
+\LT@rows=\count141
+\c@LT@tables=\count142
+\c@LT@chunks=\count143
+\LT@p@ftn=\toks39
+)
+\glsdescwidth=\skip59
+\glspagelistwidth=\skip60
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/styles/glossary-super.
+sty
+Package: glossary-super 2016/04/30 v4.23 (NLCT)
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
+\c@tracingst=\count144
+\ST@wd=\dimen127
+\ST@rightskip=\skip61
+\ST@leftskip=\skip62
+\ST@parfillskip=\skip63
+\ST@pageleft=\dimen128
+\ST@headht=\dimen129
+\ST@tailht=\dimen130
+\ST@pagesofar=\dimen131
+\ST@pboxht=\dimen132
+\ST@lineht=\dimen133
+\ST@stretchht=\dimen134
+\ST@prevht=\dimen135
+\ST@toadd=\dimen136
+\ST@dimen=\dimen137
+\ST@pbox=\box34
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
+ty
+Package: glossary-tree 2016/04/30 v4.23 (NLCT)
+\glstreeindent=\skip64
+)) (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -250,18 +414,18 @@ Package csquotes Info: ... none found.
 (./inference_devices.aux)
 \openout1 = `inference_devices.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -299,17 +463,17 @@ LaTeX Font Info:    ... okay on input line 55.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count118
-\scratchdimen=\dimen126
-\scratchbox=\box30
-\nofMPsegments=\count119
-\nofMParguments=\count120
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count121
-\MPscratchDim=\dimen127
-\MPnumerator=\count122
-\makeMPintoPDFobject=\count123
-\everyMPtoPDFconversion=\toks30
+\scratchcounter=\count145
+\scratchdimen=\dimen138
+\scratchbox=\box35
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen139
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks41
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -354,35 +518,29 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count124
-LaTeX Font Info:    Try loading font information for U+msa on input line 56.
+\c@lstlisting=\count151
+LaTeX Font Info:    Try loading font information for U+msa on input line 57.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 56.
+LaTeX Font Info:    Try loading font information for U+msb on input line 57.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--80
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
-
- []
+Overfull \vbox (36.91997pt too high) has occurred while \output is active []
 
 
-Overfull \hbox (22.86076pt too wide) in paragraph at lines 118--119
+[2]
+Overfull \hbox (22.86076pt too wide) in paragraph at lines 124--125
 []\OT1/cmr/m/n/10.95 Suppose $\OML/cmm/m/it/10.95 T$ \OT1/cmr/m/n/10.95 is in s
 tate $\OML/cmm/m/it/10.95 q \OMS/cmsy/m/n/10.95 2 \OML/cmm/m/it/10.95 Q$ \OT1/c
 mr/m/n/10.95 and $(\OML/cmm/m/it/10.95 ^^[[]; ^^[[]; [] ; ^^[[]\OT1/cmr/m/n/10.
@@ -392,121 +550,141 @@ mr/m/n/10.95 and $(\OML/cmm/m/it/10.95 ^^[[]; ^^[[]; [] ; ^^[[]\OT1/cmr/m/n/10.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 208--210
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--245
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 251--252
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--255
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 279.
+
+Underfull \hbox (badness 10000) in paragraph at lines 240--242
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 243--245
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--257
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 263--264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 291.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 279.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 291.
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 349--350
-
- []
-
-[6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 391--392
+Underfull \hbox (badness 10000) in paragraph at lines 307--308
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+
+ []
+
+[7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 409--410
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--412
+Underfull \hbox (badness 10000) in paragraph at lines 421--422
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 413--414
+Underfull \hbox (badness 10000) in paragraph at lines 423--424
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 465--466
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--426
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 471--472
+Underfull \hbox (badness 10000) in paragraph at lines 477--478
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 483--484
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 495--496
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
 
  []
 
-[10] [11] [12] (./inference_devices.aux) ) 
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 510--512
+
+ []
+
+[12] [13] [14] (./inference_devices.aux) ) 
 Here is how much of TeX's memory you used:
- 5242 strings out of 493014
- 74166 string characters out of 6133351
- 201848 words of memory out of 5000000
- 8689 multiletter control sequences out of 15000+600000
+ 8658 strings out of 493014
+ 127348 string characters out of 6133351
+ 316304 words of memory out of 5000000
+ 12003 multiletter control sequences out of 15000+600000
  11698 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,12n,40p,867b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,17n,72p,1930b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fon
@@ -525,10 +703,10 @@ nts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
 /symbols/msam10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msbm10.pfb>
-Output written on inference_devices.pdf (12 pages, 217084 bytes).
+Output written on inference_devices.pdf (14 pages, 223247 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 118 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
