@@ -215,7 +215,7 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 % COUNTABLE INFERENCE THEOREM
 \bigskip
 \newpage
-\textbf{Countable Inference Theorem} \; \textit{A set of inequivalent countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if for all} $ A_i \in A^{*} $,  $\exists a \in A_i(U) : |A_i^{-1}(a)| \geq 2 $ or $ |A_i(U)| \geq 3 $. \\
+\textbf{Countable Inference Theorem} \; \textit{A set of inequivalent countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferrable. } \\
 
 \textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
  \begin{center}
@@ -239,10 +239,10 @@ Note that setting $ X(u) = u $, $ Y(1) = -1 $, $ Y(2) = -1 $, and $ Y(3) = 1 $ i
 
 \bigskip
 \textit{Case 1:} $ \overline{A_i(V)} = \overline{A_1(V)} $. \\
- Choose $ x = 3 $ for $ a = a_i $. Choose $ x = 2 $ otherwise. \\
+ Choose $ x = 3 $ for $ a = a_i $ or otherwise choose $ x = 2 $. \\
 
 \textit{Cases 2, 3, 4:} $ \overline{A_i(V)} = \overline{A_2(V)} $ or  $ \overline{A_3(V)} $ or $ \overline{A_4(V)} $. \\
- Choose $ x = 2 $ for $ a = a_i $. Choose $ x = 1 $ otherwise. \\
+ Choose $ x = 2 $ for $ a = a_i $ or otherwise choose $ x = 1 $. \\
 
 Now we need to guarantee weak inference for $ A_i $ that are functionally equivalent to $ A_5 $ over $ V $. Enumerate each $ A_i \in A^{*}: \overline{A_i(V)} = \overline{A_5(V)} $ as $ B_4, B_5, \dots, B_i, \dots, B_n $. To satisfy weak inference for any $ A_i $ and $ B_i $, define $ X $, $ Y $ more explicitly as 
 \begin{equation*} 
@@ -264,7 +264,7 @@ For each $ a \in B_i(U) $ to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $ c
 In the next three examples we examine strong inference of integer-valued functions. \\
  
 % EXAMPLE 
- \textbf{Example 2.3.1} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+ \textbf{Example} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
  \begin {center}
  \begin{tabular}{ |c||c|c|c|c| } 
 
@@ -305,7 +305,7 @@ In the next three examples we examine strong inference of integer-valued functio
 % EXAMPLE  
  \bigskip
  \bigskip 
- \textbf{Example 2.3.2} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+ \textbf{Example} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
 
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c| } 
@@ -359,7 +359,7 @@ In the next three examples we examine strong inference of integer-valued functio
 % EXAMPLE
  \bigskip
  \bigskip 
- \textbf{Example 2.3.3} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2\} $. In this example, the inferred function $ f: S \rightarrow T, f(s) = T(S^{-1}(s)) $ is not single-valued. \\ 
+ \textbf{Example} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2\} $. In this example, the inferred function $ f: S \rightarrow T, f(s) = T(S^{-1}(s)) $ is not single-valued. \\ 
 
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c| } 
@@ -468,6 +468,7 @@ To show that the condition is necessary for either representation, suppose that 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
 
+
 \bigskip
 % INCOMPRESSIBILITY THEOREM
 \textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
@@ -506,15 +507,72 @@ Recall the functions and spaces defined in the Countable Inference Theorem and t
 $$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - 2 \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
 $ \hfill \qed $
 
-\textbf{Definition} \quad Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that 
+\newpage
+\section{Physical Knowledge}
+% Physical Knowledge
+
+\textbf{Definition} \quad Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that \\
 
 \textit{i}) $ \forall \gamma' \in \Gamma(U), u \in \xi(\gamma') \implies \delta_{\gamma'}(\Gamma(u)) = Y(u) $ \\ 
-\textit{ii}) $ \emptyset \neq \xi(\gamma) \cap W \subseteq Y^{-1}(1). $ \\
+\textit{ii}) $ \emptyset \neq \xi(\gamma) \cap W \subseteq Y^{-1}(1) $ \\
+\textit{iii}) \textit{For all} $ \gamma' \neq \gamma $, $ \emptyset \neq \xi(\gamma') \cap W \subseteq Y^{-1}(-1) $. \\
+
+Then the \textbf{knowledge complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
+
+$$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\gamma \in \Gamma(U)} \min_{|\xi(\gamma)| : \mathcal{D} \text{ knows } \Gamma = \gamma} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$ 
+
+$$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) $$ \\
+
+\textbf{Example} \quad Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
+
+\begin{tabular}{cc}
+\begin{minipage}{0.45\textwidth}
+    \begin{flushright}
+         \begin{tabular}{ |c||c|c|c| } 
+          \hline
+          $ u $ & $ X(u) $ & $ Y(u) $ & $ \Gamma(u) $  \\ 
+          \hline
+          \hline
+          $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+          \hline
+          $ 2 $ & $ 2 $ & $ -1 $ & $ 1 $ \\
+          \hline
+          $ 3 $ & $ 3 $ & $ 1 $ & $ 2 $ \\
+          \hline
+          $ 4 $ & $ 4 $ & $ -1 $ & $ 2 $ \\
+          \hline
+         \end{tabular}
+   \end{flushright}
+\end{minipage}&
+\begin{minipage}{0.45\textwidth}
+
+\begin{equation}
+\xi_{1}(\gamma) = u \notag \\
+\end{equation}
+\begin{equation}
+\xi_{2}(\gamma) = u \notag \\
+\end{equation}
+
+\end{minipage} 
+\end{tabular}
+
+\bigskip
+\textbf{Theorem} \quad \textit{For every function $ \Gamma $ there exists a device $ \mathcal{D} $ such that $ \mathcal{D} $ physically knows all $ \gamma \in \Gamma(U) $.} \\
+
+\textbf{Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a $ such that $ \mathcal{K}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+\textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction. Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. 
+
+
+
 
 \newpage
 \section{Future Work}
 \newpage
 \section{Acknowledgements}
+
+Wolpert DH. \textit{Constraints on physical reality arising from a formalization of knowledge}. arXiv preprint arXiv:1711.03499v3 [physics.hist-ph] (2018). \\
+Li M \& Vitányi P. \textit{An Introduction to Kolmogorov Complexity and Its Applications} (1st ed.). Springer-Verlag. (1993). \\
+Arora S \& Barak B. \textit{Computational Complexity: A Modern Approach}. Cambridge University Press. (2009). \\ 
 
 \end{document}
 
