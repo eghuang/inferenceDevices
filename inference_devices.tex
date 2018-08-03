@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[]{article}
 \usepackage[margin=1in]{geometry}          
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -10,7 +10,7 @@
 \graphicspath{ {/Users/eghuang/math104/images/} }
 \usepackage{listings}
 \usepackage{color}
-\usepackage{glossaries}
+\usepackage{glossaries}	
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -34,7 +34,7 @@
 }
 
 \title{
-  Notes on Inference Devices \\
+  Algorithmic Information and Inference Devices \\
   \bigskip
   \large Santa Fe Institute}
 \author{Edward G. Huang}
@@ -60,6 +60,9 @@
 
 % SECTION 0: ABSTRACT
 \section{Abstract}
+
+There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of information. Previously, Wolpert demonstrated bounds on knowledge in any physical universe that allows agents to hold information concerning that universe by using the concept of "inference devices" (IDs). We extend previous work on the capacity and limitations of IDs to infer physical variables. We then explore analogues between IDs and their relation to Turing machine theory and algorithmic information theory.
+
 
 % SECTION 1: INTRODUCTION
 \section{Introduction} 
@@ -107,6 +110,9 @@ $ \mathcal{C}_{\mu}(\Gamma; \mathcal{D}) $ & Inference complexity. \\
 $ \mu $ & Measure defined for $ u \in U $. \\
 
 \end{tabular}
+
+% SUBSECTION: INFERENCE DEVICE
+\subsection{Inference Devices}
 
 % SUBSECTION: TURING MACHINES
 \subsection{Turing Machines} 
@@ -212,7 +218,7 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 
 % COUNTABLE INFERENCE THEOREM
 \bigskip
-\newpage
+%\newpage
 \textbf{Countable Inference Theorem} \; \textit{A set of inequivalent countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferrable. } \\
 
 \textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
@@ -515,11 +521,16 @@ $ \hfill \qed $
 \textit{ii}) $ \emptyset \neq \xi(\gamma) \cap W \subseteq Y^{-1}(1) $ \\
 \textit{iii}) \textit{For all} $ \gamma' \neq \gamma $, $ \emptyset \neq \xi(\gamma') \cap W \subseteq Y^{-1}(-1) $. \\
 
+A device $ \mathcal{D} $ physically knows a function $ \Gamma $ over $ W $ iff $ \forall \gamma \in \Gamma(U)$,  $ \exists \xi : \mathcal{D} $ knows $ \gamma $ over $ W \subseteq U $ using $ \xi $. \\
+
+
 \textbf{Definition} \; The \textbf{knowledge complexity} of $ \Gamma $ given $ \mathcal{D} $, $\xi $, and measure $ \mu $ is defined as: 
 
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$ 
 
 $$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
+
+
 \textbf{Example} \quad Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
 
 \begin{tabular}{cc}
@@ -553,12 +564,41 @@ $$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
 \end{minipage} 
 \end{tabular}
 
-
 \bigskip
 \bigskip
-\textbf{Lemma} \; \textit{For every countable function $ \Gamma $ there exists a device $ \mathcal{D} $ such that $ \mathcal{D} $ physically knows all $ \gamma \in \Gamma(U) $ over $ W \subseteq U $ if $ |\Gamma^{-1}(\gamma)| \geq 2 $ for all $ \gamma \in \Gamma $.} \\
+\textbf{Lemma} \; \textit{For every countably-ranged function $ \Gamma $ there exists a device $ \mathcal{D} $ such that $ \mathcal{D} $ physically knows all $ \gamma \in \Gamma(U) $ over $ W = U $ if $ |\Gamma^{-1}(\gamma)| \geq 2 $ for all $ \gamma \in \Gamma $.} \\
 
-\textbf{Proof} \; Take $ U := \N $ and $ W = U $. Choose any $ \Gamma $ as described in the claim. Enumerate $ \gamma \in \Gamma(W) $ as $ 1, 2, \dots, i, \dots $ . Define $ V^{i} = \{u : \Gamma^{-1}(\gamma) = u \} $ for each $ i \in \Gamma(W) $. Similarly enumerate each $ u \in V^{i} $ as $ i_1, i_2, \dots, i_j, \dots $ . Now define the device $ (X, Y) $ as 
+\textbf{Proof} \; Take $ U := \N $ and $ W = U $. Choose any $ \Gamma $ as described in the claim. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots $ . Define $ V^{i} = \{u : \Gamma^{-1}(\gamma) = u \} $ for each $ i \in \Gamma(U) $. Similarly enumerate each $ u \in V^{i} $ as $ i_1, i_2, \dots, i_j, \dots $ . Now define the device $ (X, Y) $ as 
+
+\begin{equation*}
+X(i_j) = \begin{cases}
+       a_i & \text{ if } j = 1 \\
+       b_i & \text{ if } j = 2 \\
+       c_i & \text{ otherwise } \\
+       \end{cases} \quad \quad 
+Y(i_j) = \begin{cases}
+       1 & \text{ if } j = 1 \\
+       -1 & \text{ otherwise. } \\
+       \end{cases} 
+\end{equation*}
+
+Define $ \xi_{\gamma} : \Gamma(U) \rightarrow \overline{X} $ for each $ i \in \Gamma(U) $  as
+
+\begin{equation*}
+\xi_{\gamma}(i) = \begin{cases}
+       \overline{a_i} & \text{ if } i = \gamma \\
+       \overline{b_i} & \text{ otherwise. } \\
+       \end{cases} 
+\end{equation*}
+
+Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \\
+
+\textbf{Lemma} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and $ \xi $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi $. } \\
+
+\textbf{Proof} \;  
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+Let $ U := \N $ and take $ W = U $. Construct 
 
 \begin{equation*}
 X(i_j) = \begin{cases}
@@ -571,23 +611,27 @@ Y(i_j) = \begin{cases}
        \end{cases} 
 \end{equation*}
 
-Define $ \xi : \Gamma(U) \rightarrow \overline{X} $ by $ \xi(i) = \{i_1\} \cup \{j_2: i \neq j \} $. Then for $ \gamma \in \Gamma(W) $, $ u \in \xi(\gamma)$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $ Furthermore, for each $ \gamma \in \Gamma(W) $, $ \exists u, v \in \xi(\gamma) : u \in (W \subseteq Y^{-1}(1)), v \in (W \subseteq Y^{-1}(-1) $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. $ \hfill \qed $ \\
-
-\textbf{Lemma} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ that knows all $ A \in A^{*} $ over a given subset $ W \subseteq U $. } \\
-\textbf{Proof} \;  
-
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \bigskip
-\textbf{Theorem} \; \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inequivalent characteristic functions and $ \mathcal{D} $ be a device that physically knows all functions $ a \in A^{*} $. Every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ functions $ a $ such that $ \mathcal{K}_{\mu}(a;\mathcal{D}) \geq \log m - c $.} \\
+\textbf{Theorem} \; \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inequivalent characteristic functions and $ \mathcal{D} $ be a device that physically knows all functions $ a \in A^{*} $. Every finite subset $ A $ of $ A^{*} $ with cardinality $ m $ has at least $ m(1 - m^{-c}) + 1 $ functions $ a $ such that $ \mathcal{K}_{\mu}(a;\mathcal{D}) \geq \log m - c $.} \\
 
-\textbf{Proof} \; Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction. Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. 
+\textbf{Proof} \; 
+
+\bigskip
+\textbf{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ m \ln m $.} \\ 
+
+\textbf{Proof} \;
+Let $ U := \N $ and take $ W = U $. Choose any convenient knowable $ \Gamma $ with a countable range such that $ |\Gamma(U)| = m $. Then construct $ \mathcal{D} $ and $ \xi_{ \gamma \in \Gamma(U) } $ as specified in the knowability lemma. Then the knowledge complexity of $ \Gamma $ with respect to $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
+
+$$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$
+
+$$ = \sum_{\gamma \in \Gamma(U)}  \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} - \ln \sum_{u \in \xi_{\gamma}(\gamma \in \Gamma(U))} 1 = - m \ln m $$
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% INCOMPRESSIBILITY RESULT
+
+
 
 
 
@@ -595,6 +639,10 @@ Define $ \xi : \Gamma(U) \rightarrow \overline{X} $ by $ \xi(i) = \{i_1\} \cup \
 
 \newpage
 \section{Future Work}
+
+There are many related areas to IDs deserving of attention. The question of whether non-deterministic Turing machines may be strongly inferred was left unattended. Further richness may be found by establishing symmetries between results concerning Kolmogorov complexity and inference complexity. 
+
+
 \newpage
 \section{Acknowledgements}
 
