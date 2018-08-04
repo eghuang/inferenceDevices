@@ -619,14 +619,14 @@ Y(i_j) = \begin{cases}
 \textbf{Proof} \; 
 
 \bigskip
-\textbf{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ m \ln m $.} \\ 
+\textbf{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $.} \\ 
 
 \textbf{Proof} \;
 Let $ U := \N $ and take $ W = U $. Choose any convenient knowable $ \Gamma $ with a countable range such that $ |\Gamma(U)| = m $. Then construct $ \mathcal{D} $ and $ \xi_{ \gamma \in \Gamma(U) } $ as specified in the knowability lemma. Then the knowledge complexity of $ \Gamma $ with respect to $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
 
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$
 
-$$ = \sum_{\gamma \in \Gamma(U)}  \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} - \ln \sum_{u \in \xi_{\gamma}(\gamma \in \Gamma(U))} 1 = - m \ln m $$
+$$ = \sum_{\gamma \in \Gamma(U)}  \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} - \ln \sum_{u \in \xi_{\gamma}(\gamma \in \Gamma(U))} \ell(u) = - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $$ 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% INCOMPRESSIBILITY RESULT
