@@ -61,7 +61,7 @@
 % SECTION 0: ABSTRACT
 \section{Abstract}
 
-There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of information. Previously, Wolpert demonstrated bounds on knowledge in any physical universe that allows agents to hold information concerning that universe by using the concept of "inference devices" (IDs). We extend previous work on the capacity and limitations of IDs to infer physical variables. We then explore analogues between IDs and their relation to Turing machine theory and algorithmic information theory.
+There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previously, Wolpert demonstrated bounds on knowledge in any physical universe that allows agents to hold information concerning that universe by using the concept of "inference devices" (IDs). We extend previous work on the capacity and limitations of IDs to infer physical variables. We then explore analogues between IDs and their relation to Turing machine theory and algorithmic information theory.
 
 
 % SECTION 1: INTRODUCTION
@@ -75,7 +75,7 @@ This manuscript utilizes standard notation taken from set theory and vector alge
 \begin{tabular}{cp{0.6\textwidth}}
 \textbf{Turing Machine Notation} \\
 
-$ \B^{*} $ & The space of all finite bit strings. \\
+$ \B^{*} $ & The space of all finite bit strings, $ \{\epsilon, 0, 1, 00, 01, \dots \} $\\
 $ \Lambda $ & Symbol alphabet of a Turing Machine. \\
 $ \sigma  $ & A symbol on a Turing Machine tape. \\
 $ Q $ & Set of finite states of a Turing Machine. \\
@@ -171,6 +171,9 @@ When a NDTM $M$ computes a function, we envision that at each computational step
 
 If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
 
+% SUBSECTION: UTM
+\textbf{Universal Turing Machines}
+
 % SECTION: WEAK INFERENCE
 \newpage
 \section{Weak Inference}
@@ -218,8 +221,8 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 
 % COUNTABLE INFERENCE THEOREM
 \bigskip
-%\newpage
-\textbf{Countable Inference Theorem} \; \textit{A set of inequivalent countable functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferrable. } \\
+\newpage
+\textbf{Countable Inference Theorem} \; \textit{A countable set of inequivalent functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferrable. } \\
 
 \textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
  \begin{center}
@@ -258,7 +261,7 @@ Now we need to guarantee weak inference for $ A_i $ that are functionally equiva
             \end{cases} \\
 \end{equation*}
 
-For each $ a \in B_i(U) $ to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $ choose $ x = i $ if $ a = a_i $ or otherwise choose $ x = 1 $. $ \hfill \qed $ \\
+For each $ a \in B_i(U) $ to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $ choose $ x = i $ if $ a = a_i $ or otherwise choose $ x = 1 $. \hfill \qed  \\
 
 
 % SECTION 3: STRONG INFERENCE
@@ -468,14 +471,17 @@ To show that the condition is necessary for either representation, suppose that 
 \newpage
 \section{Inference Complexity}
 
-\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as: 
+\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as 
 
-$$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)]	$$ 
+$$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)].	$$ 
 
+The \textbf{strong inference complexity} for any single $ \gamma \in \Gamma $ is  
+
+$$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implies S(u) = s, Y(u) = \delta_{\gamma}(\Gamma(u)) } [\mathcal{M}_{\mu, X} (x)].	$$ 
 
 \bigskip
 % INCOMPRESSIBILITY THEOREM
-\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - m^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
+\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
 \textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
 
 $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
@@ -483,6 +489,14 @@ $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Strong Inference Incompressibility Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m - m2^{-c - 1} + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
+
+\textbf{Proof} \; \textit{Note:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
+
+$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
+
+Then the greatest number of unique pairs of bit strings with combined length less or equal to $ \log m - c $ is $ m2^{- c - 1} - \frac{1}{2} $. Hence, there are at least $ m - m2^{-c - 1} + \frac{1}{2} $ values $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. \hfill \qed \\ 
+   
 
 \newpage
 \bigskip
