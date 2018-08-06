@@ -486,7 +486,7 @@ $$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implie
 
 \bigskip
 % MAXIMUM WEAK INFERENCE THEOREM
-\textsc{Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+\textsc{Claim} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
 
 \textsc{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. Note that $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction.
 
@@ -524,19 +524,32 @@ $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 
 Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
 
+\textit{Note.} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for the remainder of this section. \\
+
+\textsc{Theorem} \; \textit{There is a constant $ c $, such that for all $ t $:} 
+
+$$
+\mathcal{C}_{\mu}(t;\mathcal{D}) \leq 2\ell(t) + c
+$$
+
+\textsc{Proof} \; Let $ U := \B^{*} \times \{0, 1\} $. Fix a Turing machine $ \phi $ over $ U $ such that $ S: U \rightarrow \B^{*} $ is written as $ S((u, b)) = u $. Then define $ T: U \rightarrow \B^{*} $ as $ T(u) = S(u) $. Construct a device $ \mathcal{D} $ that strongly infers $ (S, T) $. Then for every $ t \in \B^{*} $, $ \mathcal{C}_{\mu}(t; \mathcal{D}) = 2\ell(t) + 2 $. \hfill \qed \\
+
 % STRONG INFERENCE INCOMPRESSIBILITY RESULT
 
 \textsc{Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m(1 - 2^{-c - 1}) + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
 
-\textsc{Proof} \; \textit{Remark:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
+\textsc{Proof} \; Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
 
 $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 
 Then the greatest number of unique pairs of bit strings with combined length less or equal to $ \log m - c $ is $ m2^{- c - 1} - \frac{1}{2} $. Hence, there are at least $ m - m2^{-c - 1} + \frac{1}{2} $ values $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. \hfill \qed \\ 
-
-
    
 % INCOMPRESSIBILITY RESULT END
+
+\textsc{Claim} \; \textit{(i) The function $ \mathcal{C}(\gamma;\mathcal{D}) $ is unbounded. (ii) Define a function $ m $ by $ m(x) = \min\{ \mathcal{C}(y;\mathcal{D}) : y \geq \gamma \}$. That is, $ m $ is the greatest monotonic increasing function bounding $ \mathcal{C} $ from below. The function $ m(x) $ is unbounded. (iii) For any partial recursive function $ \phi(x) $ which goes monotonic to infinity from some $ x_0 $ onward, we have $ m(x) < \phi(x) $ except for finitely many $ x $. In other words, although $ m(x) $ goes to infinity, it does so slower than any unbounded partial function. } \\
+
+\textsc{Proof} \; (i) This follows immediately from (ii). (ii). For each $ i $ there is a least $ \gamma_{i} $ such that for all $ \gamma > \gamma_{i} $ the smallest set of $ u \in U $ strongly inferring $ \gamma $ has a total length greater or equal to $ i $. This follows immediately from the fact that there are only a finite number of $ u $ of each length $ i $. Clearly, for all $ i $ we have $ \gamma_{i + 1} \geq x_{i} $. Now observe that the function $ m $ has the property that $ m(\gamma) = i + 1 $ for $ \gamma_{i} < \gamma \leq \gamma_{i + 1} $. This proves (ii).
+
 
 \newpage
 \section{Physical Knowledge}
@@ -625,7 +638,7 @@ Define $ \xi_{\gamma} : \Gamma(U) \rightarrow \overline{X} $ for each $ i \in \G
 
 Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \hfill \qed \\
 
-\textsc{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
+\textsc{Claim} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
 
 \textsc{Proof} \;  
 
@@ -646,12 +659,12 @@ Y(i_j) = \begin{cases}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \bigskip
-\textsc{Theorem} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
+\textsc{Claim} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
 
 \textsc{Proof} \; 
 
 \bigskip
-\textsc{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $.} \\ 
+\textsc{Claim} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $.} \\ 
 
 \textsc{Proof} \;
 Let $ U := \N $ and take $ W = U $. Choose any convenient knowable $ \Gamma $ with a countable range such that $ |\Gamma(U)| = m $. Then construct $ \mathcal{D} $ and $ \xi_{ \gamma \in \Gamma(U) } $ as specified in the knowability lemma. Then the knowledge complexity of $ \Gamma $ with respect to $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
