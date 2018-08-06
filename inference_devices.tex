@@ -1,4 +1,4 @@
-\documentclass[]{article}
+\documentclass[10pt]{article}
 \usepackage[margin=1in]{geometry}          
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -7,10 +7,12 @@
 \usepackage{setspace}\onehalfspacing
 \usepackage[loose,nice]{units} %replace "nice" by "ugly" for units in upright fractions
 \usepackage{graphicx}
-\graphicspath{ {/Users/eghuang/math104/images/} }
 \usepackage{listings}
 \usepackage{color}
 \usepackage{glossaries}	
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+\graphicspath{ {/Users/eghuang/math104/images/} }
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -34,11 +36,11 @@
 }
 
 \title{
-  Algorithmic Information and Inference Devices \\
-  \bigskip
-  \large Santa Fe Institute}
-\author{Edward G. Huang}
-\date{Summer 2018} 
+  Algorithmic Information and Inference Devices }
+\author{Edward G. Huang \\ {\small Santa Fe Institute } \\ {\small Department of Mathematics, University of California, Berkeley } \\ \lstinline{eghuang@berkeley.edu}}
+\date{Summer 2018}
+
+ 
  
  \newcommand{\R}{\mathbb{R}}
  \newcommand{\Q}{\mathbb{Q}}
@@ -475,6 +477,7 @@ To show that the condition is necessary for either representation, suppose that 
 \newpage
 \section{Inference Complexity}
 
+% INFERENCE COMPLEXITY DEFINITIONS
 \textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)].	$$ 
@@ -483,31 +486,10 @@ The \textbf{strong inference complexity} for any single $ \gamma \in \Gamma $ is
 
 $$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implies S(u) = s, Y(u) = \delta_{\gamma}(\Gamma(u)) } [\mathcal{M}_{\mu, X} (x)].	$$ 
 
+
 \bigskip
-% ORIGINAL INCOMPRESSIBILITY THEOREM
-\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
-
-\textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
-
-$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
-
-Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
-
-% STRONG INFERENCE INCOMPRESSIBILITY RESULT
-
-\textbf{Strong Inference Incompressibility Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m(1 - 2^{-c - 1}) + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
-
-\textbf{Proof} \; \textit{Note:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
-
-$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
-
-Then the greatest number of unique pairs of bit strings with combined length less or equal to $ \log m - c $ is $ m2^{- c - 1} - \frac{1}{2} $. Hence, there are at least $ m - m2^{-c - 1} + \frac{1}{2} $ values $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. \hfill \qed \\ 
-   
-% INCOMPRESSIBILITY RESULT END
-
-\newpage
-\bigskip
-\textbf{Inference Incompressibility Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+% MAXIMUM WEAK INFERENCE THEOREM
+\textbf{Maximum Inference Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
 
 \textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. Note that $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction.
 
@@ -525,12 +507,39 @@ $$ \sum_{i = 0}^{m - c - 1} {2^i} = 2^{m - c - 1}. $$
 
 Hence, there are at least $ m - m2^{-c} + 1 $ functions $ a $ in $ A $ which have inference complexity greater than $ \ln \log m - c $.  \\
 
-
-\textbf{Corollary} \; \textit{ There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $ } \\
+% INFERENCE COMPLEXITY LOWER BOUND THEOREM
+\textbf{Minimum Inference Theorem} \; \textit{ There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $ } \\
 \textbf{Proof} \quad 
 Recall the functions and spaces defined in the Countable Inference Theorem and take $ \mu(u) = \ell (u) $. Then choose $ A^{*}: \overline{A_ i(V)} \in A^{*} = \overline{A_{j \in \{2, 3, 4\}}(V)} $. Then the inference complexity for any function $ A_i \in A $ is 
 $$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - 2 \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
 $ \hfill \qed $ 
+
+\newpage 
+% INCOMPRESSIBILITY
+\section{Incompressibility}
+% LI & VITANYI INCOMPRESSIBILITY THEOREM
+\textit{The following result is taken from Li and Vitanyi (1993).} \\
+\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
+
+\textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
+
+$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
+
+Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
+
+% STRONG INFERENCE INCOMPRESSIBILITY RESULT
+
+\textbf{Strong Inference Incompressibility Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m(1 - 2^{-c - 1}) + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
+
+\textbf{Proof} \; \textit{Remark:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
+
+$$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
+
+Then the greatest number of unique pairs of bit strings with combined length less or equal to $ \log m - c $ is $ m2^{- c - 1} - \frac{1}{2} $. Hence, there are at least $ m - m2^{-c - 1} + \frac{1}{2} $ values $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. \hfill \qed \\ 
+
+
+   
+% INCOMPRESSIBILITY RESULT END
 
 \newpage
 \section{Physical Knowledge}
@@ -550,8 +559,6 @@ A device $ \mathcal{D} $ physically knows a function $ \Gamma $ over $ W $ iff $
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$ 
 
 $$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
-
-
 \textbf{Example} \quad Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
 
 \begin{tabular}{cc}
@@ -576,10 +583,16 @@ $$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
 \begin{minipage}{0.45\textwidth}
 
 \begin{equation}
-\xi_(\gamma) = \begin{cases}
-                      \{1, 2\} & \text{ if } \gamma = 1 \\
-                      \{3, 4\} & \text{ if } \gamma = 2. \\
-                  \end{cases} \notag \\
+\xi_{1}(\gamma) = \begin{cases}
+                      \{1\} & \text{ if } \gamma = 1 \\
+                      \{4\} & \text{ if } \gamma = 2. \\
+                \end{cases} \notag
+\end{equation}
+\begin{equation}
+\xi_{2}(\gamma) = \begin{cases}
+                      \{2\} & \text{ if } \gamma = 1 \\
+                      \{3\} & \text{ if } \gamma = 2. \\
+                \end{cases} \\ \notag
 \end{equation} 
 
 \end{minipage} 
@@ -612,9 +625,9 @@ Define $ \xi_{\gamma} : \Gamma(U) \rightarrow \overline{X} $ for each $ i \in \G
        \end{cases} 
 \end{equation*}
 
-Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \\
+Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \hfill \qed \\
 
-\textbf{Lemma} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and $ \xi $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi $. } \\
+\textbf{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
 
 \textbf{Proof} \;  
 
@@ -635,7 +648,7 @@ Y(i_j) = \begin{cases}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \bigskip
-\textbf{Theorem} \; \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inequivalent characteristic functions and $ \mathcal{D} $ be a device that physically knows all functions $ a \in A^{*} $. Every finite subset $ A $ of $ A^{*} $ with cardinality $ m $ has at least $ m(1 - m^{-c}) + 1 $ functions $ a $ such that $ \mathcal{K}_{\mu}(a;\mathcal{D}) \geq \log m - c $.} \\
+\textbf{Theorem} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
 
 \textbf{Proof} \; 
 
@@ -650,26 +663,29 @@ $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \sum_{\gamma \in \Gamma(U)} \min_{\
 $$ = \sum_{\gamma \in \Gamma(U)}  \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} - \ln \sum_{u \in \xi_{\gamma}(\gamma \in \Gamma(U))} \ell(u) = - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $$ 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% INCOMPRESSIBILITY RESULT
+% SECTION: DISCUSSION
+\section{Discussion} 
 
 
+% SECTION: OPEN QUESTIONS
+\section{Open Questions}
 
+Much of the results covered in this manuscript are preliminary and leaves much to be desired in our understanding of the theory of inference devices and its connections to algorithmic information theory. There are many immediate questions deserving attention. The question of whether non-deterministic Turing machines may be strongly inferred was left unattended. Our incompressibility results with strong inference of universal Turing machines may be extended by exploring possible analogues between Kolmogorov complexity and strong inference complexity. The numerous negative results we found concerning the definitions of weak inference complexity and physical knowledge suggest that a revisitation of these definitions may be appropriate or fruitful.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-\section{Future Work}
-
-There are many related areas to IDs deserving of attention. The question of whether non-deterministic Turing machines may be strongly inferred was left unattended. Further richness may be found by establishing symmetries between results concerning Kolmogorov complexity and inference complexity. 
-
-
-\newpage
+% SECTION: ACKNOWLEDGEMENTS
 \section{Acknowledgements}
+I am grateful to David Wolpert for his mentorship and for many crucial discussions in the process of this work. I would like to thank the education office of the Santa Fe Institute (SFI) and the participants of the SFI Research Experience for Undergraduates (REU) program for providing resources and assistance. This work was supported by the National Science Foundation, Grant No. 1757923. \\
 
-Wolpert DH. \textit{Constraints on physical reality arising from a formalization of knowledge}. arXiv preprint arXiv:1711.03499v3 [physics.hist-ph] (2018). \\
-Li M \& Vitányi P. \textit{An Introduction to Kolmogorov Complexity and Its Applications} (1st ed.). Springer-Verlag. (1993). \\
-Arora S \& Barak B. \textit{Computational Complexity: A Modern Approach}. Cambridge University Press. (2009). \\ 
+\bigskip
+\noindent\rule{\textwidth}{1pt} \\
+
+\begin{enumerate}[label={[\arabic*]}]
+
+\item Wolpert DH. \textit{Constraints on physical reality arising from a formalization of knowledge}. arXiv preprint arXiv:1711.03499v3 [physics.hist-ph] (2018). 
+\item Li M \& Vitányi P. \textit{An Introduction to Kolmogorov Complexity and Its Applications} (1st ed.). Springer-Verlag. (1993). 
+\item Arora S \& Barak B. \textit{Computational Complexity: A Modern Approach}. Cambridge University Press. (2009). 
+
+\end{enumerate}
 
 \end{document}
 
