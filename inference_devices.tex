@@ -11,7 +11,7 @@
 \usepackage{color}
 \usepackage{glossaries}	
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
-\usepackage[center]{titlesec} % add ", md" behind center to remove bolding
+\usepackage[center, md]{titlesec} % add ", md" behind center to remove bolding
 
 
 \graphicspath{ {/Users/eghuang/math104/images/} }
@@ -127,7 +127,7 @@ $ \mu $ & Measure defined for $ u \in U $. \\
 
 Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, \mathcal{S}, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in the following figure. \\
 
-\textbf{Figure \; The transition function $ \Delta $ for a $ k $-tape Turing Machine}
+\textsc{Figure.} \; The transition function $ \Delta $ for a $ k $-tape Turing Machine
 
  \begin{center}
  \begin{tabular}{ c|c|c|c||c|c|c|c|c } 
@@ -158,7 +158,7 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 \bigbreak
 
-\textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. \\
+\textsc{Remark.} $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. \\
 
 % SUBSECTION: NDTM
 \subsubsection{Non-deterministic Turing Machines} 
@@ -178,12 +178,12 @@ If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to
 \section{Weak Inference}
 \bigskip   
 
-\textbf{Definition} \quad Two functions $ \Gamma_1 $ and $ \Gamma_2 $ with the same domain $ U $ are \textbf{(functionally) equivalent} iff the inverse functions $ \Gamma^{-1}_1 $ and $ \Gamma^{-1}_2 $ induce the same partitions of $ U $, i.e., iff $ \overline{\Gamma_1} = \overline{\Gamma_2} $. \\
+\textsc{Definition} \quad Two functions $ \Gamma_1 $ and $ \Gamma_2 $ with the same domain $ U $ are \textbf{(functionally) equivalent} iff the inverse functions $ \Gamma^{-1}_1 $ and $ \Gamma^{-1}_2 $ induce the same partitions of $ U $, i.e., iff $ \overline{\Gamma_1} = \overline{\Gamma_2} $. \\
 
 % LEMMA 1
 
-\textbf{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
-\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
+\textsc{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma^{-1}(\gamma)| \geq 2 $ \textit{for any} $ \gamma \in \Gamma(U) $. \\
+\textsc{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
 
 \begin{equation*}
 X(i_j) = \begin{cases}
@@ -200,8 +200,8 @@ Then for each $ i \in \Gamma(U) $ choose $ x = b_i $ to force $ Y(X^{-1}(b_i)) =
 
 % LEMMA 2
 \bigskip   
-\textbf{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma(U)| \geq 3 $.  \\
-\textbf{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
+\textsc{Lemma} \; \textit{A function} $ \Gamma $ \textit{can be weakly inferred by a device} $ \mathcal{D} $ \textit{if} $ |\Gamma(U)| \geq 3 $.  \\
+\textsc{Proof} \; Let $ U := \N $. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots, n $ and define $ V^{i} = \{u: \Gamma^{-1}(i) = u \} $. Then enumerate each element in $ V^i $ as $ i_1, i_2, \dots, i_j, \dots, i_m $. Continue to define $ X $ and $ Y $ as 
 
 \begin{equation*}
 X(i_j) = \begin{cases}
@@ -219,15 +219,15 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 
 % COROLLARY 2
 \bigskip
-\textbf{Corollary} \; \textit{A function $\Gamma$ cannot be weakly inferred by ay device if $ |\Gamma{-1}(\gamma)| <  2 $ and $ |\Gamma(U)| < 3 $}. \\
-\textbf{Proof} \; Fix any such $ \Gamma $ and set $ U = \{1, 2\} $. Let $ \Gamma(1) = \gamma_1 $, $\Gamma(2) = \gamma_2 $. Then either $ Y(1) = 1, Y(2) = -1 $, or vice versa. For the first case, consider the probe $ \delta_{\gamma_{2}} $ to see that there is no $ x \in X(U) $ that forces $ Y(u) = \delta_{\gamma_{2}}(\Gamma(u)) $. Consider $ \delta_{\gamma_{1}} $ to see that weak inference does not hold for the remaining case.  \hfill \qed
+\textsc{Corollary} \; \textit{A function $\Gamma$ cannot be weakly inferred by ay device if $ |\Gamma{-1}(\gamma)| <  2 $ and $ |\Gamma(U)| < 3 $}. \\
+\textsc{Proof} \; Fix any such $ \Gamma $ and set $ U = \{1, 2\} $. Let $ \Gamma(1) = \gamma_1 $, $\Gamma(2) = \gamma_2 $. Then either $ Y(1) = 1, Y(2) = -1 $, or vice versa. For the first case, consider the probe $ \delta_{\gamma_{2}} $ to see that there is no $ x \in X(U) $ that forces $ Y(u) = \delta_{\gamma_{2}}(\Gamma(u)) $. Consider $ \delta_{\gamma_{1}} $ to see that weak inference does not hold for the remaining case.  \hfill \qed
 
 % COUNTABLE INFERENCE THEOREM
 \bigskip
 \newpage
-\textbf{Countable Inference Theorem} \; \textit{A countable set of inequivalent functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferable. } \\
+\textsc{Theorem} \; \textit{A countable set of inequivalent functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferable. } \\
 
-\textbf{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
+\textsc{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c|c|c|c|c } 
 
@@ -274,7 +274,7 @@ For each $ a \in B_i(U) $ to force $ Y(X^{-1}(x)) = \delta_{a}(B(X^{-1}(x))) $ c
 In the next three examples we examine strong inference of integer-valued functions. \\
  
 % EXAMPLE 
- \textbf{Example} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+ \textsc{Example.} \quad Let $ T(U) = \{0 , 1\} $ and $ S(U) = \{0, 1, 2\} $. We construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
  \begin {center}
  \begin{tabular}{ |c||c|c|c|c| } 
 
@@ -315,7 +315,7 @@ In the next three examples we examine strong inference of integer-valued functio
 % EXAMPLE  
  \bigskip
  \bigskip 
- \textbf{Example} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
+ \textsc{Example.} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2, 3, 4, 5\} $. Again, we construct $ (X, Y) $ in the table at the left such that it strongly infers $ (S, T) $. The right table indicates $ x $ for each $ s $, $ \delta $ such that the definition of strong inference is satisfied: \\ 
 
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c| } 
@@ -369,7 +369,7 @@ In the next three examples we examine strong inference of integer-valued functio
 % EXAMPLE
  \bigskip
  \bigskip 
- \textbf{Example} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2\} $. In this example, the inferred function $ f: S \rightarrow T, f(s) = T(S^{-1}(s)) $ is not single-valued. \\ 
+ \textsc{Example.} \quad Let $ T(U) = \{1, 2, 3\} $ and $ S(U) = \{1, 2\} $. In this example, the inferred function $ f: S \rightarrow T, f(s) = T(S^{-1}(s)) $ is not single-valued. \\ 
 
  \begin{center}
  \begin{tabular}{ |c||c|c|c|c| } 
@@ -410,10 +410,10 @@ In the next three examples we examine strong inference of integer-valued functio
 % SECTION: INFERENCE OF TURING MACHINES
 \section{Inference of Turing Machines}
 % TURING INFERENCE THEOREM
-\textbf{Theorem} \quad \textit{A deterministic Turing machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device iff} 
+\textsc{Theorem} \; \textit{A deterministic Turing machine} $(\Lambda, Q, \Delta)$ \textit{can be strongly inferred by a device iff} 
 $$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$ \textit{This holds for both the representation of a Turing machine as a partial recursive function and the representation as an update function.} \\
 
-\textbf{Proof} \quad First examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
+\textsc{Proof} \; First examine the partial function case. Let $ f $ be the partial recursive function that describes the given Turing machine tuple. Let $ U := \N $. Choose any convenient single valued surjective function $ S: U \rightarrow \B^{*} $ and define $ T: U \rightarrow \B^{*} \cup \eta$ by $T(u) = f(S(u)) $ as the single-valued function mapping $ U $ to the halting and non-halting outputs of $ f $. Then $ f $ can be written as the single-valued mapping $ S \rightarrow T $ by $ f(s) = T(S^{-1}(s)) $. \\
 
 Enumerate the elements of $ S(U) $ as $ 1, 2, \dots, s, \dots \; $. Let $ V^s = \{u : S^{-1}(s) = u \} $ for $ s \in S(U) $. Similarly enumerate the elements of $ V^s $ as $ s_1, s_2, \dots , s_{|V^{s}|}$. Then define $ X $ and $ Y $ as follows:
 
@@ -436,18 +436,18 @@ Now consider the update function that describes the given Turing machine. Recall
 To show that the condition is necessary for either representation, suppose that $|V^s| < 2$ for some $ s $. If $ V^s = \emptyset $ then there exists no $ x $ that can force $ S = s $. If $ |V| = 1 $, then we can assign $ Y(s_i) = y \in \{-1, 1\} $. However, whichever value is assigned, there exists a $ t $ such that $ \delta_{t}(T(s_i)) \neq Y(s_i) $ since $ |T(U)| \geq 2 $. $ \hfill \qed $ \\
 
 
-\textit{Remark:} Conventionally all functions over $ U $ must have a range of at least two elements. This implies that Turing machines that never halt cannot be strongly inferred.
+\textsc{Remark.} Conventionally all functions over $ U $ must have a range of at least two elements. This implies that Turing machines that never halt cannot be strongly inferred.
 
 
 %\bigskip
 %\bigskip
-%\textbf{Corollary} \quad \textit{}
+%\textsc{Corollary} \quad \textit{}
 
 
 
 %\bigskip
 %\bigskip
-%\textbf {Theorem} \quad \textit{Any non-deterministic Turing Machine can be strongly inferred by a device if} 
+%\textsc {Theorem} \quad \textit{Any non-deterministic Turing Machine can be strongly inferred by a device if} 
 %$$\forall s \in S(U),\; |S^{-1}(s)| \geq 2. $$
 %\textit{This condition holds for both the partial function representation and the instantaneous description of the Turing Machines.} \\
 
@@ -475,7 +475,7 @@ To show that the condition is necessary for either representation, suppose that 
 \section{Inference Complexity}
 
 % INFERENCE COMPLEXITY DEFINITIONS
-\textbf{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as 
+\textsc{Definition} \quad Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)].	$$ 
 
@@ -486,9 +486,9 @@ $$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implie
 
 \bigskip
 % MAXIMUM WEAK INFERENCE THEOREM
-\textbf{Maximum Inference Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+\textsc{Theorem} \quad \textit{Let c be a positive integer. Let $ A^{*} $ be a countable set of inferable functions and $ \mathcal{D} $ be a device that infers all functions $ a \in A^{*} $. There exists $ A^{*} $ and $ \mathcal{D} $ such that every finite subset $ A $ of $ A^{*} $ with cardinality m has at least $ m(1 - m^{-c}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
 
-\textbf{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. Note that $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction.
+\textsc{Proof} \quad Fix any convenient $ A^{*} $ and choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Let $ X: U \rightarrow \B^{*} $ and $ Y:U \rightarrow \{-1, 1\} $ be the $ X $ and $ Y $ defined in the Countable Inference Theorem when given $ A $. Note that $ X $ in this case maps $ \N \rightarrow \B^{*} $ instead of $ \N \rightarrow \N $ but the mappings are equivalent. Then $ \mathcal{D} = (X, Y) > A $ by construction.
 
 \bigskip
 Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Recall that the inference complexity of $ a \in A $ with respect to $ \mathcal{D} $ is
@@ -505,8 +505,8 @@ $$ \sum_{i = 0}^{m - c - 1} {2^i} = 2^{m - c - 1}. $$
 Hence, there are at least $ m - m2^{-c} + 1 $ functions $ a $ in $ A $ which have inference complexity greater than $ \ln \log m - c $.  \\
 
 % INFERENCE COMPLEXITY LOWER BOUND THEOREM
-\textbf{Minimum Inference Theorem} \; \textit{ There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $ } \\
-\textbf{Proof} \quad 
+\textsc{Theorem} \; \textit{ There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $ } \\
+\textsc{Proof} \quad 
 Recall the functions and spaces defined in the Countable Inference Theorem and take $ \mu(u) = \ell (u) $. Then choose $ A^{*}: \overline{A_ i(V)} \in A^{*} = \overline{A_{j \in \{2, 3, 4\}}(V)} $. Then the inference complexity for any function $ A_i \in A $ is 
 $$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - 2 \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
 $ \hfill \qed $ 
@@ -516,9 +516,9 @@ $ \hfill \qed $
 \section{Incompressibility}
 % LI & VITANYI INCOMPRESSIBILITY THEOREM
 \textit{The following result is taken from Li and Vitanyi (1993).} \\
-\textbf{Incompressibility Theorem} \quad \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
+\textsc{Incompressibility Theorem} \; \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \\
 
-\textbf{Proof} \quad The number of programs of length less than $ \log m - c $ is 
+\textsc{Proof} \; The number of programs of length less than $ \log m - c $ is 
 
 $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 
@@ -526,9 +526,9 @@ Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no pr
 
 % STRONG INFERENCE INCOMPRESSIBILITY RESULT
 
-\textbf{Strong Inference Incompressibility Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m(1 - 2^{-c - 1}) + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
+\textsc{Theorem} \; \textit{Let c be a positive integer. For a fixed $ \mathcal{D} $, every finite set $ T(U) $ of cardinality $ m $ has at least $ m(1 - 2^{-c - 1}) + \frac{1}{2} $ elements $ t $ with $ \mathcal{C}_{\mu}(t;\mathcal{D}) \geq \log m - c $. } \\
 
-\textbf{Proof} \; \textit{Remark:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
+\textsc{Proof} \; \textit{Remark:} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for this proof. Set $ U := \B^{*} $. Fix any universal partial recursive function $ \phi $ that can be strongly inferred. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and functions $ (S, T) $ over $ \phi $ such that $ \mathcal{D} \gg (S, T) $. By the construction of $ \mathcal{D} $, it takes at least two unique values of $ u $ to force strong inference for each value $ t $. The number of bit strings of length less than $ \log m - c $ is 
 
 $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 
@@ -542,7 +542,7 @@ Then the greatest number of unique pairs of bit strings with combined length les
 \section{Physical Knowledge}
 % Physical Knowledge
 
-\textbf{Definition} \; Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that \\
+\textsc{Definition} \; Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that \\
 
 \textit{i}) $ \forall \gamma' \in \Gamma(U), u \in \xi(\gamma') \implies \delta_{\gamma'}(\Gamma(u)) = Y(u) $ \\ 
 \textit{ii}) $ \emptyset \neq \xi(\gamma) \cap W \subseteq Y^{-1}(1) $ \\
@@ -551,12 +551,13 @@ Then the greatest number of unique pairs of bit strings with combined length les
 A device $ \mathcal{D} $ physically knows a function $ \Gamma $ over $ W $ iff $ \forall \gamma \in \Gamma(U)$,  $ \exists \xi : \mathcal{D} $ knows $ \gamma $ over $ W \subseteq U $ using $ \xi $. \\
 
 
-\textbf{Definition} \; The \textbf{knowledge complexity} of $ \Gamma $ given $ \mathcal{D} $, $\xi $, and measure $ \mu $ is defined as: 
+\textsc{Definition} \; The \textbf{knowledge complexity} of $ \Gamma $ given $ \mathcal{D} $, $\xi $, and measure $ \mu $ is defined as: 
 
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$ 
 
-$$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
-\textbf{Example} \quad Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
+$$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ 
+
+\textsc{Example.} \; Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
 
 \begin{tabular}{cc}
 \begin{minipage}{0.45\textwidth}
@@ -597,9 +598,9 @@ $$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
 
 \bigskip
 \bigskip
-\textbf{Lemma} \; \textit{For every countably-ranged function $ \Gamma $ there exists a device $ \mathcal{D} $ such that $ \mathcal{D} $ physically knows all $ \gamma \in \Gamma(U) $ over $ W = U $ if $ |\Gamma^{-1}(\gamma)| \geq 2 $ for all $ \gamma \in \Gamma $.} \\
+\textsc{Lemma} \; \textit{For every countably-ranged function $ \Gamma $ there exists a device $ \mathcal{D} $ such that $ \mathcal{D} $ physically knows all $ \gamma \in \Gamma(U) $ over $ W = U $ if $ |\Gamma^{-1}(\gamma)| \geq 2 $ for all $ \gamma \in \Gamma $.} \\
 
-\textbf{Proof} \; Take $ U := \N $ and $ W = U $. Choose any $ \Gamma $ as described in the claim. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots $ . Define $ V^{i} = \{u : \Gamma^{-1}(\gamma) = u \} $ for each $ i \in \Gamma(U) $. Similarly enumerate each $ u \in V^{i} $ as $ i_1, i_2, \dots, i_j, \dots $ . Now define the device $ (X, Y) $ as 
+\textsc{Proof} \; Take $ U := \N $ and $ W = U $. Choose any $ \Gamma $ as described in the claim. Enumerate $ \gamma \in \Gamma(U) $ as $ 1, 2, \dots, i, \dots $ . Define $ V^{i} = \{u : \Gamma^{-1}(\gamma) = u \} $ for each $ i \in \Gamma(U) $. Similarly enumerate each $ u \in V^{i} $ as $ i_1, i_2, \dots, i_j, \dots $ . Now define the device $ (X, Y) $ as 
 
 \begin{equation*}
 X(i_j) = \begin{cases}
@@ -624,9 +625,9 @@ Define $ \xi_{\gamma} : \Gamma(U) \rightarrow \overline{X} $ for each $ i \in \G
 
 Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \hfill \qed \\
 
-\textbf{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
+\textsc{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
 
-\textbf{Proof} \;  
+\textsc{Proof} \;  
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 Let $ U := \N $ and take $ W = U $. Construct 
@@ -645,14 +646,14 @@ Y(i_j) = \begin{cases}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \bigskip
-\textbf{Theorem} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
+\textsc{Theorem} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
 
-\textbf{Proof} \; 
+\textsc{Proof} \; 
 
 \bigskip
-\textbf{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $.} \\ 
+\textsc{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at least $ - m \ln \sum_{i = 1}^{m} {\log_{2}{m}} $.} \\ 
 
-\textbf{Proof} \;
+\textsc{Proof} \;
 Let $ U := \N $ and take $ W = U $. Choose any convenient knowable $ \Gamma $ with a countable range such that $ |\Gamma(U)| = m $. Then construct $ \mathcal{D} $ and $ \xi_{ \gamma \in \Gamma(U) } $ as specified in the knowability lemma. Then the knowledge complexity of $ \Gamma $ with respect to $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
 
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \sum_{\gamma \in \Gamma(U)} \min_{\xi(\gamma) : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi} [\mathcal{M}_{\mu; \xi} (\gamma)]	$$
