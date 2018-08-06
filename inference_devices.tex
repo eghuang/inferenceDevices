@@ -11,6 +11,8 @@
 \usepackage{color}
 \usepackage{glossaries}	
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\usepackage[center]{titlesec} % add ", md" behind center to remove bolding
+
 
 \graphicspath{ {/Users/eghuang/math104/images/} }
 
@@ -36,12 +38,10 @@
 }
 
 \title{
-  Algorithmic Information and Inference Devices }
+  Algorithmic information and inference devices }
 \author{Edward G. Huang \\ {\small Santa Fe Institute } \\ {\small Department of Mathematics, University of California, Berkeley } \\ \lstinline{eghuang@berkeley.edu}}
-\date{Summer 2018}
+\date{ {\normalsize August 2018} }
 
- 
- 
  \newcommand{\R}{\mathbb{R}}
  \newcommand{\Q}{\mathbb{Q}}
  \newcommand{\Z}{\mathbb{Z}}
@@ -52,31 +52,26 @@
  \newcommand{\code}[1]{\texttt{#1}}
  \let\oldemptyset\emptyset
  \let\emptyset\varnothing
- 
  \setlength{\parindent}{0pt} % no indent
  
 \begin{document}
 \maketitle 
-
 % HOOPER: Please include an abstract, a brief intro with a clear statement of your research question(s), a description of your methods/model/approach, your results, and your conclusions (or lessons learned).
-
 % SECTION 0: ABSTRACT
-\section{Abstract}
-
+\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+\begin{abstract}
 There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previously, Wolpert demonstrated bounds on knowledge in any physical universe that allows agents to hold information concerning that universe by using the concept of "inference devices" (IDs). We extend previous work on the capacity and limitations of IDs to infer physical variables. We then explore analogues between IDs and their relation to Turing machine theory and algorithmic information theory.
-
+\end{abstract}
 
 % SECTION 1: INTRODUCTION
 \section{Introduction} 
 
 % SUBSECTION: NOTATION
 \subsection{Notation and Definitions}
-This manuscript utilizes standard notation taken from set theory and vector algebra. We clarify notation specific to Turing machine theory and inference devices. \\
+This manuscript utilizes standard notation taken from set theory and vector algebra. We clarify notation specific to Turing machine theory and inference devices. 
 
-
+\subsubsection{Turing Machine Notation} 
 \begin{tabular}{cp{0.6\textwidth}}
-\textbf{Turing Machine Notation} \\
-
 $ \B^{*} $ & The space of all finite bit strings, $ \{\epsilon, 0, 1, 00, 01, \dots \} $\\
 $ \Lambda $ & Symbol alphabet of a Turing Machine. \\
 $ \sigma  $ & A symbol on a Turing Machine tape. \\
@@ -84,8 +79,10 @@ $ Q $ & Set of finite states of a Turing Machine. \\
 $ \Delta $ & Transition function of a Turing Machine. \\
 $ k $ & Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
 $ \eta $ & Non-halting state of a Turing Machine. \\
+\end{tabular}
 
-\textbf{Inference Device Notation} \\
+\subsubsection{Inference Device Notation} 
+\begin{tabular}{cp{0.6\textwidth}}
 $ U $ & Set of possible histories of the universe. \\
 $ u $ & A history of the universe in $ U $. \\ 
 $ X $ & Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
@@ -120,7 +117,7 @@ $ \mu $ & Measure defined for $ u \in U $. \\
 \subsection{Turing Machines} 
 
 % SUBSECTION: DTM
-\textbf{Deterministic Turing Machines} \\
+\subsubsection{Deterministic Turing Machines} 
  Arora and Barak denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
 \begin{enumerate}
 \item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the symbols 0 and 1. 
@@ -128,9 +125,9 @@ $ \mu $ & Measure defined for $ u \in U $. \\
 \item A transition function $ \Delta : Q \times \Lambda^{k} \rightarrow Q \times \Lambda^{k - 1} \times \{L, \mathcal{S}, R\}^{k} $, where $ k \geq 2$, describing the rules $ T $ use in performing each step. The set $\{L, \mathcal{S}, R\}$ denote the actions \textit{Left, Stay,} and \textit{Right}, respectively. 
 \end{enumerate}
 
-Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, \mathcal{S}, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in Figure 2.1. \\
+Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k) $ are the symbols on the $ k $ tapes. Then $ \Delta(q, (\sigma_1, \dots, \sigma_k)) = (q', (\sigma_{2}^{'}, \dots, \sigma_{k}^{'}), z) $ where $ z \in \{L, \mathcal{S}, R\}^k $ and at the next step the $ \sigma $ symbols in the last $ k - 1 $ tapes will be replaced by the $ \sigma' $ symbols, the machine will be in state $ q $, and the $ k $ heads will move \textit{Left, Right} or \textit{Stay}. This is illustrated in the following figure. \\
 
-\textbf{Figure 2.2.1. The transition function $ \Delta $ for a $ k $-tape Turing Machine}
+\textbf{Figure \; The transition function $ \Delta $ for a $ k $-tape Turing Machine}
 
  \begin{center}
  \begin{tabular}{ c|c|c|c||c|c|c|c|c } 
@@ -164,7 +161,7 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 \textit{Remark}: $\Lambda$ can be reduced to $ \B = \{0, 1\} $ and $ k $ can be reduced to $ 1 $ without loss of computational power. Then, any Turing Machine can be expressed as a partial recursive function mapping $ \B^{*} \rightarrow \B^{*} \cup \eta $, where $ \eta $ is the undefined non-halting output. Since $ |\B^{*} \times \B^{*} \cup \eta | = | \N \times \N | = | \N | $, the set of all Turing Machines is countably infinite. \\
 
 % SUBSECTION: NDTM
-\textbf{Non-deterministic Turing Machines} \\
+\subsubsection{Non-deterministic Turing Machines} 
 Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak:
 
 \begin{displayquote}
@@ -174,7 +171,7 @@ When a NDTM $M$ computes a function, we envision that at each computational step
 If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
 
 % SUBSECTION: UTM
-\textbf{Universal Turing Machines}
+\subsubsection{Universal Turing Machines}
 
 % SECTION: WEAK INFERENCE
 \newpage
