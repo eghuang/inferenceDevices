@@ -67,22 +67,24 @@ There has been much interest surrounding what properties about the universe can 
 \section{Introduction} 
 We begin with the observation that information concerning the universe is typically held by some agent embedded within that universe. Agents typically acquire information concerning the universe in at least four ways: prediction, observation, control, and memory. As discussed by Wolpert, there is a mathematical structure shared by all such information-acquiring avenues. Objects with that structure are called inference devices [1].  \\
 
-This work builds upon the relationship between inference devices, Turing machines, and  Kolmogorov complexity. We introduce the mathematical structures of inference devices, weak inference, and strong inference and examine the conditions in which inference holds. Basic forms of Turing machines and their relationship to computability and partial recursive functions are reviewed. We then discuss the complexity of inference and its connections to Kolmogorov complexity. Finally we touch upon physical knowledge, a mathematical formalism of knowledge in a physical universe. Several properties of physical knowledge are extended and explored. These properties suggest that the mathematical definition of physical knowledge may require further examination and modification.
+This work explores the relationship between inference devices, Turing machines, and Kolmogorov complexity. We introduce the mathematical structures of inference devices, weak inference, and strong inference and examine the conditions in which inference holds. Basic forms of Turing machines and their relationship to computability and partial recursive functions are reviewed. We then discuss the complexity of inference and its connections to Kolmogorov complexity. Finally we touch upon physical knowledge, a mathematical formalism of knowledge in a physical universe. Several properties of physical knowledge are extended and explored. These properties suggest that the mathematical definition of physical knowledge may require further examination and modification.
 
 % SUBSECTION: NOTATION
 \subsection{Notation and Definitions}
 This manuscript utilizes standard notation taken from set theory and vector algebra. We clarify notation specific to Turing machine theory and inference devices. 
 
+\begin{center}
 \subsubsection{Turing Machine Notation} 
 \begin{tabular}{cp{0.8\textwidth}}
-$ \B^{*} $ & The space of all finite bit strings, $ \{\epsilon, 0, 1, 00, 01, \dots \} $\\
-$ \Lambda $ & Symbol alphabet of a Turing Machine. \\
-$ \sigma  $ & A symbol on a Turing Machine tape. \\
-$ Q $ & Set of finite states of a Turing Machine. \\
-$ \Delta $ & Transition function of a Turing Machine. \\
-$ k $ & Number of tapes of a Turing Machine. The first tape is assumed to be read-only. \\
-$ \eta $ & Non-halting state of a Turing Machine. \\
+$ \B^{*} $ & The space of all finite bit strings, $ \{\epsilon, 0, 1, 00, 01, \dots \}. $\\
+$ \Lambda $ & Turing machine symbol alphabet. \\
+$ \sigma  $ & Symbol on a Turing machine tape. \\
+$ Q $ & Set of finite Turing machine states. \\
+$ \Delta $ & turing machine transition funciton. \\
+$ k $ & Number of tapes of a Turing machine. The first tape is assumed to be read-only. \\
+$ \eta $ & Non-halting state of a Turing machine. \\
 $ \phi $ & The universal partial recursive function. \\
+$ (\Lambda, Q, \Delta) $ & A Turing machine. 
 \end{tabular}
 
 \subsubsection{Inference Device Notation} 
@@ -91,7 +93,7 @@ $ U $ & Set of possible histories of the universe. \\
 $ u $ & A history of the universe in $ U $. \\ 
 $ X $ & Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
 $ x $ & A binary question and a member of image $ X(U) $. \\ 
-$ Y $ & Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for  $ X(u) = x $. \\ 
+$ Y $ & Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for $ X(u) = x $. \\ 
 $ y $ & A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
 $ \Gamma $ & A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
 $ \gamma $ & Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
@@ -103,20 +105,28 @@ $ \delta $ & Probe of any variable $V$ parameterized by $v \in V$ such that :
       \end{cases}\] \\
 $ \wp $ & Set of probes over $\Gamma(U)$. \\
 $ \mathcal{D}  $ & An inference device, consisting of functions $ (X, Y) $. \\
-$ \xi $ & A function $ \Gamma(U) \rightarrow \overline{X} $.  \\
+$ \xi $ & A function $ \Gamma(U) \rightarrow \overline{X} $ used for knowing $ \gamma $ over $ W \subseteq U $.  \\
 $ \Gamma^{-1} $ & Inverse. Given a function $ \Gamma $ over $ U $, $\Gamma ^ {-1} = \bar{\Gamma} \equiv \{\{u : \Gamma(u) = \gamma \} : \gamma \in \Gamma(U) \} $. \\
 $ \overline{\Gamma} $ & Given a function $ \Gamma $ over $ U $, the partition of $ U $ given by $ \Gamma^{-1} $.  \\
-$ > $ & Weak inference: a device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
-$ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
-$ \gg $ & Strong inference: a device $ (X, Y) $ strongly infers a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
+$ > $ & Weakly infers.  \\
+$ \gg $ & Strongly infers. \\
 $ \mathcal{C}_{\mu}(\Gamma; \mathcal{D}) $ & Inference complexity. \\
+$ \mathcal{K}_{\mu}(\gamma; \mathcal{D}) $ & Knowledge complexity. \\
 $ \mu $ & Measure defined for $ u \in U $. \\
+$ \ell $ & Length of a bit string. \\
 \end{tabular}
+\end{center}
 
 % SUBSECTION: INFERENCE DEVICE
 \subsection{Inference Devices}
 
 \subsubsection{Types of Inference}
+
+\textsc{Definition} \; A device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
+$ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $. \\
+
+\textsc{Defintion} \; A device $ \mathcal{D} $ strongly infers a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
+
 
 % SUBSECTION: TURING MACHINES
 \subsection{Turing Machines} 
@@ -124,7 +134,7 @@ Church's Hypothesis
 
 % SUBSECTION: DTM
 \subsubsection{Deterministic Turing Machines} 
- Arora and Barak denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
+ Arora and Barak [2] denote a Turing Machine (TM) as $ T = (\Lambda, Q, \Delta) $ containing:
 \begin{enumerate}
 \item An \textit{alphabet} $ \Lambda $ of a finite set of symbols that $ T $'s tapes can contain. We assume that $ \Lambda $ contains a special blank symbol $ B $, start symbol $ S $, and the symbols 0 and 1. 
 \item A finite set $ Q $ of possible states that $ T $'s register can be in. We assume that $ Q $ contains a special start state $ q_{s} $ and a special halt state $ q_{h} $. 
@@ -168,13 +178,13 @@ Suppose $ T $ is in state $ q \in Q $ and $ (\sigma_1, \sigma_2, \dots, \sigma_k
 
 % SUBSECTION: NDTM
 \subsubsection{Non-deterministic Turing Machines} 
-Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak:
+Non-deterministic Turing Machines (NDTM) differ from deterministic Turing Machines by having two transition functions $ \Delta_0, \Delta_1 $ and a special state $ q_{accept} $. From Arora and Barak [2]:
 
 \begin{displayquote}
 When a NDTM $M$ computes a function, we envision that at each computational step $ M $ makes an arbitrary choice as to which of its two transition functions to apply. For every input $ x $, we say that $ M(x) = 1 $ if there exists some sequence of these choices (which we call nondeterministic choices of $ M $) that would make $ M $ reach $ q_{accept} $ on input $ x $. Otherwise - if every sequence of choices makes $ M $ halt without reaching $ q_{accept} $ - then we say that $ M(x) = 0 $. 
 \end{displayquote}
 
-If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. \\
+If $ M(x) = 1$, we say that $ M $ accepts the input $ x $. There are two ways to interpret the choice of update function to use in a NDTM. We can either assume that the NDTM chooses updates that will lead to an accepting state, or we can assume that the machine branches out into its choices such that it has a "computation tree" and if any of the branches reaches the accepting state then the machine accepts the input. From this second interpretation, the computational power of DTMs to NDTMs is analogous to the computational complexity of P to NP. 
 
 % SUBSECTION: UTM
 \subsubsection{Universal Turing Machines}
@@ -494,7 +504,7 @@ $$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implie
 
 \bigskip
 % MAXIMUM WEAK INFERENCE THEOREM
-\textsc{Claim} \; \textit{Let c be a positive integer. There exists a countable set of inferable functions $ A^{*} $ and device $ \mathcal{D} $ that infers all functions $ a \in A^{*} $ such that every finite subset $ A \subseteq A^{*} $ with cardinality $ m $ has at least $  m(1 - 2^{- c - 1}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+\textsc{Theorem} \; \textit{Let c be a positive integer. There exists a countable set of inferable functions $ A^{*} $ and device $ \mathcal{D} $ that infers all functions $ a \in A^{*} $ such that every finite subset $ A \subseteq A^{*} $ with cardinality $ m $ has at least $  m(1 - 2^{- c - 1}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
 
 \textsc{Proof} \; Choose $ A^{*} $ such that $ \overline{a(V)} $ is equivalent to $ \overline{A_5(V)} $ for $ a \in A^{*} $. Then choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Construct $ \mathcal{D} $ such that it weakly infers $ a \in A $. Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Recall that the inference complexity of $ a \in A $ with respect to $ \mathcal{D} $ is
 $$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } [\mathcal{M}_{\mu, X} (x)]: \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
@@ -523,7 +533,7 @@ $ \hfill \qed $
 \section{Incompressibility}
 % LI & VITANYI INCOMPRESSIBILITY THEOREM
 
-\textsc{Incompressibility Theorem} \; \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \textit{This result is taken from Li and Vitanyi (1993).} \\
+\textsc{Incompressibility Theorem} \; \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \textit{This result is taken from Li and Vitanyi (1993)} [3]. \\
 
 \textsc{Proof} \; The number of programs of length less than $ \log m - c $ is 
 
