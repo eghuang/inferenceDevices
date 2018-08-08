@@ -60,13 +60,14 @@
 % SECTION 0: ABSTRACT
 \renewcommand{\abstractname}{\vspace{-\baselineskip}}
 \begin{abstract}
-There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previous work by Wolpert used the theory of "inference devices" (IDs) to demonstrate bounds on knowledge in any physical universe that allows agents to hold information concerning that universe. We extend previous work on the capacity and limitations of IDs to infer physical variables. Several results impose conditions on the inferrability of singular functions and sets of functions. We pursue analogues between IDs and their relation to Turing machine theory and algorithmic information theory. In particular, we show that any Turing machine can be strongly inferred and build upon that to reach an incompressibility result concerning the complexity of strong inference. This incompressibility result has led to several analogues between Kolmogorov complexity and inference complexity that suggest further similarities between algorithmic information theory and the theory of inference devices.
+There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previous work by Wolpert used the theory of "inference devices" (IDs) to demonstrate bounds on knowledge in any physical universe that allows agents to hold information concerning that universe. We extend previous work on the capacity and limitations of IDs to infer physical variables. Our results impose conditions on the inferrability of singular functions and sets of functions. We pursue analogues between IDs and their relation to Turing machine theory and algorithmic information theory. In particular, we show that any Turing machine can be strongly inferred and build upon that to demonstrate incompressibility of strong inference complexity. This incompressibility result has led to several analogues between Kolmogorov complexity and inference complexity that suggest further similarities between algorithmic information theory and the theory of inference devices.
 \end{abstract}
 
 % SECTION 1: INTRODUCTION
 \section{Introduction} 
+We begin with the observation that information concerning the universe is typically held by some agent embedded within that universe. Agents typically acquire information concerning the universe in at least four ways: prediction, observation, control, and memory. As discussed by Wolpert, there is a mathematical structure shared by all such information-acquiring avenues. Objects with that structure are called inference devices [1].  \\
 
-
+This work builds upon the relationship between inference devices, Turing machines, and  Kolmogorov complexity. We introduce the mathematical structures of inference devices, weak inference, and strong inference and examine the conditions in which inference holds. Basic forms of Turing machines and their relationship to computability and partial recursive functions are reviewed. We then discuss the complexity of inference and its connections to Kolmogorov complexity. Finally we touch upon physical knowledge, a mathematical formalism of knowledge in a physical universe. Several properties of physical knowledge are extended and explored. These properties suggest that the mathematical definition of physical knowledge may require further examination and modification.
 
 % SUBSECTION: NOTATION
 \subsection{Notation and Definitions}
@@ -85,7 +86,7 @@ $ \phi $ & The universal partial recursive function. \\
 \end{tabular}
 
 \subsubsection{Inference Device Notation} 
-\begin{tabular}{cp{.8\textwidth}}
+\begin{tabular}{cp{0.8\textwidth}}
 $ U $ & Set of possible histories of the universe. \\
 $ u $ & A history of the universe in $ U $. \\ 
 $ X $ & Setup function of an ID that maps $ U \rightarrow X(U) $. A binary question concerning $ \Gamma(u) $. \\
@@ -110,7 +111,6 @@ $ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $.  \\
 $ \gg $ & Strong inference: a device $ (X, Y) $ strongly infers a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
 $ \mathcal{C}_{\mu}(\Gamma; \mathcal{D}) $ & Inference complexity. \\
 $ \mu $ & Measure defined for $ u \in U $. \\
-
 \end{tabular}
 
 % SUBSECTION: INFERENCE DEVICE
@@ -234,7 +234,6 @@ These results are enough to fully determine whether a single function is weakly 
 
 % COUNTABLE INFERENCE THEOREM
 \bigskip
-\newpage
 \textsc{Theorem} \; \textit{A countable set of inequivalent functions} $ A^{*} $ \textit{can be weakly inferred by a device if each function $ A_i \in A^{*} $ is independently inferable. } \\
 
 \textsc{Proof} \; Let $ U := \N $ and fix any $ A^{*} $. Let $ a_i, a_j, a_k $ represent any distinct three elements in $ A_i(U) $. Write $ V = \{1, 2, 3\} \subset U $. The following table represents all possible combinations of $ a_i $, $ a_j$, and $ a_k $ over $ V $. \\
@@ -665,29 +664,30 @@ Let $ U := \N $ and take $ W = U $. Fix $ A^{*} $ and construct $ \mathcal{D} $ 
 \textsc{Proof} \; Set $ U := \N $. Fix $ \Gamma $ with $ | \Gamma(U) | = m $. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and a set of functions $ \xi^{*} $ such that $ \mathcal{D} $ physically knows $ \gamma \in \Gamma $ over $ U $. By the construction of $ \mathcal{D} $, it takes at least $ 2m $ values of $ u $ to physically know each value $ \gamma $ over $ U $. Then the knowledge complexity of $ \Gamma $ with $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \mathcal{M}_{\mu}(\bigcup_{\gamma \in \Gamma(U)} \min_{\overline{\{\xi_i\}} : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi_i \in \xi^{*}})  = $$ 
 
-
 $$ \mathcal{M}_{\mu} (\{\epsilon, \dots, 2m \}) = - \ln \sum_{i = 1}^{2m} {i} $$ 
 \hfill \qed \\ 
 
 \bigskip
-\textsc{Claim} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = 0 $. } \\
+\textsc{Claim} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = - \ln 10 $. } \\
 
-\textsc{Proof} \; 
+\textsc{Proof} \; Set $ U := \N $. Fix $ A^{*} $ such that for any $ A \in A^{*} $, $ A(1) = A(2) = 0 $ and $ A(2) = A(3) = 1 $. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and a set of functions $ \xi^{*} $ such that $ \mathcal{D} $ physically knows $ a \in A $ over $ U $. By the construction of $ \mathcal{D} $, it takes only the values $ u = 1, 2, 3, 4 $ to physically know each $ A $ over $ U $. Then the knowledge complexity of all $ A $ with $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
+$$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \mathcal{M}_{\mu}(\bigcup_{\gamma \in \Gamma(U)} \min_{\overline{\{\xi_i\}} : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi_i \in \xi^{*}}) = - \ln \sum_{i = 1}^{4}{i} = - \ln 10 $$
+\hfill \qed 
 
 
 
-% SECTION: DISCUSSION
-\section{Discussion} 
+%% SECTION: DISCUSSION
+%\section{Discussion} 
 
 
 % SECTION: OPEN QUESTIONS
 \section{Open Questions}
 
-Much of the results covered in this manuscript are preliminary and leaves much to be desired in our understanding of the theory of inference devices and its connections to algorithmic information theory. There are many immediate questions deserving attention. The question of whether non-deterministic Turing machines may be strongly inferred was left unattended. Our incompressibility results with strong inference of universal Turing machines may be extended by exploring possible analogues between Kolmogorov complexity and strong inference complexity. The numerous negative results we found concerning the definitions of weak inference complexity and physical knowledge suggest that a revisitation of these definitions may be appropriate or fruitful.
+Much of the results covered in this manuscript are preliminary and leaves much to be desired in our understanding of the theory of inference devices and its connections to algorithmic information theory. There are many immediate questions deserving attention. The question of whether non-deterministic Turing machines may be strongly inferred was left unattended. Our incompressibility results with strong inference of universal Turing machines may be extended by exploring possible analogues between Kolmogorov complexity and strong inference complexity. The numerous negative results we found concerning the definitions of weak inference complexity and physical knowledge suggest that a revisitation of these definitions may be appropriate or fruitful. Any revisal of these definitions should consider possible compatibility with the similar topics of Shannon information and prefix code.
 
 % SECTION: ACKNOWLEDGEMENTS
 \section{Acknowledgements}
-I am grateful to David Wolpert for his mentorship and for many crucial discussions in the process of this work. I would like to thank the education office of the Santa Fe Institute (SFI) and the participants of the SFI Research Experience for Undergraduates (REU) program for providing resources and assistance. This work was supported by the National Science Foundation, Grant No. 1757923. \\
+I am grateful to David Wolpert for his mentorship and for many detailed discussions. I would like to thank the education office of the Santa Fe Institute (SFI) and the participants of the SFI Research Experience for Undergraduates (REU) program for providing valuable resources and assistance. This work was supported by the National Science Foundation, Grant No. 1757923. \\
 
 \bigskip
 \noindent\rule{\textwidth}{1pt} \\
