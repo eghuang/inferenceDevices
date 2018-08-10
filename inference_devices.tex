@@ -60,14 +60,14 @@
 % SECTION 0: ABSTRACT
 \renewcommand{\abstractname}{\vspace{-\baselineskip}}
 \begin{abstract}
-There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previous work by Wolpert used the theory of "inference devices" (IDs) to demonstrate bounds on knowledge in any physical universe that allows agents to hold information concerning that universe. We extend previous work on the capacity and limitations of IDs to infer physical variables. Our results impose conditions on the inferrability of singular functions and sets of functions. We pursue analogues between IDs and their relation to Turing machine theory and algorithmic information theory. In particular, we show that any Turing machine can be strongly inferred and build upon that to demonstrate incompressibility of strong inference complexity. This incompressibility result has led to several analogues between Kolmogorov complexity and inference complexity that suggest further similarities between algorithmic information theory and the theory of inference devices.
+There has been much interest surrounding what properties about the universe can be derived from applying a mathematical formalization of inference and knowledge. Previous work by Wolpert used the theory of "inference devices" (IDs) to demonstrate bounds on knowledge in any physical universe that allows agents to hold information concerning that universe. We extend previous work on the capacity and limitations of IDs to infer physical variables. Our results impose conditions on the inference of singular functions and sets of functions. We pursue analogues between IDs and their relation to Turing machine theory and algorithmic information theory. In particular, we show that any Turing machine can be strongly inferred and build upon that to demonstrate incompressibility of strong inference complexity. This incompressibility result has led to several analogues between Kolmogorov complexity and inference complexity that suggest further similarities between algorithmic information theory and the theory of inference devices.
 \end{abstract}
 
 % SECTION 1: INTRODUCTION
 \section{Introduction} 
-We begin with the observation that information concerning the universe is typically held by some agent embedded within that universe. Agents typically acquire information concerning the universe in at least four ways: prediction, observation, control, and memory. As discussed by Wolpert, there is a mathematical structure shared by all such information-acquiring avenues. Objects with that structure are called inference devices [1].  \\
+Observe that information concerning the universe is typically held by some agent embedded within that universe. Agents typically acquire information concerning the universe in at least four ways: prediction, observation, control, and memory. As discussed by Wolpert, there is a mathematical structure shared by all such information-acquiring avenues. Objects with that structure are called inference devices [1].  \\
 
-This work explores the relationship between inference devices, Turing machines, and Kolmogorov complexity. We introduce the mathematical structures of inference devices, weak inference, and strong inference and examine the conditions in which inference holds. Basic forms of Turing machines and their relationship to computability and partial recursive functions are reviewed. We then discuss the complexity of inference and its connections to Kolmogorov complexity. Finally we touch upon physical knowledge, a mathematical formalism of knowledge in a physical universe. Several properties of physical knowledge are extended and explored. These properties suggest that the mathematical definition of physical knowledge may require further examination and modification.
+This work explores the relationship between inference devices, Turing machines, and Kolmogorov complexity. We introduce the mathematical structures of inference devices, weak inference, and strong inference and examine the conditions in which inference holds. Basic forms of Turing machines and their relationship to computability and partial recursive functions are reviewed. We then discuss the inference complexity and possible connections to Kolmogorov complexity. Finally we touch upon physical knowledge, a mathematical formalism of knowledge in a physical universe. Several properties of physical knowledge are extended and explored. These properties suggest that the mathematical definition of physical knowledge may require further examination and modification. \\
 
 % SUBSECTION: NOTATION
 \subsection{Notation and Definitions}
@@ -80,7 +80,7 @@ $ \B^{*} $ & The space of all finite bit strings, $ \{\epsilon, 0, 1, 00, 01, \d
 $ \Lambda $ & Turing machine symbol alphabet. \\
 $ \sigma  $ & Symbol on a Turing machine tape. \\
 $ Q $ & Set of finite Turing machine states. \\
-$ \Delta $ & turing machine transition funciton. \\
+$ \Delta $ & Turing machine transition function. \\
 $ k $ & Number of tapes of a Turing machine. The first tape is assumed to be read-only. \\
 $ \eta $ & Non-halting state of a Turing machine. \\
 $ \phi $ & The universal partial recursive function. \\
@@ -95,7 +95,7 @@ $ X $ & Setup function of an ID that maps $ U \rightarrow X(U) $. A binary quest
 $ x $ & A binary question and a member of image $ X(U) $. \\ 
 $ Y $ & Single-valued conclusion function of an ID that maps $ U \rightarrow \{-1, 1\} $. A binary answer of an ID for $ X(u) = x $. \\ 
 $ y $ & A single-valued answer, and member of image $ Y(U)  = \{0, 1\} $. \\ 
-$ \Gamma $ & A function of the actual values of a physical variable over $U$, equivalent to $\Gamma(u) = S(t_i)(u)$.  \\
+$ \Gamma $ & A function of the actual values of a physical variable over $U$.  \\
 $ \gamma $ & Possible value of a physical variable, a member of the image $\Gamma(U)$. \\
 $ \delta $ & Probe of any variable $V$ parameterized by $v \in V$ such that : 
 	  \[ \delta_v (v') =
@@ -119,18 +119,29 @@ $ \ell $ & Length of a bit string. \\
 
 % SUBSECTION: INFERENCE DEVICE
 \subsection{Inference Devices}
+We briefly consider the structure of inference devices. Let $ U $ be the set of all possible histories. Define $ \Gamma $ as a function over $ U $ such that $ \gamma \in \Gamma $ represents some the value of some physical variable over $ U $. Then the binary question $ x $ that an agent asks themselves concerning $ \gamma \in \Gamma $ can be generated by a function $ X $ over $ U $. Similarly, let $ Y $ be the function over $ U $ that provides a binary answer to $ x $. Then an inference device can be defined. \\
+
+\textsc{Definition} \; An \textbf{(inference) device} over a set $ U $ is a pair of functions $ (X, Y) $, both with domain $ U $. $ Y $ is called the \textbf{conclusion} function of the device, and is surjective onto $ \B $. $ X $ is called the \textbf{setup} function of the device. \\
+
+Additional structure is necessary to formalize the notion of knowledge held by an inference device in a universe. We next discuss structures that capture some notion when a device can correctly infer something in its universe.
 
 \subsubsection{Types of Inference}
 
-\textsc{Definition} \; A device $\mathcal{D}$ weakly infers $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
-$ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(u)) $. \\
+A device must be able to answer some questions correctly to infer knowledge concerning a physical variable. We can encapsulate this concept in the definition of weak inference. \\
 
-\textsc{Defintion} \; A device $ \mathcal{D} $ strongly infers a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
+\textsc{Definition} \; A device $\mathcal{D}$ \textbf{weakly infers} $\Gamma$ \textit{iff} $ \forall \gamma \in \Gamma(U), \exists x \in X(U) $ s.t. $ \forall u \in U $, 
+$ X(u) = x \implies Y(u) = \delta_{\gamma}(\Gamma(ru)) $. \\
+
+\textsc{Remark} \; A device does not need to understand a question to satisfy weak inference. In other words, a device can weakly infer $ \Gamma $ even if it correctly answers questions accidentally. \\
+
+We wish to strengthen the notion of weak inference such that a device can emulate the entire mapping of a function. Let $ S $ be a function over $ U $ at represents the possible inputs for a function $ f $. Continue to define $ T $ over $ U $ as the output of $ f $ given $ s $. Then we can write $ f(s) = T(S^{-1}(s)) $ as the function a device wishes to emulate. Now we can define the notion of strong inference for the function $ f $. \\
+
+\textsc{Definition} \; A device $ \mathcal{D} $ \textbf{strongly infers} a function $ (S, T) $ over $ U $ \textit{ iff } $\forall \delta \in \wp(T) $ and all $ s \in S(U) $, $ \exists x $ \textit{ such that } $ X(u) = x \implies S(u) = s, Y(u) = \delta(T(u)) $. \\
 
 
 % SUBSECTION: TURING MACHINES
 \subsection{Turing Machines} 
-Church's Hypothesis
+A Turing machine is a mathematical model of computation that describes an abstract machine that manipulates symbols on a tape according to a set of rules. For every computer algorithm, there is a Turing machine that can simulate the behavior of that algorithm. By the Church-Turing Thesis, any algorithm over the natural numbers is computable by a human if and only if the algorithm is computable by a Turing machine. We review the formal construction of a Turing machine and two variants.
 
 % SUBSECTION: DTM
 \subsubsection{Deterministic Turing Machines} 
@@ -240,7 +251,7 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 \textsc{Corollary} \; \textit{A function $\Gamma$ cannot be weakly inferred by ay device if $ |\Gamma{-1}(\gamma)| <  2 $ and $ |\Gamma(U)| < 3 $}. \\
 \textsc{Proof} \; Fix any such $ \Gamma $ and set $ U = \{1, 2\} $. Let $ \Gamma(1) = \gamma_1 $, $\Gamma(2) = \gamma_2 $. Then either $ Y(1) = 1, Y(2) = -1 $, or vice versa. For the first case, consider the probe $ \delta_{\gamma_{2}} $ to see that there is no $ x \in X(U) $ that forces $ Y(u) = \delta_{\gamma_{2}}(\Gamma(u)) $. Consider $ \delta_{\gamma_{1}} $ to see that weak inference does not hold for the remaining case.  \hfill \qed \\
 
-These results are enough to fully determine whether a single function is weakly inferable. We continue to examine the inferability of sets of functions by a singular device. 
+These results are enough to fully determine whether a single function is weakly inferable. We continue to examine the inference of sets of functions by a singular device. 
 
 % COUNTABLE INFERENCE THEOREM
 \bigskip
@@ -572,7 +583,7 @@ Then the greatest number of unique pairs of bit strings with combined length les
 %(iii) For any partial recursive function $ \phi(\gamma) $ which goes monotonic to infinity from some $ \gamma_0 $ onward, we have $ m(\gamma) < \phi(\gamma) $ except for finitely many $ \gamma $. In other words, although $ m(\gamma) $ goes to infinity, it does so slower than any unbounded partial function. } \\
 
 \textsc{Proof} \; (i) This follows immediately from (ii). (ii). For each $ i $ there is a least $ \gamma_{i} $ such that for all $ \gamma > \gamma_{i} $ the smallest set of $ u \in U $ strongly inferring $ \gamma $ has a total length greater or equal to $ i $. This follows immediately from the fact that there are only a finite number of $ u $ of each length $ i $. Clearly, for all $ i $ we have $ \gamma_{i + 1} \geq \gamma_{i} $. Now observe that the function $ m $ has the property that $ m(\gamma) = i + 1 $ for $ \gamma_{i} < \gamma \leq \gamma_{i + 1} $. This proves (ii). 
-\hfill \qed \\
+\hfill \qed 
 
 
 \section{Physical Knowledge}
@@ -591,7 +602,8 @@ A device $ \mathcal{D} $ physically knows a function $ \Gamma $ over $ W $ iff $
 
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \mathcal{M}_{\mu} [\bigcup_{\gamma \in \Gamma(U)} \min_{\overline{\{\xi_i\}} : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi_i \in \xi^{*}}] $$ 
 
-$$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ 
+$$ \mathcal{M}_{\mu; \xi} (\gamma) = -\ln \int_{\xi(\gamma)} d\mu(u) 1 $$ \\
+
 
 \textsc{Example.} \; Let $ U := \{1, 2, 3\} $ and take $ W = U $. The following table and formulas demonstrate physical knowledge for $ \gamma \in \Gamma : |\Gamma(U)| = 2 $. \\
 
@@ -664,9 +676,7 @@ Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ 
 
 \textsc{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
 
-\textsc{Proof} \;  
-
-Let $ U := \N $ and take $ W = U $. Fix $ A^{*} $ and construct $ \mathcal{D} $ such that $ \mathcal{D} > A \in A^{*} $. For all $ A \in A^{*} $, or all $ \gamma \in A(U) $, define $ \xi_{\gamma} $ as specified in the preceding theorem. Then for all $ \gamma \in A(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence $ \mathcal{D} $ physically knows $ \gamma \in A(U) $ for $ A \in A^{*} $ . \hfill \qed \\
+\textsc{Proof} \; Let $ U := \N $ and take $ W = U $. Fix $ A^{*} $ and construct $ \mathcal{D} $ such that $ \mathcal{D} > A \in A^{*} $. For all $ A \in A^{*} $, or all $ \gamma \in A(U) $, define $ \xi_{\gamma} $ as specified in the preceding theorem. Then for all $ \gamma \in A(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence $ \mathcal{D} $ physically knows $ \gamma \in A(U) $ for $ A \in A^{*} $ . \hfill \qed \\
 
 \bigskip
 \textsc{Theorem} \; \textit{Let $ \Gamma $ be a knowable function with countable range and $ \mathcal{D} $ be a device that physically knows all $ \gamma \in \Gamma $ over $ U $. Every such $ \Gamma $ with $ |\Gamma(U)| = m $ has knowledge complexity of at most $ - \ln \sum_{i = 1}^{2m} {i} $ .} \\ 
@@ -678,16 +688,11 @@ $$ \mathcal{M}_{\mu} (\{\epsilon, \dots, 2m \}) = - \ln \sum_{i = 1}^{2m} {i} $$
 \hfill \qed \\ 
 
 \bigskip
-\textsc{Claim} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = - \ln 10 $. } \\
+\textsc{Theorem} \; \textit{There exists a countable set of inequivalent characteristic functions $ A^{*} $ and a device $ \mathcal{D} $ such that for all $ A \in A^{*} $, $ \mathcal{D} $ physically knows $ A $ over $ U $ and $ \mathcal{K}_{\mu}(A;\mathcal{D}) = - \ln 10 $. } \\
 
 \textsc{Proof} \; Set $ U := \N $. Fix $ A^{*} $ such that for any $ A \in A^{*} $, $ A(1) = A(2) = 0 $ and $ A(2) = A(3) = 1 $. Let $ \mu(u) = \ell (u) $. Construct a device $ \mathcal{D} $ and a set of functions $ \xi^{*} $ such that $ \mathcal{D} $ physically knows $ a \in A $ over $ U $. By the construction of $ \mathcal{D} $, it takes only the values $ u = 1, 2, 3, 4 $ to physically know each $ A $ over $ U $. Then the knowledge complexity of all $ A $ with $ \mathcal{D} $ using $ \xi_{\gamma \in \Gamma(U)} $ is
 $$ \mathcal{K}_{\mu}(\Gamma ; \mathcal{D}) = \mathcal{M}_{\mu}(\bigcup_{\gamma \in \Gamma(U)} \min_{\overline{\{\xi_i\}} : \mathcal{D} \text{ knows } \Gamma = \gamma \text{ using } \xi_i \in \xi^{*}}) = - \ln \sum_{i = 1}^{4}{i} = - \ln 10 $$
 \hfill \qed 
-
-
-
-%% SECTION: DISCUSSION
-%\section{Discussion} 
 
 
 % SECTION: OPEN QUESTIONS
