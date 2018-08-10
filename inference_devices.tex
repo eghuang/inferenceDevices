@@ -248,7 +248,7 @@ Then for each $ i \in \Gamma(U) $ to force $ Y(X^{-1}(x)) = \delta_{i}(\Gamma(X^
 
 % COROLLARY 2
 \bigskip
-\textsc{Corollary} \; \textit{A function $\Gamma$ cannot be weakly inferred by ay device if $ |\Gamma{-1}(\gamma)| <  2 $ and $ |\Gamma(U)| < 3 $}. \\
+\textsc{Corollary} \; \textit{A function $\Gamma$ cannot be weakly inferred by ay device if $ |\Gamma^{-1}(\gamma)| <  2 $ and $ |\Gamma(U)| < 3 $}. \\
 \textsc{Proof} \; Fix any such $ \Gamma $ and set $ U = \{1, 2\} $. Let $ \Gamma(1) = \gamma_1 $, $\Gamma(2) = \gamma_2 $. Then either $ Y(1) = 1, Y(2) = -1 $, or vice versa. For the first case, consider the probe $ \delta_{\gamma_{2}} $ to see that there is no $ x \in X(U) $ that forces $ Y(u) = \delta_{\gamma_{2}}(\Gamma(u)) $. Consider $ \delta_{\gamma_{1}} $ to see that weak inference does not hold for the remaining case.  \hfill \qed \\
 
 These results are enough to fully determine whether a single function is weakly inferable. We continue to examine the inference of sets of functions by a singular device. 
@@ -504,45 +504,53 @@ To show that the condition is necessary for either representation, suppose that 
 \section{Inference Complexity}
 
 % INFERENCE COMPLEXITY DEFINITIONS
+To examine analogues between inference devices and algorithmic information theory, there should be some measure of difficulty, or complexity, in a device's ability to weakly infer $ \Gamma $ or strongly infer $ f $. \\
+
 \textsc{Definition} \; Let $ \mathcal{D} $ be an inference device and $ \Gamma $ be a function over $ U $ where $ X(U) $ and $ \Gamma(U) $ are countable and $ \mathcal{D} > \Gamma $. Let the \textbf{size} of $\gamma \in \Gamma(U) $ be written as $ \mathcal{M}_{\mu:\Gamma(\gamma)} = -\ln[\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ such that $ d\mu $ denotes a measure over $ U $. Then the \textbf{inference complexity} of $ \Gamma $ with respect to $ \mathcal{D} $ and measure $ \mu $ is defined as 
 
 $$ \mathcal{C}_{\mu}(\Gamma ; \mathcal{D}) \triangleq \sum_{\delta \in \wp(\Gamma)} \min_{x : X = x \implies Y = \delta(\Gamma) } [\mathcal{M}_{\mu, X} (x)].	$$ 
 
 The \textbf{strong inference complexity} for any single $ \gamma \in \Gamma $ is  
 
-$$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implies S(u) = s, Y(u) = \delta_{\gamma}(\Gamma(u)) } [\mathcal{M}_{\mu, X} (x)].	$$ 
+$$ \mathcal{C}_{\mu}(\gamma ; \mathcal{D}) \triangleq \min_{x : X(u) = x \implies S(u) = s, Y(u) = \delta_{\gamma}(\Gamma(u)) } [\mathcal{M}_{\mu, X} (x)].	$$ \\
 
 
-\bigskip
+We demonstrate an upper bound on the inference complexity of any set of countable functions.\\
+
 % MAXIMUM WEAK INFERENCE THEOREM
-\textsc{Theorem} \; \textit{Let c be a positive integer. There exists a countable set of inferable functions $ A^{*} $ and device $ \mathcal{D} $ that infers all functions $ a \in A^{*} $ such that every finite subset $ A \subseteq A^{*} $ with cardinality $ m $ has at least $  m(1 - 2^{- c - 1}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq \log m - c $ .} \\
+\textsc{Theorem} \; \textit{Let c be a positive integer. There exists a countable set of inferable functions $ A^{*} $ and device $ \mathcal{D} $ that infers all functions $ a \in A^{*} $ such that every finite subset $ A \subseteq A^{*} $ with cardinality $ m $ has at least $  m(1 - 2^{- c - 1}) + 1 $ elements $ a \in A $ such that $ \mathcal{C}_{\mu}(a;\mathcal{D}) \geq - \ln (\log m - c) $ .} \\
 
 \textsc{Proof} \; Choose $ A^{*} $ such that $ \overline{a(V)} $ is equivalent to $ \overline{A_5(V)} $ for $ a \in A^{*} $. Then choose any subset $ A \subseteq A^{*} $ with cardinality $ m $. Let $ U := \B^{*} $. Construct $ \mathcal{D} $ such that it weakly infers $ a \in A $. Take $ d\mu(u) = \ell(u) $ where $ \ell(b) $ is the length of a bit string $ b $. Recall that the inference complexity of $ a \in A $ with respect to $ \mathcal{D} $ is
 $$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a) } [\mathcal{M}_{\mu, X} (x)]: \mathcal{M}_{\mu, X} (x) = - \ln \sum_{X^{-1}(x)} {\ell(u)} $$
 
 By the construction of $ A^{*} $ and $ \mathcal{D} $, it requires at least two values of $ u $ to weakly infer each $ a $, and at least one of these $ u $ must be unique between all $ a $. Then the inference complexity of $ a $ with respect to $ \mathcal{D} $ is
 
-$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a_i) } \sum_{X^{-1}(x)} {\ell(a^{-1}(a_i))} $$
+$$ \mathcal{C}_{\mu}(a ; \mathcal{D}) = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a_i) } -\ln \sum_{X^{-1}(x)} {\ell(X^{-1}(x))} $$
 
-$$ = \sum_{\delta \in \wp(a)} \min_{x : X = x \implies Y = \delta(a_i) } n {a^{-1}(a_i)} = 1 + (a^{-1}(a_i)) = \ell(u) + 1. $$
+$$ = - \ln (\ell (X^{-1}(x)) + 1) = - \ln \ell(\overline{x} + 1). $$
 
-Since a unique $ u $ is used by $ \mathcal{D} $ to infer every $ a \in A $, we can apply the pigeonhole principle. The number of bit strings of length less than $ m - c - 1 $ is 
+Since a unique $ u $ is used by $ \mathcal{D} $ to infer every $ a \in A $, we can apply the pigeonhole principle. The number of bit strings of length less than $ \log m - c - 1 $ is 
 
 $$ \sum_{i = 0}^{m - c - 2} {2^i} = 2^{\log m - c - 1} - 1. $$
 
-By the pigeonhole principle, there are at least $ m - m2^{- c - 1} + 1 $ functions $ a \in A $ which have inference complexity greater than $ \log m - c $. \hfill \qed \\
+By the pigeonhole principle, there are at least $ m - m2^{- c - 1} + 1 $ functions $ a \in A $ which have inference complexity greater than $ - \ln (\log m - c) $. \hfill \qed \\
 
-\bigskip
+Now we show that we can find a countably infinite set of functions such that the inference complexity of weakly inferring the entire set is zero. \\ 
+
 % INFERENCE COMPLEXITY LOWER BOUND THEOREM
 \textsc{Theorem} \; \textit{There exist $ A^{*} $ and $ \mathcal{D} $ such that for all functions of any subset $ A \subseteq A^{*} $, $ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = 0 $. } \\
 
-\textsc{Proof} \; Recall the functions and spaces defined in the Countable Inference Theorem and take $ \mu(u) = \ell (u) $. Then choose $ A^{*}: \overline{A_ i(V)} \in A^{*} = \overline{A_{j \in \{2, 3, 4\}}(V)} $. Then the inference complexity for any function $ A_i \in A $ is 
-$$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - 2 \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
-$ \hfill \qed $ 
+\textsc{Proof} \; Recall the functions and spaces defined in the Countable Inference Theorem and take $ \mu(u) = \ell (u) $. Then choose $ A^{*}: \forall A_i(V) \in A^{*}, \overline{A_ i(V)} = \overline{A_{j \in \{2, 3, 4\}}(V)} $. Then the inference complexity for any function $ A_i \in A $ is 
+$$ \mathcal{C}_{\mu}(A_i ; \mathcal{D}) = \sum_{\delta \in \wp(A_i)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln \sum_{X^{-1}(x)} {\ell(u)} = \sum_{\delta \in \wp(f)} \min_{x : X = x \implies Y = \delta(A_i) } - \ln {1}  = - 2 \ln {1} = 0. $$
+$ \hfill \qed $ \\
+
+These results suggest the definition of inference complexity may need to be revised for it to more closely fit intuitive perceptions of knowledge and complexity.
+
 
 % INCOMPRESSIBILITY
 \section{Incompressibility}
 % LI & VITANYI INCOMPRESSIBILITY THEOREM
+One of the most immediate and interesting results from Kolmogorov complexity is the concept of incompressibility. \\
 
 \textsc{Incompressibility Theorem} \; \textit{Let c be a positive integer. For each fixed y, every finite set A of cardinality m has at least} $ m(1 - 2^{-c}) + 1 $ \textit{elements x with} $ \mathcal{C}(x|y) \geq \log m - c $. \textit{This result is taken from Li and Vitanyi (1993)} [3]. \\
 
@@ -553,12 +561,14 @@ $$ \sum_{i = 0}^{\log m - c - 1} {2^i} = 2^{\log m - c} - 1. $$
 Hence, there are at least $ m - m2^{-c} + 1 $ elements in $ A $ which have no program of length less than $ \log m - c $. $ \hfill \qed $ \\
 
 % Look into log definition and Kraft's inequality, makes sure everything check outs okay 
-\textit{Note.} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for the remainder of this section. The $ ln $ term is not needed because $ U $ will be taken over the space of bit strings instead of the natural numbers. \\
+\textit{Note.} Let $ \mathcal{M}_{\mu:\Gamma(\gamma)} = [\int_{\Gamma^{-1}(\gamma)} d\mu(u) 1] $ for the remainder of this section. The $ -\ln $ term is not needed because $ U $ will be taken over the space of bit strings instead of the natural numbers. \\
+
+Similar incompressibility results hold over strong inference complexity. \\
 
 \textsc{Theorem} \; \textit{There is a constant $ c $, such that $
 \mathcal{C}_{\mu}(t;\mathcal{D}) \leq 2\ell(t) + c $  for all $ t $.} \\
 
-\textsc{Proof} \; Let $ U := \B^{*} \times \{0, 1\} $. Fix a Turing machine $ \phi $ over $ U $ such that $ S: U \rightarrow \B^{*} $ is written as $ S((u, b)) = u $. Then define $ T: U \rightarrow \B^{*} $ as $ T(u) = S(u) $. Construct a device $ \mathcal{D} $ that strongly infers $ (S, T) $. Then for every $ t \in \B^{*} $, $ \mathcal{C}_{\mu}(t; \mathcal{D}) = 2\ell(t) + 2 $. \hfill \qed \\
+\textsc{Proof} \; Let $ U := \B^{*} \times \{0, 1\} $. Fix a Turing machine $ \phi $ over $ U $ such that $ S: U \rightarrow \B^{*} $ is written as $ S((u, b)) = u $. Then define $ T: U \rightarrow \B^{*} $ as $ T(u) = S(u) $. Construct a device $ \mathcal{D} $ that strongly infers $ (S, T) $. Then for every $ t \in \B^{*} $, $ \mathcal{C}_{\mu}(t; \mathcal{D}) \leq 2\ell(t) + 2 $. \hfill \qed \\
 
 % STRONG INFERENCE INCOMPRESSIBILITY RESULT
 
@@ -572,13 +582,9 @@ Then the greatest number of unique pairs of bit strings with combined length les
    
 % INCOMPRESSIBILITY RESULT END
 
+Furthermore, strong inference complexity is unbounded. \\
 
-
-% For talk first introduce and motivate IDs, get people to buy into IDs, convince them that stronger definitions don't get rid of incompressibility results. demon theorems, intro to Turing machines and church's hypothesis, then talk about results, incompressibility, don't talk about negative results that will confuse people
-
-% For paper refer to David's paper for reference
-
-\textsc{Theorem} \; \textit{Consider $ \Gamma $ with countably infinite image over $ U $. (i) The function $ \mathcal{C}(\gamma;\mathcal{D}) $ is unbounded. (ii) Define a function $ m $ by $ m(\gamma) = \min\{ \mathcal{C}(y;\mathcal{D}) : y \geq \gamma \}$. That is, $ m $ is the greatest monotonic increasing function bounding $ \mathcal{C} $ from below. The function $ m(\gamma) $ is unbounded. } \\
+\textsc{Theorem} \; \textit{Consider $ \Gamma $ with countably infinite image over $ U $. (i) The function $ \mathcal{C}(\gamma;\mathcal{D}) $ is unbounded. (ii) Define a function $ m $ by $ m(\gamma) = \min\{ \mathcal{C}(\psi;\mathcal{D}) : \psi \geq \gamma \}$. That is, $ m $ is the greatest monotonic increasing function bounding $ \mathcal{C} $ from below. The function $ m(\gamma) $ is unbounded. } \\
 
 %(iii) For any partial recursive function $ \phi(\gamma) $ which goes monotonic to infinity from some $ \gamma_0 $ onward, we have $ m(\gamma) < \phi(\gamma) $ except for finitely many $ \gamma $. In other words, although $ m(\gamma) $ goes to infinity, it does so slower than any unbounded partial function. } \\
 
@@ -588,6 +594,8 @@ Then the greatest number of unique pairs of bit strings with combined length les
 
 \section{Physical Knowledge}
 % Physical Knowledge
+
+A device can weakly infer a function without ever correctly answering "yes" to any of the questions posed to it. In other words, a device does not need to know when a value of physical variable is present for weak inference. The device only needs to know, for each question posed to it, at least one other value that is not present. This arises from the weakness of the definition of weak inference. To force a device to actually know a physical variable, we wish for the device to be able to infer when a value is present and when it is not. We call this stronger condition physical knowledge. \\
 
 \textsc{Definition} \; Consider an inference device $ (X, Y) $ defined over $ U $, a function $ \Gamma $ defined over $ U $, a $ \gamma \in \Gamma(U) $, and a subset $ W \subseteq U $. We say that $ (X, Y) $ \textbf{(physically) knows} $ \Gamma = \gamma $ over $ W $ iff $\exists \xi : \Gamma(U) \rightarrow \overline{X} $ such that \\
 
@@ -673,6 +681,8 @@ Define $ \xi_{\gamma} : \Gamma(U) \rightarrow \overline{X} $ for each $ i \in \G
 \end{equation*}
 
 Then for all $ \gamma \in \Gamma(U) $ and all $ u \in \xi_{\gamma}(\gamma')$, $ \delta_{\gamma}(\Gamma(u)) = Y(u) $. Furthermore, for each $ \xi_{\gamma} $, $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' = \gamma) \cap W) \subseteq Y^{-1}(1) \} $ and $ \emptyset \neq \{ ( \xi_{\gamma}(\gamma' \neq \gamma) \cap  W ) \subseteq Y^{-1}(-1) \} $. Hence, $ \mathcal{D} $ physically knows $ \gamma \in \Gamma(U) $. \hfill \qed \\
+
+We can extend this result to show that any set of functions can be physically known by a single device. \\
 
 \textsc{Theorem} \; \textit{For any set of independently physically knowable characteristic functions $ A^{*} $ there is a device $ \mathcal{D} $ and set of functions $ \xi{*} $ such that $ \mathcal{D} $ knows $ A \in A^{*} $ over a given subset $ W \subseteq U $ using $ \xi^{*} $. } \\
 
